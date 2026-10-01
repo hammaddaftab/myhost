@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font Family */
+  --font-serif-display: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Brand Logotype Token (Navbar) */
+  --text-brand-logo: 1.25rem;
+  --text-brand-logo--line-height: 1;
+  --text-brand-logo--letter-spacing: -0.01em;
+  --text-brand-logo--font-weight: 700;
+
+  /* Hero Headline Token: Scales fluidly from 350px (1.75rem / 28px) to 1280px (3.5rem / 56px) */
+  --text-headline-hero: clamp(1.75rem, 1.75rem + (100vw - 350px) * 0.03011, 3.5rem);
+  --text-headline-hero--font-family: var(--font-serif-display);
+  --text-headline-hero--line-height: 1.1;
+  --text-headline-hero--letter-spacing: -0.01em;
+  --text-headline-hero--font-weight: 700;
+
+  /* Eyebrow / Overline Token */
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.25;
+  --text-eyebrow--letter-spacing: 0.05em;
+  --text-eyebrow--font-weight: 600;
+
+  /* Section Headline Token */
+  --text-headline-section: clamp(1.5rem, 1.15rem + 1.75vw, 2.25rem);
+  --text-headline-section--line-height: 1.2;
+  --text-headline-section--letter-spacing: -0.015em;
+  --text-headline-section--font-weight: 700;
+}
+
+/* Custom Utilities & Polish */
+@layer base {
+  * {
+    border-color: #e4e4e7; /* zinc-200 */
+  }
+
+  body {
+    background-color: #fafafa; /* zinc-50 */
+    color: #18181b; /* zinc-900 */
+  }
+}
+
+/* Light Surface Glows & Grids */
+.hero-glow-light {
+  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.08) 0%, rgba(244, 244, 245, 0.5) 60%, transparent 80%);
+}
+
+.subtle-grid-light {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(228, 228, 231, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(228, 228, 231, 0.6) 1px, transparent 1px);
+}
