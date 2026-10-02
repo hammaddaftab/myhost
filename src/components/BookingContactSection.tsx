@@ -10,7 +10,8 @@ import {
   ArrowRight, 
   ArrowUpRight,
   Copy,
-  Check
+  Check,
+  AlertCircle
 } from 'lucide-react';
 import { strings } from '../strings';
 
@@ -32,6 +33,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     phone: '',
     listingUrl: ''
   });
+  const [calendarTouched, setCalendarTouched] = useState<Record<string, boolean>>({});
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
   // Direct Form State
@@ -42,6 +44,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     listingUrl: '',
     message: ''
   });
+  const [contactTouched, setContactTouched] = useState<Record<string, boolean>>({});
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
   const availableDates = [
@@ -54,6 +57,112 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
   ];
 
   const timeSlots = bc.timeSlots;
+
+  // Validation Helpers
+  const validateEmail = (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
+  const validatePhone = (val: string) => !val.trim() || /^[\d\s+\-().]{7,}$/.test(val.trim());
+  const validateUrl = (val: string) => !val.trim() || /^https?:\/\/.+/i.test(val.trim());
+
+  const getCalendarErrors = (form: typeof calendarForm) => {
+    const errs: Partial<Record<keyof typeof calendarForm, string>> = {};
+    if (!form.name.trim()) {
+      errs.name = 'Full name is required';
+    } else if (form.name.trim().length < 2) {
+      errs.name = 'Name must be at least 2 characters';
+    }
+    if (!form.email.trim()) {
+      errs.email = 'Email address is required';
+    } else if (!validateEmail(form.email)) {
+      errs.email = 'Please enter a valid email address';
+    }
+    if (form.phone.trim() && !validatePhone(form.phone)) {
+      errs.phone = 'Please enter a valid phone number (at least 7 digits)';
+    }
+    if (form.listingUrl.trim() && !validateUrl(form.listingUrl)) {
+      errs.listingUrl = 'Please enter a valid URL (starting with http:// or https://)';
+    }
+    return errs;
+  };
+
+  const getContactErrors = (form: typeof contactForm) => {
+    const errs: Partial<Record<keyof typeof contactForm, string>> = {};
+    if (!form.name.trim()) {
+      errs.name = 'Full name is required';
+    } else if (form.name.trim().length < 2) {
+      errs.name = 'Name must be at least 2 characters';
+    }
+    if (!form.email.trim()) {
+      errs.email = 'Email address is required';
+    } else if (!validateEmail(form.email)) {
+      errs.email = 'Please enter a valid email address';
+    }
+    if (form.phone.trim() && !validatePhone(form.phone)) {
+      errs.phone = 'Please enter a valid phone number (at least 7 digits)';
+    }
+    if (form.listingUrl.trim() && !validateUrl(form.listingUrl)) {
+      errs.listingUrl = 'Please enter a valid URL (starting with http:// or https://)';
+    }
+    if (!form.message.trim()) {
+      errs.message = 'Please enter a message';
+    } else if (form.message.trim().length < 10) {
+      errs.message = 'Message must be at least 10 characters';
+    }
+    return errs;
+  };
+
+  const calendarErrors = getCalendarErrors(calendarForm);
+  const contactErrors = getContactErrors(contactForm);
+
+  const handleCalendarChange = (field: keyof typeof calendarForm, val: string) => {
+    setCalendarForm(prev => ({ ...prev, [field]: val }));
+    setCalendarTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const handleContactChange = (field: keyof typeof contactForm, val: string) => {
+    setContactForm(prev => ({ ...prev, [field]: val }));
+    setContactTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const getFieldState = (
+    touched: boolean | undefined,
+    error: string | undefined,
+    val: string,
+    isOptional = false
+  ) => {
+    if (!touched) {
+      return {
+        className: 'border-outline-variant/50 focus:border-primary',
+        icon: null,
+        error: null,
+      };
+    }
+    if (error) {
+      return {
+        className: 'border-rose-500 bg-rose-500/[0.02] focus:border-rose-500 pr-9',
+        icon: <AlertCircle className="w-4 h-4 text-rose-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
+        error,
+      };
+    }
+    if (val.trim().length > 0) {
+      return {
+        className: 'border-emerald-500/70 bg-emerald-500/[0.02] focus:border-emerald-600 pr-9',
+        icon: <Check className="w-4 h-4 text-emerald-600 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
+        error: null,
+      };
+    }
+    if (isOptional) {
+      return {
+        className: 'border-outline-variant/50 focus:border-primary',
+        icon: null,
+        error: null,
+      };
+    }
+    return {
+      className: 'border-outline-variant/50 focus:border-primary',
+      icon: null,
+      error: null,
+    };
+  };
 
   const handleCopyOrAction = async (
     type: 'phone' | 'email',
@@ -77,8 +186,14 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
   const handleCalendarSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!calendarForm.name || !calendarForm.email) {
-      alert(bc.alertMissing);
+    const errs = getCalendarErrors(calendarForm);
+    if (Object.keys(errs).length > 0) {
+      setCalendarTouched({
+        name: true,
+        email: true,
+        phone: true,
+        listingUrl: true,
+      });
       return;
     }
     setBookingConfirmed(true);
@@ -87,13 +202,33 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contactForm.name || !contactForm.email) {
-      alert(bc.alertMissing);
+    const errs = getContactErrors(contactForm);
+    if (Object.keys(errs).length > 0) {
+      setContactTouched({
+        name: true,
+        email: true,
+        phone: true,
+        listingUrl: true,
+        message: true,
+      });
       return;
     }
     setContactSubmitted(true);
     onSuccessToast('Message sent! Our team will get back to you shortly.');
   };
+
+  // State calculations for Calendar fields
+  const calNameState = getFieldState(calendarTouched.name, calendarErrors.name, calendarForm.name);
+  const calEmailState = getFieldState(calendarTouched.email, calendarErrors.email, calendarForm.email);
+  const calPhoneState = getFieldState(calendarTouched.phone, calendarErrors.phone, calendarForm.phone, true);
+  const calUrlState = getFieldState(calendarTouched.listingUrl, calendarErrors.listingUrl, calendarForm.listingUrl, true);
+
+  // State calculations for Contact fields
+  const cntNameState = getFieldState(contactTouched.name, contactErrors.name, contactForm.name);
+  const cntEmailState = getFieldState(contactTouched.email, contactErrors.email, contactForm.email);
+  const cntPhoneState = getFieldState(contactTouched.phone, contactErrors.phone, contactForm.phone, true);
+  const cntUrlState = getFieldState(contactTouched.listingUrl, contactErrors.listingUrl, contactForm.listingUrl, true);
+  const cntMsgState = getFieldState(contactTouched.message, contactErrors.message, contactForm.message);
 
   return (
     <section id="contact-booking" className="py-20 bg-surface border-t border-outline-variant/40">
@@ -287,7 +422,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             {activeMode === 'calendar' ? (
               <div className="pt-6">
                 {!bookingConfirmed ? (
-                  <form onSubmit={handleCalendarSubmit} className="space-y-5">
+                  <form onSubmit={handleCalendarSubmit} noValidate className="space-y-5">
                     
                     {/* Date Picker */}
                     <div>
@@ -353,50 +488,80 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="text-xs text-on-surface-variant block mb-1">{bc.nameLabel}</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder={bc.namePlaceholder}
-                            value={calendarForm.name}
-                            onChange={(e) => setCalendarForm({ ...calendarForm, name: e.target.value })}
-                            className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                          />
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder={bc.namePlaceholder}
+                              value={calendarForm.name}
+                              onChange={(e) => handleCalendarChange('name', e.target.value)}
+                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calNameState.className}`}
+                            />
+                            {calNameState.icon}
+                          </div>
+                          {calNameState.error && (
+                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                              <span>{calNameState.error}</span>
+                            </p>
+                          )}
                         </div>
 
                         <div>
                           <label className="text-xs text-on-surface-variant block mb-1">{bc.emailLabel}</label>
-                          <input
-                            type="email"
-                            required
-                            placeholder={bc.emailPlaceholder}
-                            value={calendarForm.email}
-                            onChange={(e) => setCalendarForm({ ...calendarForm, email: e.target.value })}
-                            className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                          />
+                          <div className="relative">
+                            <input
+                              type="email"
+                              placeholder={bc.emailPlaceholder}
+                              value={calendarForm.email}
+                              onChange={(e) => handleCalendarChange('email', e.target.value)}
+                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calEmailState.className}`}
+                            />
+                            {calEmailState.icon}
+                          </div>
+                          {calEmailState.error && (
+                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                              <span>{calEmailState.error}</span>
+                            </p>
+                          )}
                         </div>
                       </div>
 
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
-                          <input
-                            type="tel"
-                            placeholder={bc.phonePlaceholder}
-                            value={calendarForm.phone}
-                            onChange={(e) => setCalendarForm({ ...calendarForm, phone: e.target.value })}
-                            className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                          />
+                          <div className="relative">
+                            <input
+                              type="tel"
+                              placeholder={bc.phonePlaceholder}
+                              value={calendarForm.phone}
+                              onChange={(e) => handleCalendarChange('phone', e.target.value)}
+                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calPhoneState.className}`}
+                            />
+                            {calPhoneState.icon}
+                          </div>
+                          {calPhoneState.error && (
+                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                              <span>{calPhoneState.error}</span>
+                            </p>
+                          )}
                         </div>
 
                         <div>
                           <label className="text-xs text-on-surface-variant block mb-1">{bc.listingUrlLabel}</label>
-                          <input
-                            type="url"
-                            placeholder={bc.listingUrlPlaceholder}
-                            value={calendarForm.listingUrl}
-                            onChange={(e) => setCalendarForm({ ...calendarForm, listingUrl: e.target.value })}
-                            className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                          />
+                          <div className="relative">
+                            <input
+                              type="url"
+                              placeholder={bc.listingUrlPlaceholder}
+                              value={calendarForm.listingUrl}
+                              onChange={(e) => handleCalendarChange('listingUrl', e.target.value)}
+                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calUrlState.className}`}
+                            />
+                            {calUrlState.icon}
+                          </div>
+                          {calUrlState.error && (
+                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                              <span>{calUrlState.error}</span>
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -427,7 +592,11 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <p><strong className="text-on-surface">Platform:</strong> {bc.channels.calendarWidgetProvider}</p>
                     </div>
                     <button
-                      onClick={() => setBookingConfirmed(false)}
+                      onClick={() => {
+                        setBookingConfirmed(false);
+                        setCalendarTouched({});
+                        setCalendarForm({ name: '', email: '', phone: '', listingUrl: '' });
+                      }}
                       className="text-xs text-primary font-semibold hover:underline pt-2 inline-block"
                     >
                       {bc.bookAnother}
@@ -439,65 +608,106 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
               /* Mode 2: Direct Contact / Inquiry Form */
               <div className="pt-6">
                 {!contactSubmitted ? (
-                  <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <form onSubmit={handleContactSubmit} noValidate className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">{bc.nameLabel}</label>
-                        <input
-                          type="text"
-                          required
-                          placeholder={bc.namePlaceholder}
-                          value={contactForm.name}
-                          onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                          className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                        />
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder={bc.namePlaceholder}
+                            value={contactForm.name}
+                            onChange={(e) => handleContactChange('name', e.target.value)}
+                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntNameState.className}`}
+                          />
+                          {cntNameState.icon}
+                        </div>
+                        {cntNameState.error && (
+                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <span>{cntNameState.error}</span>
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">{bc.emailLabel}</label>
-                        <input
-                          type="email"
-                          required
-                          placeholder={bc.emailPlaceholder}
-                          value={contactForm.email}
-                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                          className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                        />
+                        <div className="relative">
+                          <input
+                            type="email"
+                            placeholder={bc.emailPlaceholder}
+                            value={contactForm.email}
+                            onChange={(e) => handleContactChange('email', e.target.value)}
+                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntEmailState.className}`}
+                          />
+                          {cntEmailState.icon}
+                        </div>
+                        {cntEmailState.error && (
+                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <span>{cntEmailState.error}</span>
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
-                        <input
-                          type="tel"
-                          placeholder={bc.phonePlaceholder}
-                          value={contactForm.phone}
-                          onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                          className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                        />
+                        <div className="relative">
+                          <input
+                            type="tel"
+                            placeholder={bc.phonePlaceholder}
+                            value={contactForm.phone}
+                            onChange={(e) => handleContactChange('phone', e.target.value)}
+                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntPhoneState.className}`}
+                          />
+                          {cntPhoneState.icon}
+                        </div>
+                        {cntPhoneState.error && (
+                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <span>{cntPhoneState.error}</span>
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">{bc.listingUrlLabel}</label>
-                        <input
-                          type="url"
-                          placeholder={bc.listingUrlPlaceholder}
-                          value={contactForm.listingUrl}
-                          onChange={(e) => setContactForm({ ...contactForm, listingUrl: e.target.value })}
-                          className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
-                        />
+                        <div className="relative">
+                          <input
+                            type="url"
+                            placeholder={bc.listingUrlPlaceholder}
+                            value={contactForm.listingUrl}
+                            onChange={(e) => handleContactChange('listingUrl', e.target.value)}
+                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntUrlState.className}`}
+                          />
+                          {cntUrlState.icon}
+                        </div>
+                        {cntUrlState.error && (
+                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <span>{cntUrlState.error}</span>
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs text-on-surface-variant block mb-1">{bc.messageLabel}</label>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-xs text-on-surface-variant block">{bc.messageLabel}</label>
+                        {contactTouched.message && contactForm.message.trim().length > 0 && (
+                          <span className={`text-[10px] font-mono ${contactForm.message.trim().length < 10 ? 'text-rose-500' : 'text-on-surface-variant/70'}`}>
+                            {contactForm.message.trim().length}/10 min chars
+                          </span>
+                        )}
+                      </div>
                       <textarea
                         rows={4}
-                        required
                         placeholder={bc.messagePlaceholder}
                         value={contactForm.message}
-                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                        className="w-full p-2.5 rounded-xl bg-surface-container/60 border border-outline-variant/50 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
+                        onChange={(e) => handleContactChange('message', e.target.value)}
+                        className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntMsgState.className}`}
                       />
+                      {cntMsgState.error && (
+                        <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                          <span>{cntMsgState.error}</span>
+                        </p>
+                      )}
                     </div>
 
                     <button
@@ -520,7 +730,11 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       {bc.formSuccessDescPrefix}<strong className="text-on-surface">{contactForm.name}</strong>{bc.formSuccessDescSuffix}
                     </p>
                     <button
-                      onClick={() => setContactSubmitted(false)}
+                      onClick={() => {
+                        setContactSubmitted(false);
+                        setContactTouched({});
+                        setContactForm({ name: '', email: '', phone: '', listingUrl: '', message: '' });
+                      }}
                       className="text-xs text-primary font-semibold hover:underline pt-2 inline-block"
                     >
                       {bc.sendAnother}
