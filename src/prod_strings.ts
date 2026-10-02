@@ -23,7 +23,8 @@ export type Pending<T, P extends string> = {
 };
 
 export type RequiredProdPaths =
-  | 'platformBar.channels'
+  | 'platformBar.bookingChannels'
+  | 'platformBar.operationsTools'
   | 'pricing.plans'
   | 'socialProof.caseStudies'
   | 'socialProof.testimonials'
@@ -47,7 +48,21 @@ export type RequiredProdStrings = Pending<AppStrings, RequiredProdPaths>;
 
 export const prodStrings = {
   "platformBar": {
-    "channels": [
+    "bookingChannels": [
+      {
+        "name": null,
+        "badge": null
+      },
+      {
+        "name": null,
+        "badge": null
+      },
+      {
+        "name": null,
+        "badge": null
+      }
+    ],
+    "operationsTools": [
       {
         "name": null,
         "badge": null

@@ -35,7 +35,9 @@ export const devStrings = {
   },
   "platformBar": {
     "headline": "Multi-Platform Coverage & Channel Synchronization",
-    "channels": [
+    "bookingChannelsTitle": "Major Booking Channels",
+    "bookingChannelsSubtitle": "Where your property is listed & booked",
+    "bookingChannels": [
       {
         "name": "Airbnb",
         "badge": "Superhost Partner"
@@ -47,6 +49,22 @@ export const devStrings = {
       {
         "name": "Booking.com",
         "badge": "Channel Sync"
+      }
+    ],
+    "operationsToolsTitle": "Operations Software We Leverage",
+    "operationsToolsSubtitle": "Tools powering your daily operations",
+    "operationsTools": [
+      {
+        "name": "Guesty",
+        "badge": "PMS Management"
+      },
+      {
+        "name": "PriceLabs",
+        "badge": "Dynamic Pricing"
+      },
+      {
+        "name": "Turno",
+        "badge": "Cleaner Dispatch"
       }
     ]
   },
