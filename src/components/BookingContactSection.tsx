@@ -60,8 +60,37 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
   // Validation Helpers
   const validateEmail = (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
-  const validatePhone = (val: string) => !val.trim() || /^[\d\s+\-().]{7,}$/.test(val.trim());
   const validateUrl = (val: string) => !val.trim() || /^https?:\/\/.+/i.test(val.trim());
+
+  const validatePhone = (val: string): { isValid: boolean; error?: string } => {
+    const trimmed = val.trim();
+    if (!trimmed) return { isValid: true };
+
+    // Allowed phone characters: optional leading +, digits, spaces, -, (, ), .
+    if (!/^\+?[0-9\s\-().]+$/.test(trimmed)) {
+      return { isValid: false, error: 'Only numbers and +, -, (, ), . are allowed' };
+    }
+
+    // Validate parentheses matching
+    if (trimmed.includes('(') || trimmed.includes(')')) {
+      const openCount = (trimmed.match(/\(/g) || []).length;
+      const closeCount = (trimmed.match(/\)/g) || []).length;
+      if (openCount !== closeCount || trimmed.indexOf('(') > trimmed.indexOf(')')) {
+        return { isValid: false, error: 'Please check parentheses in phone number' };
+      }
+    }
+
+    // Count actual numeric digits (standard international E.164: 7 to 15 digits)
+    const digits = trimmed.replace(/\D/g, '');
+    if (digits.length < 7) {
+      return { isValid: false, error: 'Phone number is too short (min 7 digits, e.g. +1 555-234-5678)' };
+    }
+    if (digits.length > 15) {
+      return { isValid: false, error: 'Phone number cannot exceed 15 digits' };
+    }
+
+    return { isValid: true };
+  };
 
   const getCalendarErrors = (form: typeof calendarForm) => {
     const errs: Partial<Record<keyof typeof calendarForm, string>> = {};
@@ -75,8 +104,9 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     } else if (!validateEmail(form.email)) {
       errs.email = 'Please enter a valid email address';
     }
-    if (form.phone.trim() && !validatePhone(form.phone)) {
-      errs.phone = 'Please enter a valid phone number (at least 7 digits)';
+    const phoneRes = validatePhone(form.phone);
+    if (!phoneRes.isValid && phoneRes.error) {
+      errs.phone = phoneRes.error;
     }
     if (form.listingUrl.trim() && !validateUrl(form.listingUrl)) {
       errs.listingUrl = 'Please enter a valid URL (starting with http:// or https://)';
@@ -96,8 +126,9 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     } else if (!validateEmail(form.email)) {
       errs.email = 'Please enter a valid email address';
     }
-    if (form.phone.trim() && !validatePhone(form.phone)) {
-      errs.phone = 'Please enter a valid phone number (at least 7 digits)';
+    const phoneRes = validatePhone(form.phone);
+    if (!phoneRes.isValid && phoneRes.error) {
+      errs.phone = phoneRes.error;
     }
     if (form.listingUrl.trim() && !validateUrl(form.listingUrl)) {
       errs.listingUrl = 'Please enter a valid URL (starting with http:// or https://)';
