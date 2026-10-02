@@ -252,55 +252,50 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
             {/* The Actual Booking Form Container */}
             <div className="bg-surface-container-low rounded-3xl p-6 sm:p-8 border border-outline-variant/60 shadow-sm text-left">
-              {/* Top Form Header with Mode Switcher */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-outline-variant/40">
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold font-serif-display text-on-surface flex items-center gap-2">
+              {/* Top Form Switcher Bar */}
+              <div className="flex items-center justify-between pb-5 border-b border-outline-variant/40">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-on-surface-variant/80 font-semibold flex items-center gap-1.5">
                   {activeMode === 'calendar' ? (
                     <>
-                      <CalendarIcon className="w-5 h-5 text-primary" />
-                      <span>{bc.calendarTitle}</span>
+                      <CalendarIcon className="w-3.5 h-3.5 text-primary" />
+                      <span>Live Scheduler</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5 text-primary" />
-                      <span>{bc.formTitle}</span>
+                      <Send className="w-3.5 h-3.5 text-primary" />
+                      <span>Direct Message</span>
                     </>
                   )}
-                </h3>
-                <p className="text-xs text-on-surface-variant mt-1">
-                  {activeMode === 'calendar' ? bc.calendarSubtitle : bc.formSubtitle}
-                </p>
-              </div>
+                </span>
 
-              {/* Minimal segmented toggle between Calendar and Inquiry */}
-              <div className="inline-flex p-1 rounded-xl bg-surface-container border border-outline-variant/50 shrink-0 self-start sm:self-auto">
-                <button
-                  type="button"
-                  onClick={() => setActiveMode('calendar')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                    activeMode === 'calendar'
-                      ? 'bg-primary text-on-primary shadow-sm'
-                      : 'text-on-surface-variant hover:text-on-surface'
-                  }`}
-                >
-                  <CalendarIcon className="w-3.5 h-3.5" />
-                  <span>{bc.toggleCalendar}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveMode('form')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                    activeMode === 'form'
-                      ? 'bg-primary text-on-primary shadow-sm'
-                      : 'text-on-surface-variant hover:text-on-surface'
-                  }`}
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>{bc.toggleForm}</span>
-                </button>
+                {/* Minimal segmented toggle between Calendar and Inquiry */}
+                <div className="inline-flex p-1 rounded-xl bg-surface-container border border-outline-variant/50">
+                  <button
+                    type="button"
+                    onClick={() => setActiveMode('calendar')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                      activeMode === 'calendar'
+                        ? 'bg-primary text-on-primary shadow-sm'
+                        : 'text-on-surface-variant hover:text-on-surface'
+                    }`}
+                  >
+                    <CalendarIcon className="w-3.5 h-3.5" />
+                    <span>{bc.toggleCalendar}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveMode('form')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                      activeMode === 'form'
+                        ? 'bg-primary text-on-primary shadow-sm'
+                        : 'text-on-surface-variant hover:text-on-surface'
+                    }`}
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>{bc.toggleForm}</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
             {/* Mode 1: Calendar Booking Form */}
             {activeMode === 'calendar' ? (
