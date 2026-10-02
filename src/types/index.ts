@@ -48,7 +48,7 @@ export interface ProcessStep {
   subtitle: string;
   description: string;
   deliverables: string[];
-  duration: string;
+  duration?: string;
 }
 
 export interface Differentiator {

@@ -7,7 +7,7 @@ export const PROCESS_STEPS: ProcessStep[] = strings.process.steps.map(s => ({
   subtitle: s.subtitle,
   description: s.description,
   deliverables: [...s.deliverables],
-  duration: s.duration
+  duration: (s as { duration?: string }).duration
 }));
 
 export const DIFFERENTIATORS: Differentiator[] = strings.differentiators.items.map(d => ({

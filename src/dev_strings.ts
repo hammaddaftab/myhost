@@ -34,139 +34,84 @@ export const devStrings = {
     ]
   },
   "platformBar": {
-    "headline": "Seamless Multi-Platform Synchronization & Technology Ecosystem",
+    "headline": "Multi-Platform Coverage & Integrated Software Stack",
     "channels": [
       {
         "name": "Airbnb",
-        "badge": "Superhost Co-Host"
+        "badge": "Superhost Partner"
       },
       {
         "name": "VRBO",
-        "badge": "Premier Host Certified"
+        "badge": "Premier Host"
       },
       {
         "name": "Booking.com",
-        "badge": "OTA Channel Sync"
-      },
-      {
-        "name": "PriceLabs",
-        "badge": "Algorithmic Pricing"
+        "badge": "Channel Sync"
       },
       {
         "name": "Guesty",
         "badge": "PMS Integration"
       },
       {
-        "name": "Hostaway",
-        "badge": "Enterprise API"
+        "name": "PriceLabs",
+        "badge": "Pricing Engine"
       },
       {
         "name": "Turno",
-        "badge": "Cleaner Dispatch"
+        "badge": "Turnover Coordination"
       }
     ]
   },
   "process": {
-    "eyebrow": "Simple 4-Step Process",
-    "title": "How Partnering With MyHost Works",
-    "description": "We handle the heavy operational lifting—guest messaging, review defense, pricing updates, and turnover coordination—so you enjoy passive cash flow without the 24/7 grind.",
+    "eyebrow": "How It Works",
+    "title": "Simple 4-Step Process",
+    "description": "A structured approach to managing your short-term rental—from initial audit to ongoing operations and performance tracking.",
     "stepPrefix": "Step",
-    "stagePrefix": "STAGE",
-    "exploreLabel": "Explore",
-    "includedInAllPlans": "Included in all plans",
-    "actionableDeliverables": "Actionable Deliverables:",
-    "ctaConsultation": "Start Step 1: Free Consultation",
-    "consultationSubtext": "Takes 15 minutes • Zero obligation",
-    "previewTitle": "OPERATIONAL STAGE PREVIEW",
-    "freeFirstFiveNote": "100% Free First 5",
-    "firstFiveBadge": "First 5 bookings managed free with zero host fees",
-    "simulatedCards": {
-      "step1": {
-        "scoreTitle": "Listing Revenue Health Score",
-        "scoreValue": "76 / 100",
-        "scoreOpportunity": "+24pt Opportunity",
-        "breakdownTitle": "Initial Audit Breakdown:",
-        "bullet1": "• Midweek vacancy: 34% below top 10% comp set",
-        "bullet2": "• Response time: 3.2 hrs avg (hurts search ranking)",
-        "bullet3": "• 1 retaliatory review eligible for dispute appeal"
-      },
-      "step2": {
-        "title": "Strategy Deliverable",
-        "subtitle": "Full Listing & Pricing Roadmap",
-        "breakdownTitle": "Custom Implementation:",
-        "bullet1": "• Custom house rules & keypad check-in guide",
-        "bullet2": "• Dynamic event pricing rules for local festivals",
-        "bullet3": "• Re-sequenced hero photos for +24% click rate"
-      },
-      "step3": {
-        "title": "24/7 Operations SLA",
-        "subtitle": "3.8 min Average",
-        "breakdownTitle": "Active Live Coverage:",
-        "bullet1": "• Fast inquiry conversion around the clock",
-        "bullet2": "• Automated cleaner dispatch via Turno",
-        "bullet3": "• Midnight emergency guest assistance"
-      },
-      "step4": {
-        "title": "Performance Report Delivery",
-        "subtitle": "Delivered 1st of Every Month",
-        "breakdownTitle": "Granular Metrics:",
-        "bullet1": "• Net revenue & RevPAR growth (+26.4% YoY)",
-        "bullet2": "• Occupancy rate vs market benchmark (86% vs 64%)",
-        "bullet3": "• 100% 5-star communication ratings breakdown"
-      }
-    },
+    "ctaButton": "Book Free Consultation & Audit",
+    "ctaSubtext": "Complimentary initial consultation and comprehensive STR property audit.",
     "steps": [
       {
         "step": 1,
         "title": "Audit & Consultation",
         "subtitle": "Complimentary initial consultation and comprehensive STR property audit.",
-        "description": "We inspect your listing search visibility, historical ADR, occupancy leaks, guest response velocity, and negative review vulnerability against top local comps.",
+        "description": "Complimentary initial consultation and comprehensive STR property audit to assess listing performance and opportunity.",
         "deliverables": [
-          "Complimentary STR property audit score",
-          "Market comp & pricing gap analysis",
-          "Review vulnerability assessment",
-          "Direct 1-on-1 strategy call with co-host lead"
-        ],
-        "duration": "Within 24 Hours"
+          "Complimentary initial consultation",
+          "Comprehensive STR property audit"
+        ]
       },
       {
         "step": 2,
         "title": "Custom Strategy Plan",
         "subtitle": "Tailored roadmap addressing guest communications, listing optimization, and review management.",
-        "description": "We engineer customized guest communication playbooks, optimize photo sequencing and SEO descriptions, and set dynamic pricing guardrails tailored to your market.",
+        "description": "Tailored roadmap addressing guest communications, listing optimization, and review management.",
         "deliverables": [
-          "Guest communication & FAQ playbook",
-          "Title & description algorithmic SEO rewrite",
-          "Dynamic pricing guardrails & min-night rules",
-          "Review dispute defense roadmap"
-        ],
-        "duration": "Days 2 - 3"
+          "Guest communications strategy",
+          "Listing optimization",
+          "Review management & dispute strategy"
+        ]
       },
       {
         "step": 3,
         "title": "Active Management",
         "subtitle": "Daily operations, round-the-clock guest messaging, and support coordination.",
-        "description": "Our dedicated in-house team takes over guest inquiries in under 5 minutes, handles pre-stay guest screening, coordinates turnover dispatches, and ensures 5-star communication.",
+        "description": "Daily operations, round-the-clock guest messaging, and support coordination.",
         "deliverables": [
-          "Guaranteed <5-minute response SLA (24/7/365)",
-          "Guest screening & ID verification checks",
-          "Turnover dispatch & cleaner checklist monitoring",
-          "Emergency guest on-site de-escalation"
-        ],
-        "duration": "Daily Operations"
+          "Daily operations",
+          "Round-the-clock guest messaging",
+          "Support coordination"
+        ]
       },
       {
         "step": 4,
         "title": "Performance Reporting",
         "subtitle": "Scheduled reporting cycles delivering insights on occupancy, revenue, ratings, and resolution stats.",
-        "description": "Scheduled bi-weekly and monthly reporting cycles delivering granular insights on occupancy, ADR, RevPAR gains, guest sentiment trends, and dispute resolution stats.",
+        "description": "Scheduled reporting cycles delivering insights on occupancy, revenue, ratings, and resolution stats.",
         "deliverables": [
-          "Monthly revenue & occupancy dashboard",
-          "Competitor ADR & channel performance benchmark",
-          "Review sentiment & response velocity analytics",
-          "Quarterly growth & yield strategy review"
-        ],
-        "duration": "Bi-Weekly & Monthly"
+          "Scheduled reporting cycles",
+          "Occupancy and revenue insights",
+          "Ratings and resolution stats"
+        ]
       }
     ]
   },
