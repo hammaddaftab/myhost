@@ -59,18 +59,6 @@ export const prodStrings = {
       {
         "name": null,
         "badge": null
-      },
-      {
-        "name": null,
-        "badge": null
-      },
-      {
-        "name": null,
-        "badge": null
-      },
-      {
-        "name": null,
-        "badge": null
       }
     ]
   },

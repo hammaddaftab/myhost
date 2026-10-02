@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { SectionHeader } from './SectionHeader';
 import { 
   Check, 
-  ArrowRight, 
-  Calculator, 
-  Calendar
+  ArrowRight
 } from 'lucide-react';
 import { strings } from '../strings';
 
@@ -19,16 +17,6 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
   const { pricing: p } = strings;
   const pricingPlans = p.plans;
-
-  // ROI Calculator State
-  const [nightlyRate, setNightlyRate] = useState<number>(240);
-  const [monthlyNights, setMonthlyNights] = useState<number>(18);
-
-  const currentMonthlyGross = nightlyRate * monthlyNights;
-  const projectedNights = Math.min(28, monthlyNights + 3);
-  const projectedRate = Math.round(nightlyRate * 1.18);
-  const projectedGross = projectedRate * projectedNights;
-  const estimatedLift = projectedGross - currentMonthlyGross;
 
   return (
     <section id="pricing" className="py-20 bg-surface border-t border-outline-variant/40">
@@ -134,7 +122,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
         </div>
 
         {/* 3 Tiered Packages Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16 items-stretch">
+        <div className="grid md:grid-cols-3 gap-8 items-stretch">
           {pricingPlans.map((plan) => {
             const isFullService = plan.id === 'full-service';
             const price = billingCycle === 'annual' ? plan.priceAnnual : plan.priceMonthly;
@@ -239,126 +227,6 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
               </div>
             );
           })}
-        </div>
-
-        {/* Interactive Revenue Lift Estimator */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40">
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
-            
-            <div className="lg:col-span-6 space-y-5 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-xs font-semibold border border-outline-variant/40">
-                <Calculator className="w-3.5 h-3.5 text-on-surface-variant" />
-                <span>{p.roiCalculator.title}</span>
-              </div>
-
-              <div>
-                <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
-                  {p.roiCalculator.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-on-surface-variant mt-1 leading-relaxed">
-                  {p.roiCalculator.subtitle}
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between items-center text-xs font-medium text-on-surface-variant mb-1.5">
-                    <span>{p.roiCalculator.nightlyRateLabel}:</span>
-                    <span className="font-mono text-base font-bold text-on-surface">${nightlyRate}</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="80"
-                    max="900"
-                    step="10"
-                    value={nightlyRate}
-                    onChange={(e) => setNightlyRate(Number(e.target.value))}
-                    className="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-emerald-600"
-                  />
-                  <div className="flex justify-between text-[10px] text-on-surface-variant mt-1">
-                    <span>$80/night</span>
-                    <span>$500/night</span>
-                    <span>$900/night</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center text-xs font-medium text-on-surface-variant mb-1.5">
-                    <span>{p.roiCalculator.monthlyNightsLabel}:</span>
-                    <span className="font-mono text-base font-bold text-on-surface">{monthlyNights} Nights</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="5"
-                    max="28"
-                    step="1"
-                    value={monthlyNights}
-                    onChange={(e) => setMonthlyNights(Number(e.target.value))}
-                    className="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-emerald-600"
-                  />
-                  <div className="flex justify-between text-[10px] text-on-surface-variant mt-1">
-                    <span>5 nights</span>
-                    <span>18 nights (avg)</span>
-                    <span>28 nights</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Projected Net Lift */}
-            <div className="lg:col-span-6 bg-surface-container p-6 rounded-2xl border border-outline-variant/40 space-y-4 text-left">
-              <div className="flex items-center justify-between border-b border-outline-variant/40 pb-3">
-                <span className="text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                  Revenue Comparison Projection
-                </span>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-semibold">
-                  Data-backed Model
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-3.5 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                  <span className="text-[11px] text-on-surface-variant block">{p.roiCalculator.currentGrossTitle}</span>
-                  <span className="text-xl font-serif-display font-bold text-on-surface mt-1 block">
-                    ${currentMonthlyGross.toLocaleString()}
-                  </span>
-                  <span className="text-[10px] text-on-surface-variant">{monthlyNights} nights @ ${nightlyRate}</span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                  <span className="text-[11px] text-on-surface-variant block font-semibold">{p.roiCalculator.projectedGrossTitle}</span>
-                  <span className="text-xl font-serif-display font-bold text-on-surface mt-1 block">
-                    ${projectedGross.toLocaleString()}
-                  </span>
-                  <span className="text-[10px] text-secondary">{projectedNights} nights @ ${projectedRate}</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-surface-container-high border border-outline-variant/40 flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-on-surface-variant font-medium">{p.roiCalculator.estimatedNetLift}:</span>
-                  <p className="text-2xl font-serif-display font-extrabold text-on-surface">
-                    +${estimatedLift.toLocaleString()} <span className="text-xs font-sans font-normal text-on-surface-variant">/ month</span>
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs text-on-surface-variant block">Annualized Lift</span>
-                  <span className="text-sm font-mono font-bold text-on-surface">
-                    +${(estimatedLift * 12).toLocaleString()} / yr
-                  </span>
-                </div>
-              </div>
-
-              <button
-                onClick={onOpenBooking}
-                className="w-full py-3 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>{p.roiCalculator.calculatorCta}</span>
-              </button>
-            </div>
-
-          </div>
         </div>
 
       </div>

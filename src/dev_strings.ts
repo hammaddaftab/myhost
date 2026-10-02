@@ -34,7 +34,7 @@ export const devStrings = {
     ]
   },
   "platformBar": {
-    "headline": "Multi-Platform Coverage & Integrated Software Stack",
+    "headline": "Multi-Platform Coverage & Channel Synchronization",
     "channels": [
       {
         "name": "Airbnb",
@@ -47,18 +47,6 @@ export const devStrings = {
       {
         "name": "Booking.com",
         "badge": "Channel Sync"
-      },
-      {
-        "name": "Guesty",
-        "badge": "PMS Integration"
-      },
-      {
-        "name": "PriceLabs",
-        "badge": "Pricing Engine"
-      },
-      {
-        "name": "Turno",
-        "badge": "Turnover Coordination"
       }
     ]
   },
@@ -203,21 +191,10 @@ export const devStrings = {
     "annualBillingNote": "Billed annually",
     "monthlyBillingNote": "Billed monthly",
     "featuresHeading": "Included Core Features:",
-    "roiCalculator": {
-      "title": "Interactive ROI & Yield Lift Estimator",
-      "subtitle": "See what happens when response time drops below 5m and rates calibrate dynamically.",
-      "nightlyRateLabel": "Average Nightly Rate (ADR)",
-      "monthlyNightsLabel": "Current Occupied Nights / Month",
-      "formulaExplanation": "* Projections based on conservative historical averages: +3 booked nights/month via rapid SLA responses and +18% ADR lift via daily dynamic pricing algorithms.",
-      "currentGrossTitle": "Current Monthly Gross",
-      "projectedGrossTitle": "Projected Monthly Gross",
-      "estimatedNetLift": "Estimated Net Monthly Lift",
-      "calculatorCta": "Claim Free-First-5 to Lock In This Lift"
-    },
     "freeTrialBanner": {
       "headline": "Special Launch Guarantee: Free-First-5 Stays",
-      "subheadline": "Experience the difference of sub-15m response times and 5-star reviews with ZERO risk.",
-      "badge": "100% Risk Free • No Lock-in Contract",
+      "subheadline": "Experience the difference of rapid response times and 5-star reviews with ZERO risk.",
+      "badge": "Zero Risk Guarantee • No Lock-in Contract",
       "cta": "Claim Free-First-5 Stays",
       "terms": [
         "We manage your next 5 guest reservations completely free of management fees.",
@@ -236,7 +213,7 @@ export const devStrings = {
         "percentageRate": "Or 8% of booking revenue",
         "description": "Designed for hosts who handle cleaning and maintenance themselves, but want total freedom from 24/7 guest messaging.",
         "features": [
-          "24/7/365 Guest communication (SLA < 5 mins)",
+          "24/7 Guest communication & rapid response SLA",
           "Pre-booking guest screening & ID verification",
           "Check-in & check-out instructions delivery",
           "Emergency escalation dispatch to host",
@@ -256,12 +233,12 @@ export const devStrings = {
         "features": [
           "Everything in Basic, plus:",
           "Algorithmic Dynamic Pricing (Daily adjustments)",
-          "Review Dispute & Removal representation (94% win rate)",
+          "Review Dispute & Removal representation",
           "Listing SEO: Title, description & photo optimization",
           "Cleaner scheduling & Turno checklist monitoring",
           "Multi-channel calendar sync (Airbnb, VRBO, Booking.com)",
           "Dedicated in-house account manager",
-          "Bi-weekly detailed RevPAR performance reporting"
+          "Bi-weekly detailed performance reporting"
         ],
         "ctaText": "Choose Full-Service",
         "popular": true
@@ -273,15 +250,14 @@ export const devStrings = {
         "priceMonthly": 799,
         "priceAnnual": 679,
         "percentageRate": "Custom volume-based pricing",
-        "description": "Engineered specifically for multi-property hosts and boutique management funds requiring enterprise SLAs, custom integrations, and dedicated hospitality squads.",
+        "description": "Tailored co-hosting solutions engineered for multi-property hosts and property management groups requiring bespoke agreements and dedicated support.",
         "features": [
           "Everything in Full-Service, plus:",
+          "Bespoke agreements tailored to your unit count",
           "Volume-tiered commission discounts",
-          "Custom PMS API sync (Guesty, Hostaway, Hospitable)",
-          "Dedicated hospitality concierge squad",
-          "Custom branded guest digital guidebooks",
-          "Owner financial reporting & tax statement prep",
-          "Quarterly executive portfolio review"
+          "Cross-platform calendar and listing management",
+          "Dedicated account management",
+          "Consolidated portfolio performance reporting"
         ],
         "ctaText": "Contact Portfolio Team",
         "popular": false
