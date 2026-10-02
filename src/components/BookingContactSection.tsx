@@ -102,8 +102,8 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
         {/* Main 2-Column Minimal Layout */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Direct Contact & Interactable Thin Rectangular Cards (with ~20% top margin on desktop) */}
-          <div className="lg:col-span-5 space-y-6 text-left lg:mt-[20%]">
+          {/* Left Column: Direct Contact & Interactable Thin Rectangular Cards (with ~30% top margin on desktop) */}
+          <div className="lg:col-span-5 space-y-6 text-left lg:mt-[30%]">
             <div>
               <span className="text-[11px] font-mono text-primary uppercase font-semibold tracking-wider block mb-1.5">
                 {bc.directContactEyebrow}
