@@ -7,7 +7,6 @@ import {
   FileText, 
   Headphones, 
   BarChart3, 
-  Sparkles,
   Calendar
 } from 'lucide-react';
 
@@ -84,7 +83,7 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
       case 4:
         return <BarChart3 className="w-5 h-5 text-emerald-600" />;
       default:
-        return <Sparkles className="w-5 h-5 text-emerald-600" />;
+        return <Search className="w-5 h-5 text-emerald-600" />;
     }
   };
 

@@ -1,7 +1,4 @@
-import { 
-  ArrowRight, 
-  Sparkles 
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface HeroProps {
   onOpenBooking?: () => void;
@@ -21,9 +18,6 @@ export default function Hero({ onOpenFreeFiveModal }: HeroProps) {
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary-container text-on-primary-container border border-primary/30">
                   LIMITED INTRODUCTORY OFFER
-                </span>
-                <span className="text-xs font-semibold text-primary flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" /> 100% Free Trial
                 </span>
               </div>
               <h3 className="text-sm sm:text-base font-bold text-on-surface">

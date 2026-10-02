@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { SectionHeader } from './SectionHeader';
 import { 
   Check, 
-  Sparkles, 
   ArrowRight, 
   Calculator, 
   Calendar
@@ -163,8 +162,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
         <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-primary-container/30 border-2 border-emerald-500/50 relative overflow-hidden">
           <div className="grid lg:grid-cols-12 gap-6 items-center">
             <div className="lg:col-span-8 space-y-2.5 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold">
                 <span>Introductory Incentive • 100% Risk Free</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
@@ -225,8 +223,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                 }`}
               >
                 {isFullService && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5" />
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center">
                     <span>Most Popular</span>
                   </div>
                 )}

@@ -5,8 +5,7 @@ import {
   TrendingUp, 
   Quote, 
   CheckCircle2, 
-  Calendar,
-  Sparkles
+  Calendar
 } from 'lucide-react';
 
 interface SocialProofSectionProps {
@@ -300,9 +299,8 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           <div className="mt-10 text-center">
             <button
               onClick={onOpenFreeFiveModal}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-emerald-500/40 hover:bg-primary-container/50 transition-all"
+              className="inline-flex items-center px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-emerald-500/40 hover:bg-primary-container/50 transition-all"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
               <span>Join These Hosts: Claim Your Free-First-5 Stays Pass</span>
             </button>
           </div>

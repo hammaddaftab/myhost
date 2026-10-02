@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Sparkles, Check, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { X, Check, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { FREE_FIRST_FIVE_TERMS } from '../data/mockData';
 
 interface FreeFirstFiveModalProps {
@@ -43,8 +43,7 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
         {!submitted ? (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/30 text-primary text-xs font-bold mb-2 border border-primary/20">
-                <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/30 text-primary text-xs font-bold mb-2 border border-primary/20">
                 <span>Zero Risk • No Credit Card Required</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
@@ -136,7 +135,6 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
               type="submit"
               className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all flex items-center justify-center gap-2 active:scale-95"
             >
-              <Sparkles className="w-4 h-4 text-on-primary" />
               <span>Claim Free 5 Stays (Instant Pass)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
