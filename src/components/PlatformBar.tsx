@@ -1,27 +1,20 @@
 import { CheckCircle2 } from 'lucide-react';
+import { strings } from '../strings';
 
 export default function PlatformBar() {
-  const channels = [
-    { name: "Airbnb", badge: "Superhost Co-Host" },
-    { name: "VRBO", badge: "Premier Host Certified" },
-    { name: "Booking.com", badge: "OTA Channel Sync" },
-    { name: "PriceLabs", badge: "Algorithmic Pricing" },
-    { name: "Guesty", badge: "PMS Integration" },
-    { name: "Hostaway", badge: "Enterprise API" },
-    { name: "Turno", badge: "Cleaner Dispatch" }
-  ];
+  const { platformBar } = strings;
 
   return (
     <section className="py-8 bg-surface border-y border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-5">
           <p className="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">
-            Seamless Multi-Platform Synchronization & Technology Ecosystem
+            {platformBar.headline}
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4 items-center">
-          {channels.map((ch) => (
+          {platformBar.channels.map((ch) => (
             <div
               key={ch.name}
               className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/40 flex flex-col items-center justify-center text-center transition-colors duration-200 group"

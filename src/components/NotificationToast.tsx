@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { CheckCircle2, X } from 'lucide-react';
+import { strings } from '../strings';
 
 interface NotificationToastProps {
   message: string | null;
@@ -7,6 +8,8 @@ interface NotificationToastProps {
 }
 
 export default function NotificationToast({ message, onClose }: NotificationToastProps) {
+  const { notificationToast: nt } = strings;
+
   useEffect(() => {
     if (!message) return;
     const timer = setTimeout(() => {
@@ -26,6 +29,7 @@ export default function NotificationToast({ message, onClose }: NotificationToas
         <p className="text-xs sm:text-sm font-medium">{message}</p>
         <button
           onClick={onClose}
+          aria-label={nt.dismissAria}
           className="p-1 rounded-lg text-inverse-on-surface/70 hover:text-inverse-on-surface transition-colors"
         >
           <X className="w-4 h-4" />

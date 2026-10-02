@@ -9,6 +9,7 @@ import {
   BarChart3, 
   Calendar
 } from 'lucide-react';
+import { strings } from '../strings';
 
 interface ProcessSectionProps {
   onOpenBooking: () => void;
@@ -16,61 +17,8 @@ interface ProcessSectionProps {
 
 export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
   const [activeStep, setActiveStep] = useState<number>(1);
-
-  const processSteps = [
-    {
-      step: 1,
-      title: "Audit & Consultation",
-      subtitle: "Complimentary initial consultation and comprehensive STR property audit.",
-      description: "We inspect your listing search visibility, historical ADR, occupancy leaks, guest response velocity, and negative review vulnerability against top local comps.",
-      deliverables: [
-        "Complimentary STR property audit score",
-        "Market comp & pricing gap analysis",
-        "Review vulnerability assessment",
-        "Direct 1-on-1 strategy call with co-host lead"
-      ],
-      duration: "Within 24 Hours"
-    },
-    {
-      step: 2,
-      title: "Custom Strategy Plan",
-      subtitle: "Tailored roadmap addressing guest communications, listing optimization, and review management.",
-      description: "We engineer customized guest communication playbooks, optimize photo sequencing and SEO descriptions, and set dynamic pricing guardrails tailored to your market.",
-      deliverables: [
-        "Guest communication & FAQ playbook",
-        "Title & description algorithmic SEO rewrite",
-        "Dynamic pricing guardrails & min-night rules",
-        "Review dispute defense roadmap"
-      ],
-      duration: "Days 2 - 3"
-    },
-    {
-      step: 3,
-      title: "Active Management",
-      subtitle: "Daily operations, round-the-clock guest messaging, and support coordination.",
-      description: "Our dedicated in-house team takes over guest inquiries in under 5 minutes, handles pre-stay guest screening, coordinates turnover dispatches, and ensures 5-star communication.",
-      deliverables: [
-        "Guaranteed <5-minute response SLA (24/7/365)",
-        "Guest screening & ID verification checks",
-        "Turnover dispatch & cleaner checklist monitoring",
-        "Emergency guest on-site de-escalation"
-      ],
-      duration: "Daily Operations"
-    },
-    {
-      step: 4,
-      title: "Performance Reporting",
-      subtitle: "Scheduled reporting cycles delivering insights on occupancy, revenue, ratings, and resolution stats.",
-      description: "Scheduled bi-weekly and monthly reporting cycles delivering granular insights on occupancy, ADR, RevPAR gains, guest sentiment trends, and dispute resolution stats.",
-      deliverables: [
-        "Monthly revenue & occupancy dashboard",
-        "Competitor ADR & channel performance benchmark",
-        "Review sentiment & response velocity analytics",
-        "Quarterly growth & yield strategy review"
-      ],
-      duration: "Bi-Weekly & Monthly"
-    }
-  ];
+  const { process: p } = strings;
+  const processSteps = p.steps;
 
   const getStepIcon = (step: number) => {
     switch (step) {
@@ -96,12 +44,12 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
         {/* Reusable SectionHeader Component per specification */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <SectionHeader
-            eyebrow="Simple 4-Step Process"
-            title="How Partnering With MyHost Works"
+            eyebrow={p.eyebrow}
+            title={p.title}
             className="mx-auto items-center text-center"
           />
           <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
-            We handle the heavy operational lifting—guest messaging, review defense, pricing updates, and turnover coordination—so you enjoy passive cash flow without the 24/7 grind.
+            {p.description}
           </p>
         </div>
 
@@ -129,7 +77,7 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
                     <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
                       isActive ? 'bg-primary-container text-on-primary-container' : 'text-on-surface-variant bg-surface-container'
                     }`}>
-                      Step 0{step.step}
+                      {p.stepPrefix} 0{step.step}
                     </span>
                   </div>
 
@@ -144,7 +92,7 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
                 <div className="mt-4 pt-3 border-t border-outline-variant/40 flex items-center justify-between text-[11px]">
                   <span className="text-on-surface-variant font-medium">{step.duration}</span>
                   <span className={`font-semibold flex items-center gap-1 ${isActive ? 'text-primary' : 'text-on-surface-variant'}`}>
-                    Explore <ArrowRight className="w-3 h-3" />
+                    {p.exploreLabel} <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
               </button>
@@ -160,9 +108,9 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-primary-container text-on-primary-container">
-                    STAGE 0{currentStepData.step} • {currentStepData.duration}
+                    {p.stagePrefix} 0{currentStepData.step} • {currentStepData.duration}
                   </span>
-                  <span className="text-xs text-on-surface-variant">Included in all plans</span>
+                  <span className="text-xs text-on-surface-variant">{p.includedInAllPlans}</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
                   {currentStepData.title}
@@ -175,7 +123,7 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
               {/* Deliverables Checklist */}
               <div className="space-y-2.5">
                 <p className="text-xs uppercase tracking-wider font-bold text-on-surface-variant">
-                  Actionable Deliverables:
+                  {p.actionableDeliverables}
                 </p>
                 <div className="grid sm:grid-cols-2 gap-2.5">
                   {currentStepData.deliverables.map((item, idx) => (
@@ -196,10 +144,10 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Start Step 1: Free Consultation</span>
+                  <span>{p.ctaConsultation}</span>
                 </button>
                 <span className="text-xs text-on-surface-variant">
-                  Takes 15 minutes • Zero obligation
+                  {p.consultationSubtext}
                 </span>
               </div>
             </div>
@@ -207,24 +155,24 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
             {/* Simulated Stage Visual Card */}
             <div className="lg:col-span-5 bg-surface-container rounded-2xl p-5 border border-outline-variant/40 text-left">
               <div className="text-xs font-mono text-on-surface-variant pb-3 mb-3 border-b border-outline-variant/40 flex items-center justify-between">
-                <span>OPERATIONAL STAGE PREVIEW</span>
-                <span className="text-on-surface-variant font-semibold">100% Free First 5</span>
+                <span>{p.previewTitle}</span>
+                <span className="text-on-surface-variant font-semibold">{p.freeFirstFiveNote}</span>
               </div>
 
               {activeStep === 1 && (
                 <div className="space-y-3">
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                    <p className="text-xs font-semibold text-on-surface-variant">Listing Revenue Health Score</p>
+                    <p className="text-xs font-semibold text-on-surface-variant">{p.simulatedCards.step1.scoreTitle}</p>
                     <div className="flex items-baseline gap-2 mt-1">
-                      <span className="text-2xl font-bold font-mono text-on-surface">76 / 100</span>
-                      <span className="text-xs text-secondary font-semibold">+24pt Opportunity</span>
+                      <span className="text-2xl font-bold font-mono text-on-surface">{p.simulatedCards.step1.scoreValue}</span>
+                      <span className="text-xs text-secondary font-semibold">{p.simulatedCards.step1.scoreOpportunity}</span>
                     </div>
                   </div>
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40 text-xs space-y-1 text-on-surface-variant">
-                    <p className="font-semibold text-on-surface">Initial Audit Breakdown:</p>
-                    <p>• Midweek vacancy: 34% below top 10% comp set</p>
-                    <p>• Response time: 3.2 hrs avg (hurts search ranking)</p>
-                    <p>• 1 retaliatory review eligible for dispute appeal</p>
+                    <p className="font-semibold text-on-surface">{p.simulatedCards.step1.breakdownTitle}</p>
+                    <p>{p.simulatedCards.step1.bullet1}</p>
+                    <p>{p.simulatedCards.step1.bullet2}</p>
+                    <p>{p.simulatedCards.step1.bullet3}</p>
                   </div>
                 </div>
               )}
@@ -232,14 +180,14 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
               {activeStep === 2 && (
                 <div className="space-y-3">
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                    <p className="text-xs font-semibold text-on-surface-variant">Strategy Deliverable</p>
-                    <p className="text-sm font-bold text-on-surface mt-1">Full Listing & Pricing Roadmap</p>
+                    <p className="text-xs font-semibold text-on-surface-variant">{p.simulatedCards.step2.title}</p>
+                    <p className="text-sm font-bold text-on-surface mt-1">{p.simulatedCards.step2.subtitle}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40 text-xs space-y-1 text-on-surface-variant">
-                    <p className="font-semibold text-on-surface">Custom Implementation:</p>
-                    <p>• Custom house rules & keypad check-in guide</p>
-                    <p>• Dynamic event pricing rules for local festivals</p>
-                    <p>• Re-sequenced hero photos for +24% click rate</p>
+                    <p className="font-semibold text-on-surface">{p.simulatedCards.step2.breakdownTitle}</p>
+                    <p>{p.simulatedCards.step2.bullet1}</p>
+                    <p>{p.simulatedCards.step2.bullet2}</p>
+                    <p>{p.simulatedCards.step2.bullet3}</p>
                   </div>
                 </div>
               )}
@@ -248,16 +196,16 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
                 <div className="space-y-3">
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40">
                     <div className="flex justify-between items-center">
-                      <p className="text-xs font-semibold text-on-surface-variant">24/7 Operations SLA</p>
+                      <p className="text-xs font-semibold text-on-surface-variant">{p.simulatedCards.step3.title}</p>
                       <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                     </div>
-                    <p className="text-xl font-mono font-bold text-on-surface mt-1">3.8 min Average</p>
+                    <p className="text-xl font-mono font-bold text-on-surface mt-1">{p.simulatedCards.step3.subtitle}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40 text-xs space-y-1 text-on-surface-variant">
-                    <p className="font-semibold text-on-surface">Active Live Coverage:</p>
-                    <p>• Fast inquiry conversion around the clock</p>
-                    <p>• Automated cleaner dispatch via Turno</p>
-                    <p>• Midnight emergency guest assistance</p>
+                    <p className="font-semibold text-on-surface">{p.simulatedCards.step3.breakdownTitle}</p>
+                    <p>{p.simulatedCards.step3.bullet1}</p>
+                    <p>{p.simulatedCards.step3.bullet2}</p>
+                    <p>{p.simulatedCards.step3.bullet3}</p>
                   </div>
                 </div>
               )}
@@ -265,21 +213,21 @@ export default function ProcessSection({ onOpenBooking }: ProcessSectionProps) {
               {activeStep === 4 && (
                 <div className="space-y-3">
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                    <p className="text-xs font-semibold text-on-surface-variant">Performance Report Delivery</p>
-                    <p className="text-sm font-bold text-on-surface mt-1">Delivered 1st of Every Month</p>
+                    <p className="text-xs font-semibold text-on-surface-variant">{p.simulatedCards.step4.title}</p>
+                    <p className="text-sm font-bold text-on-surface mt-1">{p.simulatedCards.step4.subtitle}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-surface-container-high border border-outline-variant/40 text-xs space-y-1 text-on-surface-variant">
-                    <p className="font-semibold text-on-surface">Granular Metrics:</p>
-                    <p>• Net revenue & RevPAR growth (+26.4% YoY)</p>
-                    <p>• Occupancy rate vs market benchmark (86% vs 64%)</p>
-                    <p>• 100% 5-star communication ratings breakdown</p>
+                    <p className="font-semibold text-on-surface">{p.simulatedCards.step4.breakdownTitle}</p>
+                    <p>{p.simulatedCards.step4.bullet1}</p>
+                    <p>{p.simulatedCards.step4.bullet2}</p>
+                    <p>{p.simulatedCards.step4.bullet3}</p>
                   </div>
                 </div>
               )}
 
               <div className="mt-4 p-2.5 rounded-lg bg-primary-container/30 border border-emerald-500/40 text-center">
                 <span className="text-[11px] font-semibold text-on-surface">
-                  First 5 bookings managed free with zero host fees
+                  {p.firstFiveBadge}
                 </span>
               </div>
             </div>

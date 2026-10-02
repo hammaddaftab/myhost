@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Check, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { FREE_FIRST_FIVE_TERMS } from '../data/mockData';
+import { strings } from '../strings';
 
 interface FreeFirstFiveModalProps {
   isOpen: boolean;
@@ -9,6 +9,7 @@ interface FreeFirstFiveModalProps {
 }
 
 export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeFirstFiveModalProps) {
+  const { freeFirstFiveModal: m, pricing } = strings;
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -23,7 +24,7 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email) {
-      alert('Please fill out your name and email');
+      alert(m.alertMissingFields);
       return;
     }
     setSubmitted(true);
@@ -44,22 +45,22 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/30 text-primary text-xs font-bold mb-2 border border-primary/20">
-                <span>Zero Risk • No Credit Card Required</span>
+                <span>{m.badge}</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
-                Claim Your Free-First-5 Stays
+                {m.title}
               </h2>
               <p className="text-xs sm:text-sm text-on-surface-variant mt-1 leading-relaxed">
-                Test our 24/7 guest communications and review defense across your next 5 reservations at $0 management fee.
+                {m.description}
               </p>
             </div>
 
             {/* Terms reminder */}
             <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 space-y-2">
               <span className="text-[10px] uppercase font-bold tracking-wider text-primary block">
-                Offer Terms & Conditions:
+                {m.termsHeading}
               </span>
-              {FREE_FIRST_FIVE_TERMS.terms.map((term, i) => (
+              {pricing.freeTrialBanner.terms.map((term, i) => (
                 <div key={i} className="flex items-start gap-2 text-xs text-on-surface-variant">
                   <Check className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
                   <span>{term}</span>
@@ -70,11 +71,11 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
             {/* Input fields */}
             <div className="space-y-3 pt-1">
               <div>
-                <label className="text-xs text-on-surface font-medium block mb-1">Your Full Name *</label>
+                <label className="text-xs text-on-surface font-medium block mb-1">{m.nameLabel}</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Rachel Adams"
+                  placeholder={m.namePlaceholder}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
@@ -83,21 +84,21 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
 
               <div className="grid sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-on-surface font-medium block mb-1">Email Address *</label>
+                  <label className="text-xs text-on-surface font-medium block mb-1">{m.emailLabel}</label>
                   <input
                     type="email"
                     required
-                    placeholder="rachel@example.com"
+                    placeholder={m.emailPlaceholder}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-on-surface font-medium block mb-1">Phone / WhatsApp</label>
+                  <label className="text-xs text-on-surface font-medium block mb-1">{m.phoneLabel}</label>
                   <input
                     type="tel"
-                    placeholder="+1 (555) 234-5678"
+                    placeholder={m.phonePlaceholder}
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
@@ -107,25 +108,25 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
 
               <div className="grid sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-on-surface font-medium block mb-1">Airbnb / VRBO Link</label>
+                  <label className="text-xs text-on-surface font-medium block mb-1">{m.listingUrlLabel}</label>
                   <input
                     type="url"
-                    placeholder="https://airbnb.com/rooms/..."
+                    placeholder={m.listingUrlPlaceholder}
                     value={form.listingUrl}
                     onChange={(e) => setForm({ ...form, listingUrl: e.target.value })}
                     className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-on-surface font-medium block mb-1">Number of Properties</label>
+                  <label className="text-xs text-on-surface font-medium block mb-1">{m.unitsLabel}</label>
                   <select
                     value={form.units}
                     onChange={(e) => setForm({ ...form, units: e.target.value })}
                     className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface focus:outline-none focus:border-primary"
                   >
-                    <option value="1">1 Unit</option>
-                    <option value="2-4">2 to 4 Units</option>
-                    <option value="5+">5+ Units</option>
+                    {m.unitOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -135,12 +136,12 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
               type="submit"
               className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all flex items-center justify-center gap-2 active:scale-95"
             >
-              <span>Claim Free 5 Stays (Instant Pass)</span>
+              <span>{m.submitButton}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <p className="text-[11px] text-on-surface-variant/70 text-center">
-              We respect your privacy. Zero spam, zero sales pressure.
+              {m.privacyNote}
             </p>
           </form>
         ) : (
@@ -149,21 +150,21 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 className="text-2xl font-serif-display font-bold text-on-surface">
-              Free-First-5 Stays Pass Activated!
+              {m.successTitle}
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed max-w-md mx-auto">
-              Welcome, <strong className="text-on-surface">{form.name}</strong>. Your co-hosting launch pass is active. Our onboarding team has sent an introduction packet to <span className="text-primary font-semibold">{form.email}</span>.
+              {m.successDescWelcome}<strong className="text-on-surface">{form.name}</strong>{m.successDescSuffix}<span className="text-primary font-semibold">{form.email}</span>.
             </p>
             <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 text-xs text-on-surface-variant text-left space-y-1">
-              <p>✓ First 5 reservations: $0 management fee</p>
-              <p>✓ Sub-5m guest response SLA active upon connection</p>
-              <p>✓ Complete listing ownership & direct payouts preserved</p>
+              {m.successBullets.map((bullet, idx) => (
+                <p key={idx}>{bullet}</p>
+              ))}
             </div>
             <button
               onClick={onClose}
               className="px-6 py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all"
             >
-              Done & Return to Site
+              {m.doneButton}
             </button>
           </div>
         )}

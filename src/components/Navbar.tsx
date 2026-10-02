@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
+import { strings } from '../strings';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -8,6 +9,7 @@ interface NavbarProps {
 
 export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { navbar } = strings;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +31,10 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         <div className="flex items-center justify-between">
           <a 
             href="/" 
-            aria-label="MyHost Home" 
+            aria-label={navbar.homeAriaLabel} 
             className="inline-flex items-center text-2xl sm:text-[1.75rem] font-(family-name:--font-serif-display) font-bold text-on-surface select-none tracking-tight [font-variation-settings:'opsz'_28,'wght'_700] hover:opacity-90 transition-opacity"
           >
-            My<span className="text-primary">Host</span>
+            {navbar.brandPrefix}<span className="text-primary">{navbar.brandSuffix}</span>
           </a>
 
           <button
@@ -40,7 +42,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             className="group inline-flex items-center justify-center gap-2 px-4 py-[10px] rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all duration-200 active:scale-95 shadow-sm"
           >
             <Calendar className="w-4 h-4 text-on-primary" />
-            <span>Book Free Audit</span>
+            <span>{navbar.bookAudit}</span>
           </button>
         </div>
       </div>

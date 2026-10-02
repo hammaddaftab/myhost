@@ -11,6 +11,7 @@ import {
   ArrowRight, 
   ShieldCheck
 } from 'lucide-react';
+import { strings } from '../strings';
 
 interface BookingContactSectionProps {
   onSuccessToast: (msg: string) => void;
@@ -18,11 +19,12 @@ interface BookingContactSectionProps {
 
 export default function BookingContactSection({ onSuccessToast }: BookingContactSectionProps) {
   const [activeMode, setActiveMode] = useState<'calendar' | 'form'>('calendar');
+  const { bookingContact: bc } = strings;
 
   // Calendar State
   const [selectedDate, setSelectedDate] = useState<string>('2026-10-06');
   const [selectedTime, setSelectedTime] = useState<string>('02:00 PM EST');
-  const [consultationFocus, setConsultationFocus] = useState<string>('Comprehensive Revenue & Listing Audit');
+  const [consultationFocus, setConsultationFocus] = useState<string>(bc.focusOptions[0]);
   const [calendarForm, setCalendarForm] = useState({
     name: '',
     email: '',
@@ -52,27 +54,13 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     { dayName: 'Sat', dayNum: '10', fullDate: '2026-10-10', month: 'Oct' },
   ];
 
-  const timeSlots = [
-    '09:30 AM EST',
-    '11:00 AM EST',
-    '01:15 PM EST',
-    '02:00 PM EST',
-    '03:45 PM EST',
-    '05:00 PM EST'
-  ];
-
-  const focusOptions = [
-    'Comprehensive Revenue & Listing Audit',
-    'Unfair Review Dispute & Removal Defense',
-    '24/7 Guest Comms & Messaging Relief',
-    'Full-Service Passive Co-Hosting & Cleaner Dispatch',
-    'Multi-Unit Portfolio Pricing & Integration'
-  ];
+  const timeSlots = bc.timeSlots;
+  const focusOptions = bc.focusOptions;
 
   const handleCalendarSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!calendarForm.name || !calendarForm.email) {
-      alert('Please provide your name and email address.');
+      alert(bc.alertMissing);
       return;
     }
     setBookingConfirmed(true);
@@ -82,7 +70,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactForm.name || !contactForm.email) {
-      alert('Please provide your name and email address.');
+      alert(bc.alertMissing);
       return;
     }
     setContactSubmitted(true);
@@ -93,15 +81,15 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     <section id="contact-booking" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header per exact specification */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <SectionHeader
-            eyebrow="Book Consultation"
-            title="Get Your Free Property Audit & Strategy Call"
+            eyebrow={bc.eyebrow}
+            title={bc.title}
             className="mx-auto items-center text-center"
           />
           <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
-            Pick a time on our live calendar for a 15-minute 1-on-1 audit with our lead STR co-host, or reach out directly across phone, email, or instant WhatsApp.
+            {bc.description}
           </p>
 
           {/* Toggle between Calendar and Form */}
@@ -115,7 +103,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
               }`}
             >
               <CalendarIcon className="w-4 h-4" />
-              <span>Interactive Calendar Scheduler</span>
+              <span>{bc.toggleCalendar}</span>
             </button>
             <button
               onClick={() => setActiveMode('form')}
@@ -126,7 +114,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
               }`}
             >
               <Send className="w-4 h-4" />
-              <span>Direct Inquiry Form</span>
+              <span>{bc.toggleForm}</span>
             </button>
           </div>
         </div>
@@ -134,7 +122,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
         {/* Main Grid: Widget/Form + Direct Contact Multi-Channels */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left/Main Column: Calendar or Form (Rule 4: heavier border, same tonal level, no resting shadow) */}
+          {/* Left/Main Column: Calendar or Form */}
           <div className="lg:col-span-8 bg-surface-container-low rounded-3xl p-6 sm:p-8 border-2 border-outline text-left">
             
             {activeMode === 'calendar' ? (
@@ -145,21 +133,21 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <div>
                         <h3 className="text-lg font-serif-display font-bold text-on-surface flex items-center gap-2">
                           <CalendarIcon className="w-5 h-5 text-on-surface-variant" />
-                          <span>Select Audit Date & Time (15-Min Strategy Session)</span>
+                          <span>{bc.calendarTitle}</span>
                         </h3>
                         <p className="text-xs text-on-surface-variant mt-1">
-                          Hosted via Google Meet or Phone • Includes Free-First-5 Stays eligibility check
+                          {bc.calendarSubtitle}
                         </p>
                       </div>
                       <span className="hidden sm:inline-block px-2.5 py-1 rounded text-[11px] font-mono bg-primary-container text-on-primary-container font-semibold">
-                        Live Calendar Sync
+                        {bc.liveCalendarSync}
                       </span>
                     </div>
 
                     {/* Step 1: Pick Date */}
                     <div>
                       <label className="text-xs uppercase font-bold tracking-wider text-on-surface-variant block mb-2">
-                        Step 1: Choose Available Date
+                        {bc.step1Label}
                       </label>
                       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                         {availableDates.map((item) => {
@@ -187,7 +175,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     {/* Step 2: Pick Time Slot */}
                     <div>
                       <label className="text-xs uppercase font-bold tracking-wider text-on-surface-variant block mb-2">
-                        Step 2: Choose Time Slot
+                        {bc.step2Label}
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {timeSlots.map((slot) => {
@@ -214,7 +202,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     {/* Step 3: Consultation Focus */}
                     <div>
                       <label className="text-xs uppercase font-bold tracking-wider text-on-surface-variant block mb-2">
-                        Step 3: Primary Consultation Topic
+                        {bc.step3Label}
                       </label>
                       <select
                         value={consultationFocus}
@@ -232,16 +220,16 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     {/* Step 4: Host Details */}
                     <div className="pt-2 border-t border-outline-variant/40 space-y-4">
                       <label className="text-xs uppercase font-bold tracking-wider text-on-surface-variant block">
-                        Step 4: Your Property & Contact Details
+                        {bc.step4Label}
                       </label>
 
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="text-xs text-on-surface-variant block mb-1">Your Full Name *</label>
+                          <label className="text-xs text-on-surface-variant block mb-1">{bc.nameLabel}</label>
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Michael Harris"
+                            placeholder={bc.namePlaceholder}
                             value={calendarForm.name}
                             onChange={(e) => setCalendarForm({ ...calendarForm, name: e.target.value })}
                             className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none focus:border-outline"
@@ -249,11 +237,11 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                         </div>
 
                         <div>
-                          <label className="text-xs text-on-surface-variant block mb-1">Email Address *</label>
+                          <label className="text-xs text-on-surface-variant block mb-1">{bc.emailLabel}</label>
                           <input
                             type="email"
                             required
-                            placeholder="michael@example.com"
+                            placeholder={bc.emailPlaceholder}
                             value={calendarForm.email}
                             onChange={(e) => setCalendarForm({ ...calendarForm, email: e.target.value })}
                             className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none focus:border-outline"
@@ -263,10 +251,10 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="text-xs text-on-surface-variant block mb-1">Phone / WhatsApp</label>
+                          <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
                           <input
                             type="tel"
-                            placeholder="+1 (555) 000-0000"
+                            placeholder={bc.phonePlaceholder}
                             value={calendarForm.phone}
                             onChange={(e) => setCalendarForm({ ...calendarForm, phone: e.target.value })}
                             className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none focus:border-outline"
@@ -274,27 +262,26 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                         </div>
 
                         <div>
-                          <label className="text-xs text-on-surface-variant block mb-1">Number of Listings</label>
+                          <label className="text-xs text-on-surface-variant block mb-1">{bc.unitsLabel}</label>
                           <select
                             value={calendarForm.propertiesCount}
                             onChange={(e) => setCalendarForm({ ...calendarForm, propertiesCount: e.target.value })}
                             className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface focus:outline-none focus:border-outline"
                           >
-                            <option value="1">1 Property</option>
-                            <option value="2-4">2 to 4 Properties</option>
-                            <option value="5-10">5 to 10 Properties</option>
-                            <option value="10+">10+ Properties (Portfolio)</option>
+                            {bc.unitOptions.map((opt) => (
+                              <option key={opt.value} value={opt.value}>{opt.label}</option>
+                            ))}
                           </select>
                         </div>
                       </div>
 
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">
-                          Airbnb / VRBO Listing URL (Optional, for pre-call audit)
+                          {bc.listingUrlLabel}
                         </label>
                         <input
                           type="url"
-                          placeholder="https://airbnb.com/rooms/..."
+                          placeholder={bc.listingUrlPlaceholder}
                           value={calendarForm.listingUrl}
                           onChange={(e) => setCalendarForm({ ...calendarForm, listingUrl: e.target.value })}
                           className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none focus:border-outline"
@@ -307,7 +294,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       className="w-full py-4 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2"
                     >
                       <CalendarIcon className="w-4 h-4" />
-                      <span>Confirm 15-Minute Free Consultation</span>
+                      <span>{bc.calendarSubmitButton}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </form>
@@ -317,21 +304,21 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h3 className="text-2xl font-serif-display font-bold text-on-surface">
-                      Consultation Confirmed!
+                      {bc.calendarSuccessTitle}
                     </h3>
                     <p className="text-sm text-on-surface-variant max-w-md mx-auto leading-relaxed">
-                      We've reserved your 15-minute listing audit for <strong className="text-on-surface">{selectedDate} at {selectedTime}</strong>. A calendar invite with Google Meet access has been sent to <span className="text-on-surface font-semibold">{calendarForm.email}</span>.
+                      {bc.calendarSuccessDesc}
                     </p>
                     <div className="p-4 rounded-2xl bg-surface-container border border-outline-variant/40 max-w-md mx-auto text-xs text-on-surface-variant text-left space-y-1">
                       <p><strong className="text-on-surface">Host:</strong> {calendarForm.name}</p>
                       <p><strong className="text-on-surface">Focus:</strong> {consultationFocus}</p>
-                      <p><strong className="text-on-surface">Status:</strong> Free-First-5 Stays Reserved</p>
+                      <p><strong className="text-on-surface">Time:</strong> {selectedDate} at {selectedTime}</p>
                     </div>
                     <button
                       onClick={() => setBookingConfirmed(false)}
                       className="text-xs text-primary font-semibold hover:underline pt-2 inline-block"
                     >
-                      Book another slot or edit appointment
+                      {bc.bookAnother}
                     </button>
                   </div>
                 )}
@@ -352,22 +339,22 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-on-surface-variant block mb-1">Your Full Name *</label>
+                        <label className="text-xs text-on-surface-variant block mb-1">{bc.nameLabel}</label>
                         <input
                           type="text"
                           required
-                          placeholder="Your Name"
+                          placeholder={bc.namePlaceholder}
                           value={contactForm.name}
                           onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                           className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-on-surface-variant block mb-1">Email Address *</label>
+                        <label className="text-xs text-on-surface-variant block mb-1">{bc.emailLabel}</label>
                         <input
                           type="email"
                           required
-                          placeholder="you@domain.com"
+                          placeholder={bc.emailPlaceholder}
                           value={contactForm.email}
                           onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                           className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
@@ -377,35 +364,34 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-on-surface-variant block mb-1">Phone Number</label>
+                        <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
                         <input
                           type="tel"
-                          placeholder="+1 (555) 000-0000"
+                          placeholder={bc.phonePlaceholder}
                           value={contactForm.phone}
                           onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
                           className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-on-surface-variant block mb-1">Number of Listings</label>
+                        <label className="text-xs text-on-surface-variant block mb-1">{bc.unitsLabel}</label>
                         <select
                           value={contactForm.propertiesCount}
                           onChange={(e) => setContactForm({ ...contactForm, propertiesCount: e.target.value })}
                           className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface focus:outline-none focus:border-primary"
                         >
-                          <option value="1">1 Property</option>
-                          <option value="2-4">2 to 4 Properties</option>
-                          <option value="5-10">5 to 10 Properties</option>
-                          <option value="10+">10+ Properties</option>
+                          {bc.unitOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
                         </select>
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs text-on-surface-variant block mb-1">Airbnb / VRBO Link</label>
+                      <label className="text-xs text-on-surface-variant block mb-1">{bc.listingUrlLabel}</label>
                       <input
                         type="url"
-                        placeholder="https://airbnb.com/rooms/..."
+                        placeholder={bc.listingUrlPlaceholder}
                         value={contactForm.listingUrl}
                         onChange={(e) => setContactForm({ ...contactForm, listingUrl: e.target.value })}
                         className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
@@ -413,11 +399,11 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     </div>
 
                     <div>
-                      <label className="text-xs text-on-surface-variant block mb-1">How can we help your rental business? *</label>
+                      <label className="text-xs text-on-surface-variant block mb-1">{bc.messageLabel}</label>
                       <textarea
                         rows={4}
                         required
-                        placeholder="Tell us about your listing, occupancy goals, or review challenges..."
+                        placeholder={bc.messagePlaceholder}
                         value={contactForm.message}
                         onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                         className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
@@ -429,7 +415,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
                     >
                       <Send className="w-4 h-4" />
-                      <span>Send Message (Under 5m SLA)</span>
+                      <span>{bc.formSubmitButton}</span>
                     </button>
                   </form>
                 ) : (
@@ -438,16 +424,16 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h3 className="text-2xl font-serif-display font-bold text-on-surface">
-                      Message Dispatched!
+                      {bc.formSuccessTitle}
                     </h3>
                     <p className="text-sm text-on-surface-variant max-w-md mx-auto">
-                      Thank you, <strong className="text-on-surface">{contactForm.name}</strong>. Our on-duty STR co-host lead is reviewing your inquiry and will reach out via email or phone within 5 minutes.
+                      {bc.formSuccessDescPrefix}<strong className="text-on-surface">{contactForm.name}</strong>{bc.formSuccessDescSuffix}
                     </p>
                     <button
                       onClick={() => setContactSubmitted(false)}
                       className="text-xs text-primary font-semibold hover:underline pt-2"
                     >
-                      Send another message
+                      {bc.sendAnother}
                     </button>
                   </div>
                 )}
@@ -461,7 +447,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             
             {/* Phone Card */}
             <a
-              href="tel:+18005554678"
+              href={bc.channels.phoneTel || '#'}
               className="p-5 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-outline transition-all block group"
             >
               <div className="flex items-center gap-3 mb-1.5">
@@ -469,20 +455,20 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   <PhoneCall className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs text-on-surface-variant/70 block">Direct Telephone Hotline</span>
+                  <span className="text-xs text-on-surface-variant/70 block">{bc.channels.phoneTitle}</span>
                   <span className="text-base font-bold text-on-surface group-hover:text-primary transition-colors">
-                    +1 (800) 555-HOST
+                    {bc.channels.phoneNumber}
                   </span>
                 </div>
               </div>
               <p className="text-[11px] text-on-surface-variant">
-                Speak directly with an STR co-hosting strategist. Monday–Sunday 8 AM – 9 PM EST.
+                {bc.channels.phoneDesc}
               </p>
             </a>
 
             {/* WhatsApp Direct Chat */}
             <a
-              href="https://wa.me/14158904678?text=Hi%20MyHost,%20I'd%20like%20to%20learn%20more%20about%20your%20Free-First-5%20stays%20offer."
+              href={bc.channels.whatsAppLink || '#'}
               target="_blank"
               rel="noopener noreferrer"
               className="p-5 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-primary/50 transition-all block group"
@@ -492,20 +478,20 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs text-primary font-semibold block">Instant WhatsApp Chat</span>
+                  <span className="text-xs text-primary font-semibold block">{bc.channels.whatsAppTitle}</span>
                   <span className="text-base font-bold text-on-surface group-hover:text-primary transition-colors">
-                    Chat on WhatsApp
+                    {bc.channels.whatsAppAction}
                   </span>
                 </div>
               </div>
               <p className="text-[11px] text-on-surface-variant">
-                Direct live chat desk. Fast assistance for urgent review dispute questions or quick audits.
+                {bc.channels.whatsAppDesc}
               </p>
             </a>
 
             {/* Email Direct */}
             <a
-              href="mailto:partners@myhost.co?subject=STR%20Co-Hosting%20Inquiry%20-%20Free-First-5"
+              href={bc.channels.emailMailto || '#'}
               className="p-5 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-outline transition-all block group"
             >
               <div className="flex items-center gap-3 mb-1.5">
@@ -513,14 +499,14 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs text-on-surface-variant/70 block">Partnership Inquiries</span>
+                  <span className="text-xs text-on-surface-variant/70 block">{bc.channels.emailTitle}</span>
                   <span className="text-base font-bold text-on-surface group-hover:text-primary transition-colors">
-                    partners@myhost.co
+                    {bc.channels.operationalEmail}
                   </span>
                 </div>
               </div>
               <p className="text-[11px] text-on-surface-variant">
-                Send multi-unit portfolio spreadsheets or custom RFP requests directly to our team.
+                {bc.channels.emailDesc}
               </p>
             </a>
 
@@ -528,10 +514,10 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             <div className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/40 space-y-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-on-surface">
                 <ShieldCheck className="w-4 h-4 text-primary" />
-                <span>Zero Sales Pressure Promise</span>
+                <span>{bc.channels.promiseTitle}</span>
               </div>
               <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                We deliver a comprehensive listing audit report with real revenue comps. If we aren't a mutual fit, you keep the report at no charge.
+                {bc.channels.promiseDesc}
               </p>
             </div>
 

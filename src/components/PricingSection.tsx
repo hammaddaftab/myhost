@@ -6,6 +6,7 @@ import {
   Calculator, 
   Calendar
 } from 'lucide-react';
+import { strings } from '../strings';
 
 interface PricingSectionProps {
   onOpenBooking: () => void;
@@ -15,6 +16,9 @@ interface PricingSectionProps {
 export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: PricingSectionProps) {
   const [billingCycle, setBillingCycle] = useState<'annual' | 'monthly'>('monthly');
   const [pricingModel, setPricingModel] = useState<'flat' | 'percentage'>('flat');
+
+  const { pricing: p } = strings;
+  const pricingPlans = p.plans;
 
   // ROI Calculator State
   const [nightlyRate, setNightlyRate] = useState<number>(240);
@@ -26,68 +30,6 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
   const projectedGross = projectedRate * projectedNights;
   const estimatedLift = projectedGross - currentMonthlyGross;
 
-  const pricingPlans = [
-    {
-      id: "basic",
-      name: "Basic",
-      tagline: "Guest communications and message handling only.",
-      priceMonthly: 199,
-      priceAnnual: 169,
-      percentageRate: "Or 8% of booking revenue",
-      description: "Designed for hosts who handle cleaning and maintenance themselves, but want total freedom from 24/7 guest messaging.",
-      features: [
-        "24/7/365 Guest communication (SLA < 5 mins)",
-        "Pre-booking guest screening & ID verification",
-        "Check-in & check-out instructions delivery",
-        "Emergency escalation dispatch to host",
-        "Monthly communication performance report"
-      ],
-      ctaText: "Start with Basic",
-      popular: false
-    },
-    {
-      id: "full-service",
-      name: "Full-Service",
-      tagline: "Comprehensive listing management, guest messaging, optimization, and dispute resolution.",
-      priceMonthly: 399,
-      priceAnnual: 339,
-      percentageRate: "Or 15% of booking revenue",
-      description: "Our signature end-to-end co-hosting package. Listing optimization, dynamic event pricing, cleaner dispatch, and proactive review dispute defense.",
-      features: [
-        "Everything in Basic, plus:",
-        "Algorithmic Dynamic Pricing (Daily adjustments)",
-        "Review Dispute & Removal representation (94% win rate)",
-        "Listing SEO: Title, description & photo optimization",
-        "Cleaner scheduling & Turno checklist monitoring",
-        "Multi-channel calendar sync (Airbnb, VRBO, Booking.com)",
-        "Dedicated in-house account manager",
-        "Bi-weekly detailed RevPAR performance reporting"
-      ],
-      ctaText: "Choose Full-Service",
-      popular: true
-    },
-    {
-      id: "portfolio",
-      name: "Custom Portfolio",
-      tagline: "Bespoke agreements designed for multi-unit operators and property management groups.",
-      priceMonthly: 799,
-      priceAnnual: 679,
-      percentageRate: "Custom volume-based pricing",
-      description: "Engineered specifically for multi-property hosts and boutique management funds requiring enterprise SLAs, custom integrations, and dedicated hospitality squads.",
-      features: [
-        "Everything in Full-Service, plus:",
-        "Volume-tiered commission discounts",
-        "Custom PMS API sync (Guesty, Hostaway, Hospitable)",
-        "Dedicated hospitality concierge squad",
-        "Custom branded guest digital guidebooks",
-        "Owner financial reporting & tax statement prep",
-        "Quarterly executive portfolio review"
-      ],
-      ctaText: "Contact Portfolio Team",
-      popular: false
-    }
-  ];
-
   return (
     <section id="pricing" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,12 +37,12 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <SectionHeader
-            eyebrow="Pricing & Packages"
-            title="Tiered Plans Engineered to Maximize Host Profits"
+            eyebrow={p.eyebrow}
+            title={p.title}
             className="mx-auto items-center text-center"
           />
           <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
-            Choose between flat monthly subscriptions or percentage-based revenue sharing. Zero onboarding fees, zero lock-in contracts, and your first 5 stays managed completely free.
+            {p.description}
           </p>
 
           {/* Pricing Controls */}
@@ -114,7 +56,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                     : 'text-on-surface-variant hover:text-on-surface'
                 }`}
               >
-                Flat Monthly Fee
+                {p.toggleFlat}
               </button>
               <button
                 onClick={() => setPricingModel('percentage')}
@@ -124,7 +66,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                     : 'text-on-surface-variant hover:text-on-surface'
                 }`}
               >
-                % Revenue Share
+                {p.togglePercentage}
               </button>
             </div>
 
@@ -138,7 +80,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                       : 'text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
-                  Monthly
+                  {p.billingMonthly}
                 </button>
                 <button
                   onClick={() => setBillingCycle('annual')}
@@ -148,10 +90,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                       : 'text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
-                  <span>Annual</span>
-                  <span className="px-1.5 py-0.2 rounded text-[10px] bg-primary-container text-on-primary-container font-bold">
-                    Save 15%
-                  </span>
+                  <span>{p.billingAnnual}</span>
                 </button>
               </div>
             )}
@@ -163,32 +102,22 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
           <div className="grid lg:grid-cols-12 gap-6 items-center">
             <div className="lg:col-span-8 space-y-2.5 text-left">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold">
-                <span>Introductory Incentive • 100% Risk Free</span>
+                <span>{p.freeTrialBanner.badge}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
-                Launch Guarantee: Free-First-5 Stays
+                {p.freeTrialBanner.headline}
               </h3>
               <p className="text-sm text-on-surface-variant leading-relaxed">
-                Experience our sub-5 minute response times and 5-star review defense with zero management fees on your next 5 reservations.
+                {p.freeTrialBanner.subheadline}
               </p>
 
               <div className="grid sm:grid-cols-2 gap-2 pt-1 text-xs text-on-surface-variant">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span>Next 5 reservations managed 100% free</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span>Includes 24/7 guest comms & review defense</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span>No credit card required to activate</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span>Zero long-term lock-in contract</span>
-                </div>
+                {p.freeTrialBanner.terms.map((term, tIdx) => (
+                  <div key={tIdx} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-primary shrink-0" />
+                    <span>{term}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -197,12 +126,9 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                 onClick={onOpenFreeFiveModal}
                 className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2"
               >
-                <span>Claim Free-First-5 Stays</span>
+                <span>{p.freeTrialBanner.cta}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <p className="text-[11px] text-on-surface-variant text-center lg:text-right">
-                Instant enrollment • First 5 bookings • Cancel anytime
-              </p>
             </div>
           </div>
         </div>
@@ -224,7 +150,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
               >
                 {isFullService && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center">
-                    <span>Most Popular</span>
+                    <span>{p.popularBadge}</span>
                   </div>
                 )}
 
@@ -253,7 +179,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                               ${price}
                             </span>
                             <span className="text-xs text-on-surface-variant font-medium">
-                              / month / unit
+                              {p.monthSuffix} / unit
                             </span>
                           </div>
                           <p className="text-[11px] text-on-surface-variant mt-1 font-semibold">
@@ -284,7 +210,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
                   <div className="space-y-2.5 mb-8 text-left">
                     <p className="text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
-                      Included Services:
+                      {p.featuresHeading}
                     </p>
                     {plan.features.map((feature, fIdx) => (
                       <div key={fIdx} className="flex items-start gap-2.5 text-xs text-on-surface-variant">
@@ -309,9 +235,6 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                     <span>{plan.ctaText}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-[10px] text-on-surface-variant text-center">
-                    Qualifies for Free-First-5 Stays guarantee
-                  </p>
                 </div>
               </div>
             );
@@ -325,22 +248,22 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
             <div className="lg:col-span-6 space-y-5 text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-xs font-semibold border border-outline-variant/40">
                 <Calculator className="w-3.5 h-3.5 text-on-surface-variant" />
-                <span>INTERACTIVE REVENUE ESTIMATOR</span>
+                <span>{p.roiCalculator.title}</span>
               </div>
 
               <div>
                 <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
-                  Calculate Your STR Profit Lift
+                  {p.roiCalculator.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-on-surface-variant mt-1 leading-relaxed">
-                  Sub-5 minute response times convert more browsers, and algorithmic pricing maximizes revenue during high-demand dates.
+                  {p.roiCalculator.subtitle}
                 </p>
               </div>
 
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between items-center text-xs font-medium text-on-surface-variant mb-1.5">
-                    <span>Average Nightly Rate (ADR):</span>
+                    <span>{p.roiCalculator.nightlyRateLabel}:</span>
                     <span className="font-mono text-base font-bold text-on-surface">${nightlyRate}</span>
                   </div>
                   <input
@@ -361,7 +284,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
                 <div>
                   <div className="flex justify-between items-center text-xs font-medium text-on-surface-variant mb-1.5">
-                    <span>Nights Booked Per Month:</span>
+                    <span>{p.roiCalculator.monthlyNightsLabel}:</span>
                     <span className="font-mono text-base font-bold text-on-surface">{monthlyNights} Nights</span>
                   </div>
                   <input
@@ -395,7 +318,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-3.5 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                  <span className="text-[11px] text-on-surface-variant block">Current Gross Monthly</span>
+                  <span className="text-[11px] text-on-surface-variant block">{p.roiCalculator.currentGrossTitle}</span>
                   <span className="text-xl font-serif-display font-bold text-on-surface mt-1 block">
                     ${currentMonthlyGross.toLocaleString()}
                   </span>
@@ -403,7 +326,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-surface-container-high border border-outline-variant/40">
-                  <span className="text-[11px] text-on-surface-variant block font-semibold">With MyHost Co-Hosting</span>
+                  <span className="text-[11px] text-on-surface-variant block font-semibold">{p.roiCalculator.projectedGrossTitle}</span>
                   <span className="text-xl font-serif-display font-bold text-on-surface mt-1 block">
                     ${projectedGross.toLocaleString()}
                   </span>
@@ -413,7 +336,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
               <div className="p-4 rounded-xl bg-surface-container-high border border-outline-variant/40 flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-on-surface-variant font-medium">Estimated Net Monthly Revenue Lift:</span>
+                  <span className="text-xs text-on-surface-variant font-medium">{p.roiCalculator.estimatedNetLift}:</span>
                   <p className="text-2xl font-serif-display font-extrabold text-on-surface">
                     +${estimatedLift.toLocaleString()} <span className="text-xs font-sans font-normal text-on-surface-variant">/ month</span>
                   </p>
@@ -431,7 +354,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                 className="w-full py-3 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
-                <span>Verify Your Property Potential on Free Audit Call</span>
+                <span>{p.roiCalculator.calculatorCta}</span>
               </button>
             </div>
 

@@ -1,18 +1,29 @@
 import { useState } from 'react';
 import { SectionHeader } from './SectionHeader';
-import { BLOG_POSTS } from '../data/mockData';
 import { BlogPost } from '../types';
 import { BookOpen, ArrowRight, X, Clock, Tag, CheckCircle2 } from 'lucide-react';
+import { strings } from '../strings';
 
 export default function ResourcesSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
-  const categories = ['All', 'Platform Policy Updates', 'Seasonal Pricing Strategies', 'STR Best Practice Guides'];
+  const { resources: r } = strings;
+  const categories = r.categories;
+  const posts: BlogPost[] = r.posts.map(p => ({
+    id: p.id,
+    title: p.title ?? '',
+    category: p.category,
+    readTime: p.readTime,
+    date: p.date,
+    excerpt: p.excerpt ?? '',
+    tags: [...p.tags],
+    highlights: p.highlights ? [...p.highlights] : []
+  }));
 
   const filteredPosts = activeCategory === 'All'
-    ? BLOG_POSTS
-    : BLOG_POSTS.filter((p) => p.category === activeCategory);
+    ? posts
+    : posts.filter((p) => p.category === activeCategory);
 
   return (
     <section id="resources" className="py-20 bg-surface border-t border-outline-variant/40">
@@ -21,12 +32,12 @@ export default function ResourcesSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <SectionHeader
-            eyebrow="Blog & Resources"
-            title="STR Best Practice Guides, Policy Updates & Pricing Strategies"
+            eyebrow={r.eyebrow}
+            title={r.title}
             className="mx-auto items-center text-center"
           />
           <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
-            Stay ahead of platform algorithm updates, learn how to dispute retaliatory reviews, and discover how to optimize dynamic pricing for maximum RevPAR.
+            {r.description}
           </p>
 
           {/* Category Filter Pills */}
@@ -76,7 +87,7 @@ export default function ResourcesSection() {
                 {/* Highlights preview */}
                 <div className="mt-4 pt-3 border-t border-outline-variant/40 space-y-1.5">
                   <p className="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant">
-                    What You'll Learn:
+                    {r.whatYoullLearn}
                   </p>
                   {post.highlights.map((h, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs text-on-surface">
@@ -93,7 +104,7 @@ export default function ResourcesSection() {
                   className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface border border-outline-variant/40 text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
                 >
                   <BookOpen className="w-3.5 h-3.5 text-on-surface-variant" />
-                  <span>Read Guide</span>
+                  <span>{r.readGuideButton}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -132,7 +143,7 @@ export default function ResourcesSection() {
 
               <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface">
-                  Key Strategic Takeaways
+                  {r.modalKeyTakeaways}
                 </h4>
                 {selectedPost.highlights.map((h, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-xs text-on-surface">
@@ -142,28 +153,19 @@ export default function ResourcesSection() {
                 ))}
               </div>
 
-              <div className="text-xs text-on-surface-variant space-y-3 leading-relaxed pt-2">
-                <p>
-                  At MyHost, our operations team implements these exact protocols every single day on behalf of our host partners. Rather than relying on guesswork, our co-hosting playbook is codified to ensure maximum revenue, high search visibility, and dispute-proof review defenses.
-                </p>
-                <p>
-                  Want our operations team to audit your listing and check for these exact vulnerabilities? Book a complimentary 15-minute listing audit with our lead STR strategist.
-                </p>
-              </div>
-
               <div className="pt-4 flex items-center justify-end gap-3 border-t border-outline-variant/40">
                 <button
                   onClick={() => setSelectedPost(null)}
                   className="px-4 py-2 rounded-xl text-xs font-medium text-on-surface-variant hover:text-on-surface"
                 >
-                  Close
+                  {r.modalClose}
                 </button>
                 <a
                   href="#contact-booking"
                   onClick={() => setSelectedPost(null)}
                   className="px-5 py-2.5 rounded-xl text-xs font-semibold text-on-primary bg-primary hover:opacity-90 transition-colors"
                 >
-                  Book Free Audit Call
+                  {strings.navbar.bookAudit}
                 </a>
               </div>
             </div>

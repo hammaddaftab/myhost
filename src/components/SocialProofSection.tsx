@@ -7,6 +7,7 @@ import {
   CheckCircle2, 
   Calendar
 } from 'lucide-react';
+import { strings } from '../strings';
 
 interface SocialProofSectionProps {
   onOpenBooking: () => void;
@@ -14,79 +15,9 @@ interface SocialProofSectionProps {
 }
 
 export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal }: SocialProofSectionProps) {
-  const caseStudies = [
-    {
-      id: "case-1",
-      tag: "Review Defense & Rating Recovery",
-      title: "Removed a false 1-star review in 5 days",
-      platform: "Airbnb",
-      duration: "5 Days to Complete Removal",
-      metricHighlight: "4.98★",
-      metricLabel: "Superhost Status Restored",
-      summary: "A guest attempted to extort a full refund after an unauthorized party was halted. When they retaliated with a false 1-star review, MyHost intervened directly with platform Trust & Safety to have it completely removed.",
-      challenge: "Guest breached maximum occupancy rules with an unregistered event. Upon checkout, they retaliated with a fabricated 1-star cleanliness review threatening the host's Superhost status.",
-      solution: "MyHost compiled timestamped exterior security camera logs, pre-check-in cleaning inspection photo proofs, and in-app message transcripts demonstrating an explicit refund demand.",
-      result: "Airbnb confirmed violation of the Extortion & Retaliation Policy. The 1-star review was permanently expunged within 5 days, restoring the listing's 4.98-star rating."
-    },
-    {
-      id: "case-2",
-      tag: "Revenue & Listing Optimization",
-      title: "Increased booking rate by 38% after listing optimization",
-      platform: "Multi-Platform",
-      duration: "45 Days Post-Launch",
-      metricHighlight: "+38.4%",
-      metricLabel: "Booking Rate & RevPAR Lift",
-      summary: "A 2-bedroom mountain chalet in Colorado was underperforming due to static pricing and sub-optimal photography. MyHost implemented algorithmic pricing and overhauled the listing metadata.",
-      challenge: "The listing suffered from a 42% weekday vacancy rate and relied on Airbnb's basic Smart Pricing, which undervalued peak ski weekend dates by up to $180/night.",
-      solution: "We re-sequenced the photo gallery to highlight the hot tub and mountain views in the first 5 slots, rewrote copy targeting remote work travelers, and calibrated dynamic pricing with local event demand.",
-      result: "Booking rate jumped by 38.4%, occupancy rose from 58% to 84%, and monthly booking revenue grew from $4,440 to $6,150."
-    }
-  ];
-
-  const testimonials = [
-    {
-      id: "test-1",
-      author: "Elena Rostova",
-      role: "Property Owner & Investor",
-      location: "Scottsdale, AZ • 3 Properties",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
-      quote: "Handing over my guest comms to MyHost was the single highest-ROI decision I made this year. My response time dropped from 4 hours to 4 minutes, and our occupancy jumped from 62% to 88%. The Free-First-5 stays made trying them completely painless.",
-      rating: 5,
-      stats: [
-        { label: "Occupancy Rate", before: "62%", after: "88%" },
-        { label: "Guest Response", before: "4.2 hrs", after: "4 mins" },
-        { label: "Average Rating", before: "4.74★", after: "4.98★" }
-      ]
-    },
-    {
-      id: "test-2",
-      author: "Marcus Vance",
-      role: "Full-Time Real Estate Operator",
-      location: "Austin, TX • 6 Units",
-      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80",
-      quote: "When an unruly guest threatened a 1-star review unless I refunded their entire $1,800 stay, MyHost took control. They documented the extortion and had the review removed in 5 days. Unbelievable peace of mind.",
-      rating: 5,
-      stats: [
-        { label: "Extortion Saved", before: "$0", after: "$1,800" },
-        { label: "Superhost Status", before: "At Risk", after: "Restored" },
-        { label: "Annual Revenue", before: "Baseline", after: "+$22,400" }
-      ]
-    },
-    {
-      id: "test-3",
-      author: "Sarah & David Chen",
-      role: "Boutique STR Hosts",
-      location: "Smoky Mountains, TN • 2 Cabins",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
-      quote: "We were skeptical about dynamic pricing until MyHost showed us our weekday gap analysis. They re-calibrated our rates for local concert weekends and seasonal leaf-peepers. Our RevPAR is up 31% year over year.",
-      rating: 5,
-      stats: [
-        { label: "RevPAR Revenue", before: "$142", after: "$186 (+31%)" },
-        { label: "Communication", before: "4.82★", after: "5.0★" },
-        { label: "Weekly Host Time", before: "20 hrs", after: "2 hrs" }
-      ]
-    }
-  ];
+  const { socialProof: sp } = strings;
+  const caseStudies = sp.caseStudies;
+  const testimonials = sp.testimonials;
 
   const [selectedCaseId, setSelectedCaseId] = useState<string>(caseStudies[0].id);
   const activeCase = caseStudies.find((c) => c.id === selectedCaseId) || caseStudies[0];
@@ -98,12 +29,12 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <SectionHeader
-            eyebrow="Social Proof"
-            title="Measurable Results for Real Short-Term Rental Hosts"
+            eyebrow={sp.eyebrow}
+            title={sp.title}
             className="mx-auto items-center text-center"
           />
           <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
-            See how MyHost intervened during retaliatory 1-star reviews, turned around lagging occupancy, and protected Superhost ratings.
+            {sp.description}
           </p>
         </div>
 
@@ -167,7 +98,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
                     <span className="text-xs uppercase tracking-wider font-bold text-secondary block mb-1">
-                      The Operational Challenge:
+                      {sp.challengeHeading}:
                     </span>
                     <p className="text-xs text-on-surface-variant leading-relaxed">
                       {activeCase.challenge}
@@ -176,7 +107,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
 
                   <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
                     <span className="text-xs uppercase tracking-wider font-bold text-on-surface block mb-1">
-                      The MyHost Intervention:
+                      {sp.solutionHeading}:
                     </span>
                     <p className="text-xs text-on-surface-variant leading-relaxed">
                       {activeCase.solution}
@@ -189,7 +120,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                   <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
                   <div>
                     <span className="text-xs uppercase tracking-wider font-bold text-on-surface block">
-                      The Measurable Outcome:
+                      {sp.resultHeading}:
                     </span>
                     <p className="text-xs sm:text-sm text-on-surface mt-1">
                       {activeCase.result}
@@ -219,7 +150,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                   className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5" />
-                  <span>Get Similar Results For Your Listing</span>
+                  <span>{sp.ctaScheduleAudit}</span>
                 </button>
               </div>
 
@@ -282,7 +213,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                   <div className="flex items-center gap-3 pt-3 border-t border-outline-variant/40">
                     <img
                       src={t.avatar}
-                      alt={t.author}
+                      alt={t.author || 'Host Avatar'}
                       className="w-10 h-10 rounded-full object-cover border border-outline-variant/40"
                     />
                     <div>
@@ -301,7 +232,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
               onClick={onOpenFreeFiveModal}
               className="inline-flex items-center px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-emerald-500/40 hover:bg-primary-container/50 transition-all"
             >
-              <span>Join These Hosts: Claim Your Free-First-5 Stays Pass</span>
+              <span>{sp.ctaClaimOffer}</span>
             </button>
           </div>
         </div>
