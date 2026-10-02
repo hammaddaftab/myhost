@@ -23,7 +23,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
   const activeCase = caseStudies.find((c) => c.id === selectedCaseId) || caseStudies[0];
 
   return (
-    <section id="case-studies" className="py-20 bg-surface border-t border-outline-variant/40">
+    <section id="case-studies" className="py-20 bg-surface border-t border-outline-variant">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -47,10 +47,10 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                 <button
                   key={cs.id}
                   onClick={() => setSelectedCaseId(cs.id)}
-                  className={`flex-1 text-left p-4 sm:p-5 rounded-2xl transition-all duration-200 flex items-center justify-between hover:shadow-elevation-1 ${
+                  className={`flex-1 text-left p-4 sm:p-5 rounded-2xl transition-all duration-200 flex items-center justify-between ${
                     isSelected
-                      ? 'bg-surface-container-low border-2 border-outline'
-                      : 'bg-surface-container-low border border-outline-variant/40 hover:border-outline'
+                      ? 'bg-surface-container border border-outline shadow-elevation-1'
+                      : 'bg-surface-container border border-outline-variant hover:border-outline'
                   }`}
                 >
                   <div className="space-y-1">
@@ -73,51 +73,53 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           </div>
 
           {/* Active Case Study Detail Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40">
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
+          <div className="p-6 sm:p-8 rounded-3xl bg-surface-container border border-outline-variant shadow-elevation-1">
+            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
               
-              <div className="lg:col-span-8 space-y-5 text-left">
-                <div className="space-y-1.5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-primary-container text-on-primary-container">
-                      {activeCase.platform} Verified
-                    </span>
-                    <span className="text-xs text-on-surface-variant font-mono">
-                      Timeline: {activeCase.duration}
-                    </span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
-                    {activeCase.title}
-                  </h3>
-                  <p className="text-sm text-on-surface-variant leading-relaxed">
-                    {activeCase.summary}
-                  </p>
-                </div>
-
-                {/* Challenge & Solution Grid */}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
-                    <span className="text-xs uppercase tracking-wider font-bold text-secondary block mb-1">
-                      {sp.challengeHeading}:
-                    </span>
-                    <p className="text-xs text-on-surface-variant leading-relaxed">
-                      {activeCase.challenge}
+              <div className="lg:col-span-8 space-y-6 text-left flex flex-col justify-between">
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-primary-container text-on-primary-container">
+                        {activeCase.platform} Verified
+                      </span>
+                      <span className="text-xs text-on-surface-variant font-mono">
+                        Timeline: {activeCase.duration}
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
+                      {activeCase.title}
+                    </h3>
+                    <p className="text-sm text-on-surface-variant leading-relaxed">
+                      {activeCase.summary}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
-                    <span className="text-xs uppercase tracking-wider font-bold text-on-surface block mb-1">
-                      {sp.solutionHeading}:
-                    </span>
-                    <p className="text-xs text-on-surface-variant leading-relaxed">
-                      {activeCase.solution}
-                    </p>
+                  {/* Challenge & Solution: De-boxed editorial columns */}
+                  <div className="grid sm:grid-cols-2 gap-6 pt-1">
+                    <div className="pl-4 border-l-2 border-secondary">
+                      <span className="text-xs uppercase tracking-wider font-bold text-secondary block mb-1.5">
+                        {sp.challengeHeading}:
+                      </span>
+                      <p className="text-xs text-on-surface-variant leading-relaxed">
+                        {activeCase.challenge}
+                      </p>
+                    </div>
+
+                    <div className="pl-4 border-l-2 border-outline-variant">
+                      <span className="text-xs uppercase tracking-wider font-bold text-on-surface block mb-1.5">
+                        {sp.solutionHeading}:
+                      </span>
+                      <p className="text-xs text-on-surface-variant leading-relaxed">
+                        {activeCase.solution}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Measurable Outcome */}
-                <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
+                {/* Measurable Outcome: Sleek accent strip */}
+                <div className="p-4 rounded-2xl bg-primary-container/20 border border-outline-variant flex items-start gap-3 mt-4">
+                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <span className="text-xs uppercase tracking-wider font-bold text-on-surface block">
                       {sp.resultHeading}:
@@ -129,25 +131,27 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                 </div>
               </div>
 
-              {/* Stat Highlight Card */}
-              <div className="lg:col-span-4 bg-surface-container rounded-2xl p-6 border border-outline-variant/40 text-center space-y-4">
-                <div className="p-3 rounded-full w-14 h-14 mx-auto bg-surface-container-high border border-outline-variant/40 flex items-center justify-center">
-                  <TrendingUp className="w-7 h-7 text-on-surface" />
-                </div>
-                <div>
-                  <span className="text-3xl sm:text-4xl font-serif-display font-extrabold text-on-surface block">
-                    {activeCase.metricHighlight}
-                  </span>
-                  <span className="text-xs uppercase tracking-wider font-semibold text-on-surface-variant mt-1 block">
-                    {activeCase.metricLabel}
-                  </span>
-                </div>
-                <div className="text-xs text-on-surface-variant border-t border-outline-variant/40 pt-3">
-                  Documented case study with platform ticket ID and verified host performance metrics.
+              {/* Stat Highlight Column: Hairline Divider (Zero Inner Card Nesting) */}
+              <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-outline-variant pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between text-center space-y-5">
+                <div className="space-y-4 my-auto">
+                  <div className="p-3 rounded-full w-14 h-14 mx-auto bg-primary-container/30 border border-outline-variant flex items-center justify-center">
+                    <TrendingUp className="w-7 h-7 text-primary" />
+                  </div>
+                  <div>
+                    <span className="text-3xl sm:text-4xl font-serif-display font-extrabold text-on-surface block">
+                      {activeCase.metricHighlight}
+                    </span>
+                    <span className="text-xs uppercase tracking-wider font-semibold text-on-surface-variant mt-1 block">
+                      {activeCase.metricLabel}
+                    </span>
+                  </div>
+                  <p className="text-xs text-on-surface-variant leading-relaxed px-2">
+                    Documented case study with platform ticket ID and verified host performance metrics.
+                  </p>
                 </div>
                 <button
                   onClick={onOpenBooking}
-                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>{sp.ctaScheduleAudit}</span>
@@ -230,7 +234,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           <div className="mt-10 text-center">
             <button
               onClick={onOpenFreeFiveModal}
-              className="inline-flex items-center px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-emerald-500/40 hover:bg-primary-container/50 transition-all"
+              className="inline-flex items-center px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-primary/40 hover:bg-primary-container/50 transition-all"
             >
               <span>{sp.ctaClaimOffer}</span>
             </button>

@@ -86,7 +86,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
         </div>
 
         {/* Highlighted "Free-First-5" Offer Banner per exact specification */}
-        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-primary-container/30 border-2 border-emerald-500/50 relative overflow-hidden">
+        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-primary-container/30 border-2 border-primary/50 relative overflow-hidden">
           <div className="grid lg:grid-cols-12 gap-6 items-center">
             <div className="lg:col-span-8 space-y-2.5 text-left">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold">

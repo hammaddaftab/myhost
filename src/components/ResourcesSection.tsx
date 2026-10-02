@@ -116,7 +116,7 @@ export default function ResourcesSection() {
 
       {/* Reader Modal */}
       {selectedPost && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 bg-scrim/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div className="bg-surface-container-lowest border border-outline-variant/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto text-left">
             <button
               onClick={() => setSelectedPost(null)}

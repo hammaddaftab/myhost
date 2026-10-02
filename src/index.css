@@ -30,59 +30,265 @@
   --text-headline-section--letter-spacing: -0.015em;
   --text-headline-section--font-weight: 700;
 
-  /* Material Design 3 Tonal Elevation Scale (Light mode: lightest -> darkest) */
-  --color-surface-container-lowest: #ffffff;
-  --color-surface: #fafafa;
-  --color-surface-container-low: #f4f4f6;
-  --color-surface-container: #ebebef;
-  --color-surface-container-high: #e2e2e7;
-  --color-surface-container-highest: #d8d8de;
+  /* ==========================================================================
+     Material Design 3 Tokens - Exported from material-theme.json (Seed: #059669)
+     Light Scheme (Default)
+     ========================================================================== */
 
-  /* Surface & Outline Roles */
-  --color-on-surface: #18181b;
-  --color-on-surface-variant: #52525b;
-  --color-outline: #a1a1aa;
-  --color-outline-variant: #e4e4e7;
-  --color-inverse-surface: #18181b;
-  --color-inverse-on-surface: #f4f4f5;
+  /* Primary Palette Roles */
+  --color-primary: #216A4D;
+  --color-surface-tint: #216A4D;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #A9F2CC;
+  --color-on-primary-container: #005137;
+  --color-inverse-primary: #8ED5B1;
 
-  /* Primary (Emerald) */
-  --color-primary: #059669;
-  --color-on-primary: #ffffff;
-  --color-primary-container: #d1fae5;
-  --color-on-primary-container: #064e3b;
+  /* Primary Fixed Roles */
+  --color-primary-fixed: #A9F2CC;
+  --color-on-primary-fixed: #002114;
+  --color-primary-fixed-dim: #8ED5B1;
+  --color-on-primary-fixed-variant: #005137;
 
-  /* Secondary (Terracotta / Coral) generated from seed */
-  --color-secondary: #c85a32;
-  --color-on-secondary: #ffffff;
-  --color-secondary-container: #fbeae4;
-  --color-on-secondary-container: #3d1608;
+  /* Secondary Palette Roles */
+  --color-secondary: #4D6357;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #CFE9D9;
+  --color-on-secondary-container: #364B40;
+
+  /* Secondary Fixed Roles */
+  --color-secondary-fixed: #CFE9D9;
+  --color-on-secondary-fixed: #0A1F16;
+  --color-secondary-fixed-dim: #B4CCBD;
+  --color-on-secondary-fixed-variant: #364B40;
+
+  /* Tertiary Palette Roles */
+  --color-tertiary: #3D6473;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #C1E9FB;
+  --color-on-tertiary-container: #244C5A;
+
+  /* Tertiary Fixed Roles */
+  --color-tertiary-fixed: #C1E9FB;
+  --color-on-tertiary-fixed: #001F29;
+  --color-tertiary-fixed-dim: #A5CCDE;
+  --color-on-tertiary-fixed-variant: #244C5A;
+
+  /* Error Roles */
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
+
+  /* Background & Surface Roles */
+  --color-background: #F5FBF5;
+  --color-on-background: #171D19;
+  --color-surface: #F5FBF5;
+  --color-on-surface: #171D19;
+  --color-surface-variant: #DCE5DD;
+  --color-on-surface-variant: #404943;
+  --color-surface-dim: #D6DBD6;
+  --color-surface-bright: #F5FBF5;
+
+  /* MD3 Light Mode Tonal Elevation Scale (Containment / Elevation hierarchy) */
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F0F5EF;
+  --color-surface-container: #EAEFE9;
+  --color-surface-container-high: #E4EAE4;
+  --color-surface-container-highest: #DEE4DE;
+
+  /* Outline & Scrim Roles */
+  --color-outline: #707973;
+  --color-outline-variant: #BFC9C1;
+  --color-shadow: #000000;
+  --color-scrim: #000000;
+  --color-inverse-surface: #2C322E;
+  --color-inverse-on-surface: #EDF2EC;
+
+  /* Full MD3 Tonal Palettes (0-100) */
+  --color-md-primary-0: #000000;
+  --color-md-primary-5: #00150B;
+  --color-md-primary-10: #002114;
+  --color-md-primary-15: #002C1C;
+  --color-md-primary-20: #003825;
+  --color-md-primary-25: #00452E;
+  --color-md-primary-30: #005137;
+  --color-md-primary-35: #005F41;
+  --color-md-primary-40: #006C4A;
+  --color-md-primary-50: #00885F;
+  --color-md-primary-60: #25A475;
+  --color-md-primary-70: #49BF8F;
+  --color-md-primary-80: #68DBA9;
+  --color-md-primary-90: #85F8C4;
+  --color-md-primary-95: #BEFFDC;
+  --color-md-primary-98: #E8FFF0;
+  --color-md-primary-99: #F4FFF6;
+  --color-md-primary-100: #FFFFFF;
+
+  --color-md-secondary-0: #000000;
+  --color-md-secondary-5: #01150B;
+  --color-md-secondary-10: #092016;
+  --color-md-secondary-15: #142A20;
+  --color-md-secondary-20: #1E352A;
+  --color-md-secondary-25: #294035;
+  --color-md-secondary-30: #354C40;
+  --color-md-secondary-35: #40574B;
+  --color-md-secondary-40: #4C6457;
+  --color-md-secondary-50: #647D6F;
+  --color-md-secondary-60: #7E9688;
+  --color-md-secondary-70: #98B1A2;
+  --color-md-secondary-80: #B3CDBD;
+  --color-md-secondary-90: #CEE9D8;
+  --color-md-secondary-95: #DDF7E6;
+  --color-md-secondary-98: #E8FFF0;
+  --color-md-secondary-99: #F4FFF6;
+  --color-md-secondary-100: #FFFFFF;
+
+  --color-md-tertiary-0: #000000;
+  --color-md-tertiary-5: #00131B;
+  --color-md-tertiary-10: #001F29;
+  --color-md-tertiary-15: #002A36;
+  --color-md-tertiary-20: #023544;
+  --color-md-tertiary-25: #13404F;
+  --color-md-tertiary-30: #214C5B;
+  --color-md-tertiary-35: #2E5867;
+  --color-md-tertiary-40: #3B6474;
+  --color-md-tertiary-50: #547D8D;
+  --color-md-tertiary-60: #6E97A8;
+  --color-md-tertiary-70: #88B1C3;
+  --color-md-tertiary-80: #A3CDDF;
+  --color-md-tertiary-90: #BFE9FC;
+  --color-md-tertiary-95: #DEF4FF;
+  --color-md-tertiary-98: #F3FAFF;
+  --color-md-tertiary-99: #FAFDFF;
+  --color-md-tertiary-100: #FFFFFF;
+
+  --color-md-neutral-0: #000000;
+  --color-md-neutral-5: #0E1210;
+  --color-md-neutral-10: #191C1A;
+  --color-md-neutral-15: #232724;
+  --color-md-neutral-20: #2E312F;
+  --color-md-neutral-25: #393C3A;
+  --color-md-neutral-30: #444845;
+  --color-md-neutral-35: #505350;
+  --color-md-neutral-40: #5C5F5C;
+  --color-md-neutral-50: #757875;
+  --color-md-neutral-60: #8F918E;
+  --color-md-neutral-70: #A9ACA8;
+  --color-md-neutral-80: #C5C7C3;
+  --color-md-neutral-90: #E1E3DF;
+  --color-md-neutral-95: #EFF1ED;
+  --color-md-neutral-98: #F8FAF6;
+  --color-md-neutral-99: #FBFDF9;
+  --color-md-neutral-100: #FFFFFF;
+
+  --color-md-neutral-variant-0: #000000;
+  --color-md-neutral-variant-5: #0B130E;
+  --color-md-neutral-variant-10: #151D19;
+  --color-md-neutral-variant-15: #1F2823;
+  --color-md-neutral-variant-20: #2A322D;
+  --color-md-neutral-variant-25: #353D38;
+  --color-md-neutral-variant-30: #404943;
+  --color-md-neutral-variant-35: #4C554F;
+  --color-md-neutral-variant-40: #57605A;
+  --color-md-neutral-variant-50: #707973;
+  --color-md-neutral-variant-60: #8A938C;
+  --color-md-neutral-variant-70: #A4ADA6;
+  --color-md-neutral-variant-80: #BFC9C1;
+  --color-md-neutral-variant-90: #DCE5DD;
+  --color-md-neutral-variant-95: #EAF3EB;
+  --color-md-neutral-variant-98: #F2FCF4;
+  --color-md-neutral-variant-99: #F5FFF6;
+  --color-md-neutral-variant-100: #FFFFFF;
 
   /* Elevation Shadows */
   --shadow-elevation-1: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-elevation-2: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
+/* ==========================================================================
+   Material Design 3 Dark Theme Support (from material-theme.json)
+   ========================================================================== */
+.dark {
+  --color-primary: #8ED5B1;
+  --color-surface-tint: #8ED5B1;
+  --color-on-primary: #003825;
+  --color-primary-container: #005137;
+  --color-on-primary-container: #A9F2CC;
+
+  --color-secondary: #B4CCBD;
+  --color-on-secondary: #1F352A;
+  --color-secondary-container: #364B40;
+  --color-on-secondary-container: #CFE9D9;
+
+  --color-tertiary: #A5CCDE;
+  --color-on-tertiary: #073543;
+  --color-tertiary-container: #244C5A;
+  --color-on-tertiary-container: #C1E9FB;
+
+  --color-error: #FFB4AB;
+  --color-on-error: #690005;
+  --color-error-container: #93000A;
+  --color-on-error-container: #FFDAD6;
+
+  --color-background: #0F1511;
+  --color-on-background: #DEE4DE;
+  --color-surface: #0F1511;
+  --color-on-surface: #DEE4DE;
+  --color-surface-variant: #404943;
+  --color-on-surface-variant: #BFC9C1;
+  --color-surface-dim: #0F1511;
+  --color-surface-bright: #353B37;
+
+  --color-surface-container-lowest: #0A0F0C;
+  --color-surface-container-low: #171D19;
+  --color-surface-container: #1B211D;
+  --color-surface-container-high: #252B28;
+  --color-surface-container-highest: #303632;
+
+  --color-outline: #8A938C;
+  --color-outline-variant: #404943;
+  --color-shadow: #000000;
+  --color-scrim: #000000;
+  --color-inverse-surface: #DEE4DE;
+  --color-inverse-on-surface: #2C322E;
+  --color-inverse-primary: #216A4D;
+
+  --color-primary-fixed: #A9F2CC;
+  --color-on-primary-fixed: #002114;
+  --color-primary-fixed-dim: #8ED5B1;
+  --color-on-primary-fixed-variant: #005137;
+
+  --color-secondary-fixed: #CFE9D9;
+  --color-on-secondary-fixed: #0A1F16;
+  --color-secondary-fixed-dim: #B4CCBD;
+  --color-on-secondary-fixed-variant: #364B40;
+
+  --color-tertiary-fixed: #C1E9FB;
+  --color-on-tertiary-fixed: #001F29;
+  --color-tertiary-fixed-dim: #A5CCDE;
+  --color-on-tertiary-fixed-variant: #244C5A;
+}
+
 /* Custom Utilities & Polish */
 @layer base {
   * {
-    border-color: #e4e4e7; /* zinc-200 */
+    border-color: var(--color-outline-variant);
   }
 
   body {
-    background-color: #fafafa; /* zinc-50 */
-    color: #18181b; /* zinc-900 */
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
   }
 }
 
-/* Light Surface Glows & Grids */
+/* Light Surface Glows & Grids using material tokens */
 .hero-glow-light {
-  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.08) 0%, rgba(244, 244, 245, 0.5) 60%, transparent 80%);
+  background: radial-gradient(circle at 50% 20%, rgba(33, 106, 77, 0.08) 0%, rgba(240, 245, 239, 0.5) 60%, transparent 80%);
 }
 
 .subtle-grid-light {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(228, 228, 231, 0.6) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(228, 228, 231, 0.6) 1px, transparent 1px);
+    linear-gradient(to right, rgba(191, 201, 193, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(191, 201, 193, 0.4) 1px, transparent 1px);
 }

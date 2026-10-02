@@ -8,15 +8,15 @@ export default function AboutTrustSection() {
   const getCredentialIcon = (idx: number) => {
     switch (idx) {
       case 0:
-        return <Award className="w-6 h-6 text-emerald-600" />;
+        return <Award className="w-6 h-6 text-primary" />;
       case 1:
-        return <ShieldCheck className="w-6 h-6 text-emerald-600" />;
+        return <ShieldCheck className="w-6 h-6 text-primary" />;
       case 2:
-        return <Laptop className="w-6 h-6 text-emerald-600" />;
+        return <Laptop className="w-6 h-6 text-primary" />;
       case 3:
-        return <Lock className="w-6 h-6 text-emerald-600" />;
+        return <Lock className="w-6 h-6 text-primary" />;
       default:
-        return <Award className="w-6 h-6 text-emerald-600" />;
+        return <Award className="w-6 h-6 text-primary" />;
     }
   };
 

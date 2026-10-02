@@ -169,15 +169,15 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     }
     if (error) {
       return {
-        className: 'border-rose-500 bg-rose-500/[0.02] focus:border-rose-500 pr-9',
-        icon: <AlertCircle className="w-4 h-4 text-rose-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
+        className: 'border-error bg-error/[0.02] focus:border-error pr-9',
+        icon: <AlertCircle className="w-4 h-4 text-error absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
         error,
       };
     }
     if (val.trim().length > 0) {
       return {
-        className: 'border-emerald-500/70 bg-emerald-500/[0.02] focus:border-emerald-600 pr-9',
-        icon: <Check className="w-4 h-4 text-emerald-600 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
+        className: 'border-primary/70 bg-primary/[0.02] focus:border-primary pr-9',
+        icon: <Check className="w-4 h-4 text-primary absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />,
         error: null,
       };
     }
@@ -305,7 +305,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                         <span className="text-xs font-semibold text-on-surface">
                           {bc.channels.whatsAppTitle}
                         </span>
-                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-700 font-medium">
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-primary-container text-on-primary-container font-medium">
                           {bc.channels.whatsAppBadge}
                         </span>
                       </div>
@@ -530,7 +530,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             {calNameState.icon}
                           </div>
                           {calNameState.error && (
-                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                               <span>{calNameState.error}</span>
                             </p>
                           )}
@@ -549,7 +549,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             {calEmailState.icon}
                           </div>
                           {calEmailState.error && (
-                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                               <span>{calEmailState.error}</span>
                             </p>
                           )}
@@ -570,7 +570,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             {calPhoneState.icon}
                           </div>
                           {calPhoneState.error && (
-                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                               <span>{calPhoneState.error}</span>
                             </p>
                           )}
@@ -589,7 +589,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             {calUrlState.icon}
                           </div>
                           {calUrlState.error && (
-                            <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                            <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                               <span>{calUrlState.error}</span>
                             </p>
                           )}
@@ -608,7 +608,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   </form>
                 ) : (
                   <div className="py-10 text-center space-y-4 animate-in fade-in duration-200">
-                    <div className="w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto border border-emerald-500/40">
+                    <div className="w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto border border-primary/40">
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
                     <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
@@ -654,7 +654,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                           {cntNameState.icon}
                         </div>
                         {cntNameState.error && (
-                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                          <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                             <span>{cntNameState.error}</span>
                           </p>
                         )}
@@ -672,7 +672,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                           {cntEmailState.icon}
                         </div>
                         {cntEmailState.error && (
-                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                          <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                             <span>{cntEmailState.error}</span>
                           </p>
                         )}
@@ -693,7 +693,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                           {cntPhoneState.icon}
                         </div>
                         {cntPhoneState.error && (
-                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                          <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                             <span>{cntPhoneState.error}</span>
                           </p>
                         )}
@@ -711,7 +711,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                           {cntUrlState.icon}
                         </div>
                         {cntUrlState.error && (
-                          <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                          <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                             <span>{cntUrlState.error}</span>
                           </p>
                         )}
@@ -722,7 +722,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <div className="flex items-center justify-between mb-1">
                         <label className="text-xs text-on-surface-variant block">{bc.messageLabel}</label>
                         {contactTouched.message && contactForm.message.trim().length > 0 && (
-                          <span className={`text-[10px] font-mono ${contactForm.message.trim().length < 10 ? 'text-rose-500' : 'text-on-surface-variant/70'}`}>
+                          <span className={`text-[10px] font-mono ${contactForm.message.trim().length < 10 ? 'text-error' : 'text-on-surface-variant/70'}`}>
                             {contactForm.message.trim().length}/10 min chars
                           </span>
                         )}
@@ -735,7 +735,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                         className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntMsgState.className}`}
                       />
                       {cntMsgState.error && (
-                        <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                        <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
                           <span>{cntMsgState.error}</span>
                         </p>
                       )}
@@ -751,7 +751,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   </form>
                 ) : (
                   <div className="py-10 text-center space-y-4 animate-in fade-in duration-200">
-                    <div className="w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto border border-emerald-500/40">
+                    <div className="w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto border border-primary/40">
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
                     <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
