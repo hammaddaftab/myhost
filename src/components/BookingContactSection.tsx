@@ -253,21 +253,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             {/* The Actual Booking Form Container */}
             <div className="bg-surface-container-low rounded-3xl p-6 sm:p-8 border border-outline-variant/60 shadow-sm text-left">
               {/* Top Form Switcher Bar */}
-              <div className="flex items-center justify-between pb-5 border-b border-outline-variant/40">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-on-surface-variant/80 font-semibold flex items-center gap-1.5">
-                  {activeMode === 'calendar' ? (
-                    <>
-                      <CalendarIcon className="w-3.5 h-3.5 text-primary" />
-                      <span>Live Scheduler</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-3.5 h-3.5 text-primary" />
-                      <span>Direct Message</span>
-                    </>
-                  )}
-                </span>
-
+              <div className="flex items-center pb-5 border-b border-outline-variant/40">
                 {/* Minimal segmented toggle between Calendar and Inquiry */}
                 <div className="inline-flex p-1 rounded-xl bg-surface-container border border-outline-variant/50">
                   <button
