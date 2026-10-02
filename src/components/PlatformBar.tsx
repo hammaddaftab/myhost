@@ -12,10 +12,10 @@ export default function PlatformBar() {
   ];
 
   return (
-    <section className="py-8 bg-white border-y border-zinc-200">
+    <section className="py-8 bg-surface border-y border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-5">
-          <p className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold">
+          <p className="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">
             Seamless Multi-Platform Synchronization & Technology Ecosystem
           </p>
         </div>
@@ -24,13 +24,13 @@ export default function PlatformBar() {
           {channels.map((ch) => (
             <div
               key={ch.name}
-              className="p-3 rounded-xl bg-zinc-50 border border-zinc-200 flex flex-col items-center justify-center text-center hover:border-emerald-300 transition-all duration-200 group shadow-xs"
+              className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/40 flex flex-col items-center justify-center text-center transition-colors duration-200 group"
             >
-              <span className="text-sm font-bold text-zinc-800 group-hover:text-emerald-700 transition-colors">
+              <span className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">
                 {ch.name}
               </span>
-              <span className="text-[10px] text-zinc-500 flex items-center gap-1 mt-0.5">
-                <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
+              <span className="text-[10px] text-on-surface-variant flex items-center gap-1 mt-0.5">
+                <CheckCircle2 className="w-2.5 h-2.5 text-on-surface-variant" />
                 {ch.badge}
               </span>
             </div>

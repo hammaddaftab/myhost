@@ -61,7 +61,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-zinc-50 border-t border-zinc-200">
+    <section id="faq" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -71,7 +71,7 @@ export default function FAQSection() {
             title="Everything You Need to Know About Co-Hosting With MyHost"
             className="mx-auto items-center text-center"
           />
-          <p className="text-sm sm:text-base text-zinc-600 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
             Straight answers to common questions about platform channels, review dispute removal, payouts, and our Free-First-5 stays guarantee.
           </p>
         </div>
@@ -79,13 +79,13 @@ export default function FAQSection() {
         {/* Search & Category Filter */}
         <div className="mb-8 space-y-3">
           <div className="relative">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-on-surface-variant absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search frequently asked questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-zinc-200 text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 shadow-xs"
+              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-surface-container-low border border-outline-variant/40 text-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none focus:border-outline"
             />
           </div>
 
@@ -96,8 +96,8 @@ export default function FAQSection() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   activeCategory === cat
-                    ? 'bg-emerald-600 text-white shadow-xs'
-                    : 'bg-white text-zinc-600 hover:text-zinc-900 border border-zinc-200'
+                    ? 'bg-primary text-on-primary'
+                    : 'bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/40'
                 }`}
               >
                 {cat}
@@ -114,10 +114,10 @@ export default function FAQSection() {
               return (
                 <div
                   key={faq.id}
-                  className={`rounded-2xl border transition-all duration-200 text-left overflow-hidden bg-white ${
+                  className={`rounded-2xl border transition-colors duration-200 text-left overflow-hidden bg-surface-container-low ${
                     isOpen
-                      ? 'border-emerald-500 shadow-sm'
-                      : 'border-zinc-200 hover:border-zinc-300'
+                      ? 'border-outline'
+                      : 'border-outline-variant/40 hover:border-outline'
                   }`}
                 >
                   <button
@@ -125,16 +125,16 @@ export default function FAQSection() {
                     className="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left focus:outline-none"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-sm sm:text-base font-bold text-zinc-900">
+                    <span className="text-sm sm:text-base font-bold text-on-surface">
                       {faq.question}
                     </span>
-                    <div className={`p-1 rounded-lg transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 bg-emerald-100 text-emerald-800' : 'bg-zinc-100 text-zinc-500'}`}>
+                    <div className={`p-1 rounded-lg transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 bg-primary-container text-on-primary-container' : 'bg-surface-container text-on-surface-variant'}`}>
                       <ChevronDown className="w-4 h-4" />
                     </div>
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-zinc-600 leading-relaxed border-t border-zinc-100 animate-in fade-in duration-200">
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/40 animate-in fade-in duration-200">
                       <p>{faq.answer}</p>
                     </div>
                   )}
@@ -142,26 +142,26 @@ export default function FAQSection() {
               );
             })
           ) : (
-            <div className="p-8 text-center bg-white rounded-2xl border border-zinc-200 text-zinc-500 text-sm">
+            <div className="p-8 text-center bg-surface-container-low rounded-2xl border border-outline-variant/40 text-on-surface-variant text-sm">
               No matching questions found for "{searchQuery}". Have a custom question? Contact our team directly below.
             </div>
           )}
         </div>
 
         {/* Support Help Banner */}
-        <div className="mt-10 p-5 rounded-2xl bg-white border border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
+        <div className="mt-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 shrink-0">
+            <div className="p-2.5 rounded-xl bg-surface-container text-on-surface-variant shrink-0">
               <HelpCircle className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs font-bold text-zinc-900">Have a specific question about your property?</p>
-              <p className="text-[11px] text-zinc-500">Our STR co-hosting strategists are available 7 days a week.</p>
+              <p className="text-xs font-bold text-on-surface">Have a specific question about your property?</p>
+              <p className="text-[11px] text-on-surface-variant">Our STR co-hosting strategists are available 7 days a week.</p>
             </div>
           </div>
           <a
             href="#contact-booking"
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shrink-0"
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all shrink-0"
           >
             Ask a Specialist
           </a>

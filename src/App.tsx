@@ -38,7 +38,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900 flex flex-col selection:bg-emerald-600 selection:text-white font-sans">
+    <div className="min-h-screen bg-surface text-on-surface flex flex-col selection:bg-primary selection:text-on-primary font-sans">
       {/* Fixed Navbar with exact Brand Mark and Emerald CTA */}
       <Navbar
         onOpenBooking={handleOpenBooking}

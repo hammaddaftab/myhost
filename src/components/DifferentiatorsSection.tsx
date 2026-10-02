@@ -97,7 +97,7 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
   ];
 
   return (
-    <section id="why-myhost" className="py-20 bg-white border-t border-zinc-200">
+    <section id="why-myhost" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -107,7 +107,7 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
             title="The Four Unfair Advantages That Elevate Your STR Revenue"
             className="mx-auto items-center text-center"
           />
-          <p className="text-sm sm:text-base text-zinc-600 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
             Most co-hosts are either overwhelmed solo hosts or impersonal outsourced call centers. MyHost delivers dedicated in-house hospitality specialists backed by data and platform policy expertise.
           </p>
         </div>
@@ -117,48 +117,48 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
           {differentiators.map((item, index) => (
             <div
               key={index}
-              className="p-6 sm:p-8 rounded-3xl bg-zinc-50 border border-zinc-200 hover:border-emerald-300 transition-all duration-200 flex flex-col justify-between text-left shadow-xs"
+              className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40 flex flex-col justify-between text-left"
             >
               <div>
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-surface-container border border-outline-variant/40 flex items-center justify-center">
                     {item.icon}
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant border border-outline-variant/40">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-serif-display font-bold text-zinc-900">
+                <h3 className="text-xl font-serif-display font-bold text-on-surface">
                   {item.title}
                 </h3>
-                <p className="text-xs uppercase tracking-wider text-emerald-700 font-semibold mt-1">
+                <p className="text-xs uppercase tracking-wider text-on-surface-variant font-semibold mt-1">
                   {item.tagline}
                 </p>
 
-                <p className="text-sm text-zinc-600 mt-3 leading-relaxed">
+                <p className="text-sm text-on-surface-variant mt-3 leading-relaxed">
                   {item.description}
                 </p>
               </div>
 
               {/* Side-by-Side Comparison Box */}
-              <div className="mt-6 pt-5 border-t border-zinc-200 space-y-2.5">
-                <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="mt-6 pt-5 border-t border-outline-variant/40 space-y-2.5">
+                <div className="p-3 rounded-xl bg-surface-container border border-outline-variant/40">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-on-surface-variant" />
                     MyHost Standard:
                   </span>
-                  <p className="text-xs text-zinc-800 mt-0.5 font-medium">
+                  <p className="text-xs text-on-surface mt-0.5 font-medium">
                     {item.myHost}
                   </p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white border border-zinc-200">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                    <X className="w-3.5 h-3.5 text-rose-500" />
+                <div className="p-3 rounded-xl bg-surface-container border border-outline-variant/40">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1.5">
+                    <X className="w-3.5 h-3.5 text-secondary" />
                     Traditional Alternative:
                   </span>
-                  <p className="text-xs text-zinc-500 mt-0.5">
+                  <p className="text-xs text-on-surface-variant mt-0.5">
                     {item.alternative}
                   </p>
                 </div>
@@ -171,7 +171,7 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
         <div className="text-center mb-8">
           <button
             onClick={() => setShowMatrix(!showMatrix)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300 transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface border border-outline-variant/40 transition-all"
           >
             <span>{showMatrix ? "Hide Detailed Comparison Matrix" : "View Detailed Head-to-Head Comparison Matrix"}</span>
             <ArrowRight className={`w-4 h-4 transition-transform ${showMatrix ? 'rotate-90' : ''}`} />
@@ -180,37 +180,37 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
 
         {/* Head-to-Head Matrix */}
         {showMatrix && (
-          <div className="overflow-x-auto rounded-2xl border border-zinc-200 bg-white shadow-sm mb-12 animate-in fade-in duration-200">
+          <div className="overflow-x-auto rounded-2xl border border-outline-variant/40 bg-surface-container-low mb-12 animate-in fade-in duration-200">
             <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-zinc-100 border-b border-zinc-200 text-zinc-700">
+              <thead className="bg-surface-container border-b border-outline-variant/40 text-on-surface">
                 <tr>
                   <th className="py-4 px-6 font-semibold">Capability</th>
-                  <th className="py-4 px-6 font-bold text-emerald-800 bg-emerald-50 border-x border-emerald-200">
+                  <th className="py-4 px-6 font-bold text-on-surface bg-surface-container-high border-x border-outline-variant/40">
                     MyHost Co-Hosting
                   </th>
-                  <th className="py-4 px-6 font-medium text-zinc-500">Solo Host (DIY)</th>
-                  <th className="py-4 px-6 font-medium text-zinc-500">Traditional Agency / Call Center</th>
+                  <th className="py-4 px-6 font-medium text-on-surface-variant">Solo Host (DIY)</th>
+                  <th className="py-4 px-6 font-medium text-on-surface-variant">Traditional Agency / Call Center</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200 text-zinc-700">
+              <tbody className="divide-y divide-outline-variant/40 text-on-surface-variant">
                 {comparisonRows.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-zinc-50/80">
-                    <td className="py-3.5 px-6 font-medium text-zinc-900">{row.feature}</td>
-                    <td className="py-3.5 px-6 font-semibold text-emerald-800 bg-emerald-50/50 border-x border-emerald-200">
+                  <tr key={idx} className="hover:bg-surface-container/60">
+                    <td className="py-3.5 px-6 font-medium text-on-surface">{row.feature}</td>
+                    <td className="py-3.5 px-6 font-semibold text-on-surface bg-surface-container/40 border-x border-outline-variant/40">
                       <div className="flex items-center gap-1.5">
-                        <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <Check className="w-4 h-4 text-on-surface-variant shrink-0" />
                         <span>{row.myHost}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-6 text-zinc-500">
+                    <td className="py-3.5 px-6 text-on-surface-variant">
                       <div className="flex items-center gap-1.5">
-                        <X className="w-4 h-4 text-rose-500 shrink-0" />
+                        <X className="w-4 h-4 text-secondary shrink-0" />
                         <span>{row.soloHost}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-6 text-zinc-500">
+                    <td className="py-3.5 px-6 text-on-surface-variant">
                       <div className="flex items-center gap-1.5">
-                        <X className="w-4 h-4 text-rose-500 shrink-0" />
+                        <X className="w-4 h-4 text-secondary shrink-0" />
                         <span>{row.outsourcedAgency}</span>
                       </div>
                     </td>
@@ -222,23 +222,23 @@ export default function DifferentiatorsSection({ onOpenBooking, onOpenFreeFiveMo
         )}
 
         {/* Quick Conversion Banner */}
-        <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-primary-container/30 border border-emerald-500/40 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center md:text-left">
-            <p className="text-sm font-bold text-emerald-900">Ready to experience sub-5m response speeds on your properties?</p>
-            <p className="text-xs text-emerald-700">
+            <p className="text-sm font-bold text-on-surface">Ready to experience sub-5m response speeds on your properties?</p>
+            <p className="text-xs text-on-surface-variant">
               Claim our Free-First-5 Stays offer today. Zero management fees for your next 5 reservations.
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={onOpenFreeFiveModal}
-              className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm transition-all"
+              className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all"
             >
               Claim Free 5 Stays
             </button>
             <button
               onClick={onOpenBooking}
-              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 bg-white hover:bg-zinc-100 border border-zinc-200 transition-all"
+              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 transition-all"
             >
               Book Audit
             </button>

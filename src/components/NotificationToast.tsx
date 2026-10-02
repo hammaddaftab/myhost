@@ -19,14 +19,14 @@ export default function NotificationToast({ message, onClose }: NotificationToas
 
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom duration-300">
-      <div className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-zinc-900 border border-emerald-500/50 text-white shadow-2xl backdrop-blur-xl">
-        <div className="p-1 rounded-full bg-emerald-500/20 text-emerald-400">
+      <div className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-inverse-surface border border-outline-variant/40 text-inverse-on-surface shadow-2xl backdrop-blur-xl">
+        <div className="p-1 rounded-full bg-primary/20 text-primary">
           <CheckCircle2 className="w-5 h-5" />
         </div>
         <p className="text-xs sm:text-sm font-medium">{message}</p>
         <button
           onClick={onClose}
-          className="p-1 rounded-lg text-zinc-400 hover:text-white transition-colors"
+          className="p-1 rounded-lg text-inverse-on-surface/70 hover:text-inverse-on-surface transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

@@ -29,6 +29,38 @@
   --text-headline-section--line-height: 1.2;
   --text-headline-section--letter-spacing: -0.015em;
   --text-headline-section--font-weight: 700;
+
+  /* Material Design 3 Tonal Elevation Scale (Light mode: lightest -> darkest) */
+  --color-surface-container-lowest: #ffffff;
+  --color-surface: #fafafa;
+  --color-surface-container-low: #f4f4f6;
+  --color-surface-container: #ebebef;
+  --color-surface-container-high: #e2e2e7;
+  --color-surface-container-highest: #d8d8de;
+
+  /* Surface & Outline Roles */
+  --color-on-surface: #18181b;
+  --color-on-surface-variant: #52525b;
+  --color-outline: #a1a1aa;
+  --color-outline-variant: #e4e4e7;
+  --color-inverse-surface: #18181b;
+  --color-inverse-on-surface: #f4f4f5;
+
+  /* Primary (Emerald) */
+  --color-primary: #059669;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #d1fae5;
+  --color-on-primary-container: #064e3b;
+
+  /* Secondary (Terracotta / Coral) generated from seed */
+  --color-secondary: #c85a32;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fbeae4;
+  --color-on-secondary-container: #3d1608;
+
+  /* Elevation Shadows */
+  --shadow-elevation-1: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-elevation-2: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 /* Custom Utilities & Polish */

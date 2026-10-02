@@ -93,7 +93,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
   const activeCase = caseStudies.find((c) => c.id === selectedCaseId) || caseStudies[0];
 
   return (
-    <section id="case-studies" className="py-20 bg-white border-t border-zinc-200">
+    <section id="case-studies" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -103,7 +103,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
             title="Measurable Results for Real Short-Term Rental Hosts"
             className="mx-auto items-center text-center"
           />
-          <p className="text-sm sm:text-base text-zinc-600 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
             See how MyHost intervened during retaliatory 1-star reviews, turned around lagging occupancy, and protected Superhost ratings.
           </p>
         </div>
@@ -117,25 +117,25 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                 <button
                   key={cs.id}
                   onClick={() => setSelectedCaseId(cs.id)}
-                  className={`flex-1 text-left p-4 sm:p-5 rounded-2xl border transition-all duration-200 flex items-center justify-between ${
+                  className={`flex-1 text-left p-4 sm:p-5 rounded-2xl transition-all duration-200 flex items-center justify-between hover:shadow-elevation-1 ${
                     isSelected
-                      ? 'bg-zinc-50 border-emerald-600 shadow-sm ring-1 ring-emerald-500/20'
-                      : 'bg-white border-zinc-200 hover:border-zinc-300'
+                      ? 'bg-surface-container-low border-2 border-outline'
+                      : 'bg-surface-container-low border border-outline-variant/40 hover:border-outline'
                   }`}
                 >
                   <div className="space-y-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 block">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block">
                       {cs.tag}
                     </span>
-                    <h4 className="text-sm sm:text-base font-bold text-zinc-900">
+                    <h4 className="text-sm sm:text-base font-bold text-on-surface">
                       {cs.title}
                     </h4>
                   </div>
                   <div className="text-right shrink-0 pl-3">
-                    <span className="text-lg sm:text-xl font-serif-display font-extrabold text-zinc-900 block">
+                    <span className="text-lg sm:text-xl font-serif-display font-extrabold text-on-surface block">
                       {cs.metricHighlight}
                     </span>
-                    <span className="text-[10px] text-zinc-500">{cs.metricLabel}</span>
+                    <span className="text-[10px] text-on-surface-variant">{cs.metricLabel}</span>
                   </div>
                 </button>
               );
@@ -143,56 +143,56 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           </div>
 
           {/* Active Case Study Detail Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-zinc-50 border border-zinc-200 shadow-sm">
+          <div className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40">
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               
               <div className="lg:col-span-8 space-y-5 text-left">
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-100 text-emerald-800">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-primary-container text-on-primary-container">
                       {activeCase.platform} Verified
                     </span>
-                    <span className="text-xs text-zinc-500 font-mono">
+                    <span className="text-xs text-on-surface-variant font-mono">
                       Timeline: {activeCase.duration}
                     </span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-zinc-900">
+                  <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-on-surface">
                     {activeCase.title}
                   </h3>
-                  <p className="text-sm text-zinc-600 leading-relaxed">
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
                     {activeCase.summary}
                   </p>
                 </div>
 
                 {/* Challenge & Solution Grid */}
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
-                    <span className="text-xs uppercase tracking-wider font-bold text-rose-600 block mb-1">
+                  <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
+                    <span className="text-xs uppercase tracking-wider font-bold text-secondary block mb-1">
                       The Operational Challenge:
                     </span>
-                    <p className="text-xs text-zinc-600 leading-relaxed">
+                    <p className="text-xs text-on-surface-variant leading-relaxed">
                       {activeCase.challenge}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 shadow-xs">
-                    <span className="text-xs uppercase tracking-wider font-bold text-emerald-800 block mb-1">
+                  <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40">
+                    <span className="text-xs uppercase tracking-wider font-bold text-on-surface block mb-1">
                       The MyHost Intervention:
                     </span>
-                    <p className="text-xs text-zinc-700 leading-relaxed">
+                    <p className="text-xs text-on-surface-variant leading-relaxed">
                       {activeCase.solution}
                     </p>
                   </div>
                 </div>
 
                 {/* Measurable Outcome */}
-                <div className="p-4 rounded-xl bg-white border border-emerald-300 shadow-xs flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs uppercase tracking-wider font-bold text-emerald-800 block">
+                    <span className="text-xs uppercase tracking-wider font-bold text-on-surface block">
                       The Measurable Outcome:
                     </span>
-                    <p className="text-xs sm:text-sm text-zinc-800 mt-1">
+                    <p className="text-xs sm:text-sm text-on-surface mt-1">
                       {activeCase.result}
                     </p>
                   </div>
@@ -200,24 +200,24 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
               </div>
 
               {/* Stat Highlight Card */}
-              <div className="lg:col-span-4 bg-white rounded-2xl p-6 border border-zinc-200 text-center space-y-4 shadow-xs">
-                <div className="p-3 rounded-full w-14 h-14 mx-auto bg-emerald-50 border border-emerald-200 flex items-center justify-center">
-                  <TrendingUp className="w-7 h-7 text-emerald-600" />
+              <div className="lg:col-span-4 bg-surface-container rounded-2xl p-6 border border-outline-variant/40 text-center space-y-4">
+                <div className="p-3 rounded-full w-14 h-14 mx-auto bg-surface-container-high border border-outline-variant/40 flex items-center justify-center">
+                  <TrendingUp className="w-7 h-7 text-on-surface" />
                 </div>
                 <div>
-                  <span className="text-3xl sm:text-4xl font-serif-display font-extrabold text-zinc-900 block">
+                  <span className="text-3xl sm:text-4xl font-serif-display font-extrabold text-on-surface block">
                     {activeCase.metricHighlight}
                   </span>
-                  <span className="text-xs uppercase tracking-wider font-semibold text-zinc-600 mt-1 block">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-on-surface-variant mt-1 block">
                     {activeCase.metricLabel}
                   </span>
                 </div>
-                <div className="text-xs text-zinc-500 border-t border-zinc-100 pt-3">
+                <div className="text-xs text-on-surface-variant border-t border-outline-variant/40 pt-3">
                   Documented case study with platform ticket ID and verified host performance metrics.
                 </div>
                 <button
                   onClick={onOpenBooking}
-                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Get Similar Results For Your Listing</span>
@@ -231,11 +231,11 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
         {/* Host Testimonials with Before / After occupancy & rating stats */}
         <div>
           <div className="text-left mb-6">
-            <h3 className="text-lg font-serif-display font-bold text-zinc-900 flex items-center gap-2">
-              <Quote className="w-5 h-5 text-emerald-600" />
+            <h3 className="text-lg font-serif-display font-bold text-on-surface flex items-center gap-2">
+              <Quote className="w-5 h-5 text-on-surface-variant" />
               <span>Host Testimonials & Hard Performance Metrics</span>
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-0.5">
+            <p className="text-xs sm:text-sm text-on-surface-variant mt-0.5">
               Before and after metrics from active property owners utilizing MyHost co-hosting.
             </p>
           </div>
@@ -244,47 +244,52 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
             {testimonials.map((t) => (
               <div
                 key={t.id}
-                className="p-6 rounded-2xl bg-zinc-50 border border-zinc-200 flex flex-col justify-between hover:border-zinc-300 transition-all text-left shadow-xs"
+                className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 flex flex-col justify-between text-left transition-colors"
               >
                 <div>
                   <div className="flex items-center gap-1 mb-3">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-emerald-600 text-emerald-600" />
+                      <Star key={i} className="w-4 h-4 fill-secondary text-secondary" />
                     ))}
                   </div>
 
-                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed italic mb-6">
+                  <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed italic mb-6">
                     "{t.quote}"
                   </p>
                 </div>
 
                 <div>
                   {/* Before / After Stats Table */}
-                  <div className="bg-white rounded-xl p-3 border border-zinc-200 mb-4 space-y-2 shadow-xs">
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-emerald-800">
+                  <div className="bg-surface-container rounded-xl p-3 border border-outline-variant/40 mb-4 space-y-2">
+                    <p className="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant">
                       Before vs After MyHost:
                     </p>
-                    {t.stats.map((st, sIdx) => (
-                      <div key={sIdx} className="flex justify-between items-center text-xs">
-                        <span className="text-zinc-500">{st.label}:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-zinc-400 line-through text-[11px]">{st.before}</span>
-                          <span className="text-emerald-700 font-bold font-mono">{st.after}</span>
+                    {t.stats.map((st, sIdx) => {
+                      const isHighlighted = sIdx === 0;
+                      return (
+                        <div key={sIdx} className="flex justify-between items-center text-xs">
+                          <span className="text-on-surface-variant">{st.label}:</span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-on-surface-variant/70 line-through text-[11px]">{st.before}</span>
+                            <span className={`font-bold font-mono ${isHighlighted ? 'text-secondary' : 'text-on-surface-variant'}`}>
+                              {st.after}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
-                  <div className="flex items-center gap-3 pt-3 border-t border-zinc-200">
+                  <div className="flex items-center gap-3 pt-3 border-t border-outline-variant/40">
                     <img
                       src={t.avatar}
                       alt={t.author}
-                      className="w-10 h-10 rounded-full object-cover border border-emerald-200"
+                      className="w-10 h-10 rounded-full object-cover border border-outline-variant/40"
                     />
                     <div>
-                      <p className="text-xs font-bold text-zinc-900">{t.author}</p>
-                      <p className="text-[11px] text-zinc-500">{t.role}</p>
-                      <p className="text-[10px] text-emerald-700 font-medium">{t.location}</p>
+                      <p className="text-xs font-bold text-on-surface">{t.author}</p>
+                      <p className="text-[11px] text-on-surface-variant">{t.role}</p>
+                      <p className="text-[10px] text-on-surface-variant font-medium">{t.location}</p>
                     </div>
                   </div>
                 </div>
@@ -295,9 +300,9 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           <div className="mt-10 text-center">
             <button
               onClick={onOpenFreeFiveModal}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-on-surface bg-primary-container/30 border border-emerald-500/40 hover:bg-primary-container/50 transition-all"
             >
-              <Sparkles className="w-4 h-4 text-emerald-600" />
+              <Sparkles className="w-4 h-4 text-primary" />
               <span>Join These Hosts: Claim Your Free-First-5 Stays Pass</span>
             </button>
           </div>

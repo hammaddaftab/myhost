@@ -27,7 +27,7 @@ export default function AboutTrustSection() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white border-t border-zinc-200">
+    <section id="about" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -37,7 +37,7 @@ export default function AboutTrustSection() {
             title="Built by Seasoned Superhosts for Serious Property Investors"
             className="mx-auto items-center text-center"
           />
-          <p className="text-sm sm:text-base text-zinc-600 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-on-surface-variant mt-3 leading-relaxed">
             We started MyHost because traditional management agencies charge 25–40% while delivering generic call-center messaging and ignoring unfair reviews. We created a modern, data-backed co-hosting partner.
           </p>
         </div>
@@ -47,15 +47,15 @@ export default function AboutTrustSection() {
           {credentials.map((cred, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-zinc-50 border border-zinc-200 text-left space-y-3 shadow-xs"
+              className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 text-left space-y-3"
             >
-              <div className="w-12 h-12 rounded-xl bg-white border border-zinc-200 flex items-center justify-center shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-surface-container border border-outline-variant/40 flex items-center justify-center">
                 {cred.icon}
               </div>
-              <h3 className="text-base font-bold text-zinc-900 leading-snug">
+              <h3 className="text-base font-bold text-on-surface leading-snug">
                 {cred.title}
               </h3>
-              <p className="text-xs text-zinc-600 leading-relaxed">
+              <p className="text-xs text-on-surface-variant leading-relaxed">
                 {cred.description}
               </p>
             </div>
@@ -63,9 +63,9 @@ export default function AboutTrustSection() {
         </div>
 
         {/* Partner Ecosystem & Software Certifications */}
-        <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
+        <div className="p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40">
           <div className="text-center mb-6">
-            <p className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">
+            <p className="text-xs uppercase tracking-widest text-on-surface-variant font-semibold">
               Industry Certifications & Software Integrations
             </p>
           </div>
@@ -74,15 +74,15 @@ export default function AboutTrustSection() {
             {TRUST_BADGES.map((badge, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl bg-white border border-zinc-200 text-center space-y-1 shadow-xs"
+                className="p-4 rounded-xl bg-surface-container border border-outline-variant/40 text-center space-y-1"
               >
-                <span className="text-xs font-bold text-zinc-900 block">
+                <span className="text-xs font-bold text-on-surface block">
                   {badge.name}
                 </span>
-                <span className="text-[10px] text-zinc-500 block">
+                <span className="text-[10px] text-on-surface-variant block">
                   {badge.label}
                 </span>
-                <span className="text-[10px] font-mono text-emerald-700 font-semibold block pt-1">
+                <span className="text-[10px] font-mono text-on-surface-variant font-semibold block pt-1">
                   {badge.metric}
                 </span>
               </div>
@@ -90,38 +90,38 @@ export default function AboutTrustSection() {
           </div>
 
           {/* 3 Host Guarantees */}
-          <div className="mt-8 pt-6 border-t border-zinc-200 grid md:grid-cols-3 gap-6 text-left">
+          <div className="mt-8 pt-6 border-t border-outline-variant/40 grid md:grid-cols-3 gap-6 text-left">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-900">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface">
                   100% Host Listing Ownership
                 </h4>
-                <p className="text-xs text-zinc-600 mt-1">
+                <p className="text-xs text-on-surface-variant mt-1">
                   You own your account, listing data, and guest reviews forever.
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-900">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface">
                   Zero Lock-In Contracts
                 </h4>
-                <p className="text-xs text-zinc-600 mt-1">
+                <p className="text-xs text-on-surface-variant mt-1">
                   Flexible month-to-month terms. Cancel anytime with simple 14-day notice.
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-on-surface-variant shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-900">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface">
                   Direct Guest Revenue Payouts
                 </h4>
-                <p className="text-xs text-zinc-600 mt-1">
+                <p className="text-xs text-on-surface-variant mt-1">
                   All guest payments deposit straight into your own verified bank account.
                 </p>
               </div>

@@ -7,10 +7,10 @@ interface SectionHeaderProps {
 export function SectionHeader({ eyebrow, title, className = '' }: SectionHeaderProps) {
   return (
     <header className={`flex flex-col gap-2 max-w-2xl ${className}`}>
-      <span className="text-eyebrow text-emerald-600 uppercase">
+      <span className="text-eyebrow text-on-surface-variant uppercase font-semibold">
         {eyebrow}
       </span>
-      <h2 className="text-headline-section text-pretty text-zinc-900">
+      <h2 className="text-headline-section text-pretty text-on-surface">
         {title}
       </h2>
     </header>
