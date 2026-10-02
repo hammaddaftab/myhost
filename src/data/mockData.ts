@@ -12,12 +12,13 @@ export const PROCESS_STEPS: ProcessStep[] = strings.process.steps.map(s => ({
 
 export const DIFFERENTIATORS: Differentiator[] = strings.differentiators.items.map(d => ({
   title: d.title,
-  subtitle: d.tagline,
+  subtitle: d.subtitle,
   description: d.description,
-  myHostStandard: d.myHost,
-  traditionalAlternative: d.alternative,
   iconName: d.iconName,
-  badge: d.badge
+  highlights: d.highlights ? [...d.highlights] : undefined,
+  assets: (d as { assets?: { src: string; alt: string; label?: string }[] }).assets
+    ? [...(d as { assets?: { src: string; alt: string; label?: string }[] }).assets!]
+    : undefined
 }));
 
 export const PRICING_PLANS: PricingPlan[] = strings.pricing.plans.map(p => ({

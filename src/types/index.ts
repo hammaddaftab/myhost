@@ -51,14 +51,19 @@ export interface ProcessStep {
   duration?: string;
 }
 
+export interface DifferentiatorAsset {
+  src: string;
+  alt: string;
+  label?: string;
+}
+
 export interface Differentiator {
   title: string;
   subtitle: string;
   description: string;
-  myHostStandard: string;
-  traditionalAlternative: string;
   iconName: string;
-  badge: string;
+  highlights?: string[];
+  assets?: DifferentiatorAsset[];
 }
 
 export interface FAQItem {

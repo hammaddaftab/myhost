@@ -118,96 +118,75 @@ export const devStrings = {
   "differentiators": {
     "eyebrow": "Why Choose MyHost",
     "title": "Modern Co-Hosting Designed to Outperform Traditional Agencies",
-    "description": "Traditional property managers take 25–40% cuts, answer guest messages hours late, and ignore unfair reviews. MyHost provides dedicated hospitality, algorithmic pricing, and review defense.",
-    "myHostLabel": "MyHost Standard",
-    "alternativeLabel": "Traditional Alternative",
-    "comparisonToggleShow": "Show Detailed Agency vs. Solo Host Comparison",
-    "comparisonToggleHide": "Hide Comparison Matrix",
-    "matrixTitle": "Feature-by-Feature Operational Breakdown",
-    "matrixHeaders": {
-      "feature": "Operational Feature",
-      "myHost": "MyHost Standard",
-      "soloHost": "Solo Host",
-      "outsourcedAgency": "Traditional Agency"
-    },
-    "bannerHeadline": "Ready to Upgrade Your Short-Term Rental Operations?",
-    "bannerDescription": "Try MyHost for your next 5 reservations completely risk-free with zero management fees.",
-    "ctaBookAudit": "Book Free Audit",
-    "ctaClaimOffer": "Claim Free-First-5 Stays",
+    "description": "Substantially faster guest response times, proven review disputes, data-backed optimization, and dedicated in-house support.",
     "items": [
       {
-        "title": "Rapid Guest Response Times",
-        "tagline": "Sub-5 minute response SLAs 24/7/365",
-        "description": "Substantially faster response SLAs to improve response rate metrics and guest review scores. We respond within minutes around the clock, converting browsers into confirmed bookings while boosting your search algorithm placement.",
-        "myHost": "Guaranteed <5m average response SLA 24/7 by dedicated hospitality specialists.",
-        "alternative": "4 to 12 hour delayed responses from solo hosts or outsourced offshore call centers.",
-        "badge": "< 5m Guaranteed SLA",
-        "iconName": "Zap"
+        "title": "Faster Guest Response Times = Better Ratings",
+        "subtitle": "Rapid guest response SLAs to improve response rate metrics and guest review scores.",
+        "description": "Substantially faster response SLAs to improve response rate metrics and guest review scores. Fast communication converts guest inquiries into confirmed bookings while elevating search placement and guest satisfaction.",
+        "iconName": "Zap",
+        "highlights": [
+          "97% verified response rate with rapid turnaround",
+          "Direct correlation between response speed and 5-star ratings",
+          "Higher conversion from inquiry to confirmed reservation"
+        ],
+        "assets": [
+          {
+            "src": "/assets/differentiators/airbnb-response-rate.jpeg",
+            "alt": "Airbnb Host Details showing 97% response rate, responds within an hour",
+            "label": "97% Response Rate"
+          },
+          {
+            "src": "/assets/differentiators/airbnb-rating-493.jpeg",
+            "alt": "Airbnb Guest Favorite 4.93 rating",
+            "label": "4.93 Guest Favorite"
+          },
+          {
+            "src": "/assets/differentiators/airbnb-rating-486.jpeg",
+            "alt": "Airbnb Guest Favorite 4.86 rating",
+            "label": "4.86 Guest Favorite"
+          }
+        ]
       },
       {
-        "title": "Review Dispute & Removal",
-        "tagline": "Proven platform policy dispute process",
-        "description": "A structured, proven process to dispute and remove unfair or policy-violating negative reviews. We leverage deep platform policy knowledge and timestamped evidence to protect your Superhost status.",
-        "myHost": "Formal documentation & direct Trust & Safety escalation. 94% win rate on policy disputes.",
-        "alternative": "Standard generic tickets that get auto-rejected by automated tier-1 support bots.",
-        "badge": "94% Win Rate",
-        "iconName": "ShieldCheck"
+        "title": "Proven Review Dispute & Removal Process",
+        "subtitle": "A structured, proven process to dispute and remove unfair or policy-violating negative reviews.",
+        "description": "A structured, proven process to dispute and remove unfair or policy-violating negative reviews. We leverage deep platform policy knowledge and timestamped communication evidence to challenge retaliation and protect Superhost standing.",
+        "iconName": "ShieldCheck",
+        "highlights": [
+          "Thorough evidence compilation and policy violation identification",
+          "Formal dispute escalation with platform Trust & Safety teams",
+          "Protection of hard-earned Superhost status"
+        ]
       },
       {
         "title": "Data-Backed Listing Optimization",
-        "tagline": "Algorithmic pricing and conversion SEO",
-        "description": "Algorithmic and market-data adjustments to photos, titles, descriptions, and dynamic pricing. We synchronize daily event demand, competitor occupancy, and pacing curves to maximize your RevPAR.",
-        "myHost": "Dynamic pricing calibrated daily with continuous A/B testing of photos and copy.",
-        "alternative": "Static flat rates or Airbnb Smart Pricing that systematically depresses weekend rates.",
-        "badge": "+26.4% RevPAR Lift",
-        "iconName": "TrendingUp"
+        "subtitle": "Algorithmic and market-data adjustments to photos, titles, descriptions, and dynamic pricing.",
+        "description": "Algorithmic and market-data adjustments to photos, titles, descriptions, and dynamic pricing. We synchronize local event demand, competitor occupancy, and pacing curves to maximize listing visibility and RevPAR.",
+        "iconName": "TrendingUp",
+        "highlights": [
+          "Algorithmic pricing adjustments responding to market demand",
+          "Strategic photo sequencing and SEO-optimized copy",
+          "Continuous performance tuning against local comp sets"
+        ]
       },
       {
-        "title": "Dedicated In-House Support",
-        "tagline": "Assigned account managers, zero call centers",
-        "description": "Assigned account management and guest support rather than impersonal outsourced call centers. Trained specialists understand your property, house manual, and local quirks.",
-        "myHost": "Dedicated account manager with a direct WhatsApp or Slack channel for the property owner.",
-        "alternative": "Anonymous third-party call centers reading generic scripts with zero local context.",
-        "badge": "100% In-House Team",
-        "iconName": "Users"
-      }
-    ],
-    "comparisonRows": [
-      {
-        "feature": "Guest Response Velocity",
-        "myHost": "< 5 minutes guaranteed (24/7/365)",
-        "soloHost": "4 – 12 hours (delayed by work/sleep)",
-        "outsourcedAgency": "1 – 3 hours (robotic templates)"
-      },
-      {
-        "feature": "Unfair Review Dispute Support",
-        "myHost": "Proactive platform policy defense (94% win rate)",
-        "soloHost": "Manual tickets (frequently rejected)",
-        "outsourcedAgency": "Not included or billed extra"
-      },
-      {
-        "feature": "Dynamic Pricing Engine",
-        "myHost": "Daily market & event pricing algorithms",
-        "soloHost": "Flat static rates or Smart Pricing leaks",
-        "outsourcedAgency": "Occasional manual rate adjustments"
-      },
-      {
-        "feature": "Guest Hospitality Care",
-        "myHost": "Dedicated in-house hospitality specialists",
-        "soloHost": "Solo host burnout",
-        "outsourcedAgency": "Impersonal offshore call center"
-      },
-      {
-        "feature": "Account Ownership & Payouts",
-        "myHost": "Host retains 100% bank credentials & ownership",
-        "soloHost": "Direct ownership",
-        "outsourcedAgency": "Often routed through agency accounts"
-      },
-      {
-        "feature": "Introductory Trial",
-        "myHost": "Free-First-5 Stays ($0 upfront risk)",
-        "soloHost": "N/A",
-        "outsourcedAgency": "Upfront onboarding fees ($500+)"
+        "title": "Dedicated Support, Not Outsourced Call Centers",
+        "subtitle": "Assigned account management and guest support rather than impersonal outsourced call centers.",
+        "description": "Assigned account management and guest support rather than impersonal outsourced call centers. Trained hospitality specialists understand your specific property, house manual, and guest needs.",
+        "iconName": "Users",
+        "highlights": [
+          "Assigned account management with intimate property familiarity",
+          "Zero impersonal third-party outsourced call centers",
+          "Verified Superhost co-hosting expertise"
+        ],
+        "assets": [
+          {
+            "src": "/assets/differentiators/cloud-breeze-superhost-logo.jpeg",
+            "alt": "Cloud Breeze Holidays - Verified Superhost Co-Host",
+            "label": "Superhost Co-Host"
+          }
+        ]
       }
     ]
   },
