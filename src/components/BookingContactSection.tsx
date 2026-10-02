@@ -102,16 +102,16 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
         {/* Main 2-Column Minimal Layout */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Direct Contact & Interactable Thin Rectangular Cards */}
-          <div className="lg:col-span-5 space-y-6 text-left">
+          {/* Left Column: Direct Contact & Interactable Thin Rectangular Cards (with ~20% top margin on desktop) */}
+          <div className="lg:col-span-5 space-y-6 text-left lg:mt-[20%]">
             <div>
-              <span className="text-eyebrow text-primary uppercase font-semibold tracking-wider block mb-2">
+              <span className="text-[11px] font-mono text-primary uppercase font-semibold tracking-wider block mb-1.5">
                 {bc.directContactEyebrow}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-serif-display text-on-surface leading-tight">
+              <h3 className="text-lg sm:text-xl font-bold font-serif-display text-on-surface leading-snug">
                 {bc.directContactTitle}
-              </h2>
-              <p className="text-sm text-on-surface-variant mt-2.5 leading-relaxed">
+              </h3>
+              <p className="text-xs sm:text-sm text-on-surface-variant mt-1.5 leading-relaxed">
                 {bc.directContactDescription}
               </p>
             </div>
@@ -236,10 +236,23 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             </div>
           </div>
 
-          {/* Right Column: The Actual Booking Form Container */}
-          <div className="lg:col-span-7 bg-surface-container-low rounded-3xl p-6 sm:p-8 border border-outline-variant/60 shadow-sm text-left">
-            
-            {/* Top Form Header with Mode Switcher */}
+          {/* Right Column: Main Booking Heading + The Actual Booking Form Container */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div>
+              <span className="text-eyebrow text-primary uppercase font-semibold tracking-wider block mb-2">
+                {bc.eyebrow}
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-serif-display text-on-surface leading-tight">
+                {bc.title}
+              </h2>
+              <p className="text-sm sm:text-base text-on-surface-variant mt-2.5 leading-relaxed max-w-2xl">
+                {bc.description}
+              </p>
+            </div>
+
+            {/* The Actual Booking Form Container */}
+            <div className="bg-surface-container-low rounded-3xl p-6 sm:p-8 border border-outline-variant/60 shadow-sm text-left">
+              {/* Top Form Header with Mode Switcher */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-outline-variant/40">
               <div>
                 <h3 className="text-lg sm:text-xl font-bold font-serif-display text-on-surface flex items-center gap-2">
@@ -535,8 +548,8 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                 )}
               </div>
             )}
-
           </div>
+        </div>
 
         </div>
 
