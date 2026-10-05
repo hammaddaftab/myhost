@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Booking } from './entities/Booking.entity';
+import { logger } from '../utils/logger';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -8,7 +9,7 @@ export const AppDataSource = new DataSource({
     ? { rejectUnauthorized: false }
     : false,
   synchronize: true,
-  logging: false,
+  logging: process.env.DB_LOGGING === 'true',
   entities: [Booking]
 });
 
@@ -19,10 +20,17 @@ export async function getDataSource(): Promise<DataSource> {
     return AppDataSource;
   }
   if (!initPromise) {
-    initPromise = AppDataSource.initialize().catch((err) => {
-      initPromise = null;
-      throw err;
-    });
+    logger.info('Connecting to PostgreSQL database...');
+    initPromise = AppDataSource.initialize()
+      .then((ds) => {
+        logger.info('Database connection established successfully.');
+        return ds;
+      })
+      .catch((err) => {
+        logger.error('Database connection failed:', err);
+        initPromise = null;
+        throw err;
+      });
   }
   return initPromise;
 }

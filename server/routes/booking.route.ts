@@ -4,12 +4,9 @@ import { Booking } from '../db/entities/Booking.entity';
 import { sendMail } from '../mail/mailer';
 import { clientConfirmHtml } from '../mail/templates/clientConfirm';
 import { ownerNotifyHtml } from '../mail/templates/ownerNotify';
+import { logger } from '../utils/logger';
 
 export const bookingRouter = Router();
-
-bookingRouter.get('/health', (_req: Request, res: Response): void => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
-});
 
 bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void> => {
   try {
@@ -27,18 +24,23 @@ bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void
       metadata
     } = req.body;
 
+    logger.info(`Processing ${type || 'unknown'} submission for "${name || 'unnamed'}" <${email || 'no-email'}>`);
+
     // 1. Validate
     if (!name || typeof name !== 'string' || !name.trim()) {
+      logger.warn('Booking rejected: Name is required');
       res.status(400).json({ error: 'Name is required' });
       return;
     }
 
     if (!email || typeof email !== 'string' || !email.trim()) {
+      logger.warn('Booking rejected: Email is required');
       res.status(400).json({ error: 'Email is required' });
       return;
     }
 
     if (type !== 'calendar' && type !== 'inquiry') {
+      logger.warn(`Booking rejected: Invalid type "${type}". Must be "calendar" or "inquiry"`);
       res.status(400).json({ error: 'Invalid booking type. Must be "calendar" or "inquiry"' });
       return;
     }
@@ -60,6 +62,7 @@ bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void
     });
 
     const savedBooking = await bookingRepo.save(booking);
+    logger.info(`Booking successfully persisted in database (ID: ${savedBooking.id}, Type: ${savedBooking.type})`);
 
     // 3. Send client email (safely wrapped in try/catch)
     try {
@@ -73,8 +76,9 @@ bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void
         subject: clientSubject,
         html: clientConfirmHtml(savedBooking)
       });
+      logger.info(`Client confirmation sent for booking ID: ${savedBooking.id}`);
     } catch (mailError) {
-      console.error('Failed to send client confirmation email:', mailError);
+      logger.error(`Failed to send client confirmation email for booking ID ${savedBooking.id}:`, mailError);
     }
 
     // 4. Send owner email (safely wrapped in try/catch)
@@ -90,11 +94,12 @@ bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void
           subject: ownerSubject,
           html: ownerNotifyHtml(savedBooking)
         });
+        logger.info(`Owner notification sent to <${ownerEmail}> for booking ID: ${savedBooking.id}`);
       } catch (mailError) {
-        console.error('Failed to send owner notification email:', mailError);
+        logger.error(`Failed to send owner notification email for booking ID ${savedBooking.id}:`, mailError);
       }
     } else {
-      console.warn('OWNER_EMAIL is not configured; skipping owner notification.');
+      logger.warn('OWNER_EMAIL is not configured; skipping owner notification email.');
     }
 
     // 5. Respond
@@ -103,7 +108,7 @@ bookingRouter.post('/booking', async (req: Request, res: Response): Promise<void
       bookingId: savedBooking.id
     });
   } catch (error) {
-    console.error('Error processing booking request:', error);
+    logger.error('Error processing booking request:', error);
     res.status(500).json({ error: 'Internal server error processing booking' });
   }
 });
