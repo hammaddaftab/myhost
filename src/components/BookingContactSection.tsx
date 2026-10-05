@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { strings } from '../strings';
 import InternationalPhoneInput from './InternationalPhoneInput';
-import { validateInternationalPhone } from '../utils/phoneUtils';
+import { validateInternationalPhone, composeWhatsAppLink } from '../utils/phoneUtils';
 
 interface BookingContactSectionProps {
   onSuccessToast: (msg: string) => void;
@@ -43,6 +43,9 @@ export default function BookingContactSection({
   };
   const [copiedChannel, setCopiedChannel] = useState<'phone' | 'email' | null>(null);
   const { bookingContact: bc } = strings;
+  const whatsAppLink = composeWhatsAppLink(bc.channels.whatsApp?.phone, bc.channels.whatsApp?.text);
+  const phoneTel = (bc.channels as any).phoneTel || (bc.channels.phoneNumber ? `tel:${bc.channels.phoneNumber.replace(/[^0-9+]/g, '')}` : undefined);
+  const emailMailto = (bc.channels as any).emailMailto || (bc.channels.operationalEmail ? `mailto:${bc.channels.operationalEmail}?subject=STR%20Co-Hosting%20Inquiry` : undefined);
 
   // Calendar State
   const [selectedDate, setSelectedDate] = useState<string>('2026-10-06');
@@ -342,7 +345,7 @@ export default function BookingContactSection({
               <div className="space-y-2.5">
                 {/* WhatsApp Thin Rectangular Card */}
                 <a
-                  href={bc.channels.whatsAppLink || '#'}
+                  href={whatsAppLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => onSuccessToast('Opening WhatsApp chat...')}
@@ -376,7 +379,7 @@ export default function BookingContactSection({
 
                 {/* Direct Phone Thin Rectangular Card */}
                 <div
-                  onClick={() => handleCopyOrAction('phone', bc.channels.phoneNumber || '', bc.channels.phoneTel)}
+                  onClick={() => handleCopyOrAction('phone', bc.channels.phoneNumber || '', phoneTel)}
                   className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/50 hover:border-primary/50 hover:bg-surface-container transition-all flex items-center justify-between group cursor-pointer"
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -411,7 +414,7 @@ export default function BookingContactSection({
 
                 {/* Direct Email Thin Rectangular Card */}
                 <div
-                  onClick={() => handleCopyOrAction('email', bc.channels.operationalEmail || '', bc.channels.emailMailto)}
+                  onClick={() => handleCopyOrAction('email', bc.channels.operationalEmail || '', emailMailto)}
                   className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/50 hover:border-primary/50 hover:bg-surface-container transition-all flex items-center justify-between group cursor-pointer"
                 >
                   <div className="flex items-center gap-3 min-w-0">

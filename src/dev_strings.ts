@@ -667,7 +667,10 @@ export const devStrings = {
       "phoneTitle": "Direct Phone",
       "phoneBadge": "Toll-Free",
       "phoneDesc": "+1 (800) 555-HOST",
-      "whatsAppLink": "https://wa.me/14158904678?text=Hi%20MyHost,%20I'd%20like%20to%20learn%20more%20about%20your%20services.",
+      "whatsApp": {
+        "phone": "+1 (415) 890-4678",
+        "text": "Hi MyHost, I'd like to learn more about your services."
+      },
       "whatsAppTitle": "WhatsApp",
       "whatsAppBadge": "Instant",
       "whatsAppAction": "Chat on WhatsApp",

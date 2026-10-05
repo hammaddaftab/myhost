@@ -1,0 +1,315 @@
+{
+  "hero": {
+    "metrics": [
+      {
+        "value": "< 5m",
+        "label": "Guest Response SLA"
+      },
+      {
+        "value": "4.9 / 5.0",
+        "label": "Average Guest Rating"
+      },
+      {
+        "value": "5 Days",
+        "label": "Fast Review Dispute Avg"
+      },
+      {
+        "value": "100%",
+        "label": "Account Control Retained"
+      }
+    ]
+  },
+  "platformBar": {
+    "bookingChannels": [
+      {
+        "name": "Airbnb",
+        "badge": "Superhost Partner"
+      },
+      {
+        "name": "VRBO",
+        "badge": "Premier Host"
+      },
+      {
+        "name": "Booking.com",
+        "badge": "Channel Sync"
+      }
+    ],
+    "operationsTools": [
+      {
+        "name": "Guesty",
+        "badge": "PMS Management"
+      },
+      {
+        "name": "PriceLabs",
+        "badge": "Dynamic Pricing"
+      },
+      {
+        "name": "Turno",
+        "badge": "Cleaner Dispatch"
+      }
+    ]
+  },
+  "pricing": {
+    "plans": [
+      {
+        "id": "basic",
+        "name": "Basic",
+        "tagline": "Guest communications and message handling only.",
+        "priceMonthly": 199,
+        "priceAnnual": 169,
+        "percentageRate": "Or 8% of booking revenue",
+        "description": "Designed for hosts who handle cleaning and maintenance themselves, but want total freedom from 24/7 guest messaging.",
+        "features": [
+          "24/7 Guest communication & rapid response SLA (< 5 mins)",
+          "Pre-booking guest screening & ID verification",
+          "Check-in & check-out instructions delivery",
+          "Emergency escalation dispatch to host",
+          "Monthly communication performance report"
+        ],
+        "ctaText": "Start with Basic",
+        "popular": false
+      },
+      {
+        "id": "full-service",
+        "name": "Full-Service",
+        "tagline": "Comprehensive listing management, guest messaging, optimization, and dispute resolution.",
+        "priceMonthly": 399,
+        "priceAnnual": 339,
+        "percentageRate": "Or 15% of booking revenue",
+        "description": "Our signature end-to-end co-hosting package. Listing optimization, dynamic event pricing, cleaner dispatch, and proactive review dispute defense.",
+        "features": [
+          "Everything in Basic, plus:",
+          "Algorithmic Dynamic Pricing (Daily adjustments)",
+          "Review Dispute & Removal representation",
+          "Listing SEO: Title, description & photo optimization",
+          "Cleaner scheduling & Turno checklist monitoring",
+          "Multi-channel calendar sync (Airbnb, VRBO, Booking.com)",
+          "Dedicated in-house account manager",
+          "Bi-weekly detailed performance reporting"
+        ],
+        "ctaText": "Choose Full-Service",
+        "popular": true
+      },
+      {
+        "id": "portfolio",
+        "name": "Custom Portfolio",
+        "tagline": "Bespoke agreements designed for multi-unit operators and property management groups.",
+        "priceMonthly": 799,
+        "priceAnnual": 679,
+        "percentageRate": "Custom volume-based pricing",
+        "description": "Tailored co-hosting solutions engineered for multi-property hosts and property management groups requiring bespoke agreements and dedicated support.",
+        "features": [
+          "Everything in Full-Service, plus:",
+          "Bespoke agreements tailored to your unit count",
+          "Volume-tiered commission discounts",
+          "Cross-platform calendar and listing management",
+          "Dedicated account management",
+          "Consolidated portfolio performance reporting"
+        ],
+        "ctaText": "Contact Portfolio Team",
+        "popular": false
+      }
+    ]
+  },
+  "socialProof": {
+    "caseStudies": [
+      {
+        "id": "case-1",
+        "tag": "Review Defense & Rating Recovery",
+        "title": "Removed a false 1-star review in 5 days",
+        "platform": "Airbnb",
+        "duration": "5 Days to Complete Removal",
+        "metricHighlight": "4.98★",
+        "metricLabel": "Superhost Status Restored",
+        "summary": "A guest attempted to extort a full refund after an unauthorized party was halted. When they retaliated with a false 1-star review, MyHost intervened directly with platform Trust & Safety to have it completely removed.",
+        "challenge": "Guest breached maximum occupancy rules with an unregistered event. Upon checkout, they retaliated with a fabricated 1-star cleanliness review threatening the host's Superhost status.",
+        "solution": "MyHost compiled timestamped exterior security camera logs, pre-check-in cleaning inspection photo proofs, and in-app message transcripts demonstrating an explicit refund demand.",
+        "result": "Airbnb confirmed violation of the Extortion & Retaliation Policy. The 1-star review was permanently expunged within 5 days, restoring the listing's 4.98-star rating."
+      },
+      {
+        "id": "case-2",
+        "tag": "Revenue & Listing Optimization",
+        "title": "Increased booking rate by 38% after listing optimization",
+        "platform": "Multi-Platform",
+        "duration": "45 Days Post-Launch",
+        "metricHighlight": "+38.4%",
+        "metricLabel": "Booking Rate & RevPAR Lift",
+        "summary": "A 2-bedroom mountain chalet in Colorado was underperforming due to static pricing and sub-optimal photography. MyHost implemented algorithmic pricing and overhauled the listing metadata.",
+        "challenge": "The listing suffered from a 42% weekday vacancy rate and relied on Airbnb's basic Smart Pricing, which undervalued peak ski weekend dates by up to $180/night.",
+        "solution": "We re-sequenced the photo gallery to highlight the hot tub and mountain views in the first 5 slots, rewrote copy targeting remote work travelers, and calibrated dynamic pricing with local event demand.",
+        "result": "Booking rate jumped by 38.4%, occupancy rose from 58% to 84%, and monthly booking revenue grew from $4,440 to $6,150."
+      }
+    ],
+    "testimonials": [
+      {
+        "id": "test-1",
+        "author": "Elena Rostova",
+        "role": "Property Owner & Investor",
+        "location": "Scottsdale, AZ • 3 Properties",
+        "avatar": "/assets/testimonials/host-1.jpg",
+        "quote": "Handing over my guest comms to MyHost was the single highest-ROI decision I made this year. My response time dropped from 4 hours to 4 minutes, and our occupancy jumped from 62% to 88%. The Free-First-5 stays made trying them completely painless.",
+        "rating": 5,
+        "stats": [
+          {
+            "label": "Occupancy Rate",
+            "value": "88%",
+            "before": "62%",
+            "after": "88%"
+          },
+          {
+            "label": "Guest Response",
+            "value": "4 mins",
+            "before": "4.2 hrs",
+            "after": "4 mins"
+          },
+          {
+            "label": "Average Rating",
+            "value": "4.98★",
+            "before": "4.74★",
+            "after": "4.98★"
+          }
+        ]
+      },
+      {
+        "id": "test-2",
+        "author": "Marcus Vance",
+        "role": "Full-Time Real Estate Operator",
+        "location": "Austin, TX • 6 Units",
+        "avatar": "/assets/testimonials/host-2.jpg",
+        "quote": "When an unruly guest threatened a 1-star review unless I refunded their entire $1,800 stay, MyHost took control. They documented the extortion and had the review removed in 5 days. Unbelievable peace of mind.",
+        "rating": 5,
+        "stats": [
+          {
+            "label": "Extortion Saved",
+            "value": "$1,800",
+            "before": "$0",
+            "after": "$1,800"
+          },
+          {
+            "label": "Superhost Status",
+            "value": "Restored",
+            "before": "At Risk",
+            "after": "Restored"
+          },
+          {
+            "label": "Annual Revenue",
+            "value": "+$22,400",
+            "before": "Baseline",
+            "after": "+$22,400"
+          }
+        ]
+      },
+      {
+        "id": "test-3",
+        "author": "Sarah & David Chen",
+        "role": "Boutique STR Hosts",
+        "location": "Smoky Mountains, TN • 2 Cabins",
+        "avatar": "/assets/testimonials/host-3.jpg",
+        "quote": "We were skeptical about dynamic pricing until MyHost showed us our weekday gap analysis. They re-calibrated our rates for local concert weekends and seasonal leaf-peepers. Our RevPAR is up 31% year over year.",
+        "rating": 5,
+        "stats": [
+          {
+            "label": "RevPAR Revenue",
+            "value": "+31%",
+            "before": "$142",
+            "after": "$186 (+31%)"
+          },
+          {
+            "label": "Communication",
+            "value": "5.0★",
+            "before": "4.82★",
+            "after": "5.0★"
+          },
+          {
+            "label": "Weekly Host Time",
+            "value": "2 hrs",
+            "before": "20 hrs",
+            "after": "2 hrs"
+          }
+        ]
+      }
+    ]
+  },
+  "aboutTrust": {
+    "companyHistory": "We started MyHost because traditional management agencies charge 25–40% while delivering generic call-center messaging and ignoring unfair reviews. We created a modern, data-backed co-hosting partner.",
+    "credentials": [
+      {
+        "title": "12+ Years STR Hospitality Experience",
+        "description": "Founded by former Airbnb Superhost Ambassadors and revenue managers who scaled personal 8-figure vacation rental portfolios."
+      },
+      {
+        "title": "Platform Policy & Dispute Savvy",
+        "description": "Our in-house compliance specialists know the exact clauses in Airbnb and VRBO Terms of Service to protect hosts from unfair guest retaliation."
+      },
+      {
+        "title": "Certified Tooling Stack Integrations",
+        "description": "Official partners with PriceLabs, Guesty, Hostaway, Minut noise monitors, and Turno cleaner dispatch platforms."
+      },
+      {
+        "title": "Direct Owner Financial Protection",
+        "description": "We never touch your payouts. All booking revenue deposits directly from OTAs into your verified bank account. We operate as authorized co-hosts."
+      }
+    ]
+  },
+  "faq": {
+    "items": [
+      {
+        "id": "faq-1",
+        "category": "General",
+        "question": "Do you work with multiple platforms?",
+        "answer": "Yes, absolutely. We support Airbnb, VRBO, Booking.com, and direct booking engines. We implement unified multi-calendar channel synchronization through premier software like Guesty and Hostaway to prevent double bookings while maximizing your exposure across all major OTA travel channels."
+      },
+      {
+        "id": "faq-2",
+        "category": "Reviews",
+        "question": "How does review removal work / what's your success rate?",
+        "answer": "Major STR platforms have strict content integrity policies prohibiting extortion, retaliatory reviews, reviews mentioning external events beyond host control (like power grid outages), or reviews containing hate speech. Our in-house compliance specialists review the conversation logs, extract timestamped evidence, and draft formal appeals directly to Trust & Safety. We maintain a 94% success rate on reviews that violate published OTA policies."
+      },
+      {
+        "id": "faq-3",
+        "category": "General",
+        "question": "Do I keep control of my listing?",
+        "answer": "100% yes. You remain the primary owner and legal account holder. We operate as authorized co-hosts via official platform co-hosting permissions. You maintain full access to your listing, bank account payouts, calendar, and historical data at all times. All revenue payouts continue depositing directly into your bank account."
+      },
+      {
+        "id": "faq-4",
+        "category": "Operations",
+        "question": "What happens after the free consultation?",
+        "answer": "Immediately following your 15-minute consultation, our team delivers your customized Listing Audit & Revenue Benchmark Report within 24 hours. There is no hard sell. If you decide to proceed, onboarding takes under 48 hours and your first 5 reservations are managed completely free under our Free-First-5 guarantee."
+      },
+      {
+        "id": "faq-5",
+        "category": "Pricing",
+        "question": "What are the exact terms of the Free-First-5 offer?",
+        "answer": "Under our Free-First-5 guarantee, we take over full 24/7 guest communications and listing monitoring for your next 5 confirmed reservations at zero co-hosting or management fee. You experience our sub-5m response velocity and 5-star communication standards firsthand. No credit card is charged upfront, and there is zero obligation to continue afterward."
+      },
+      {
+        "id": "faq-6",
+        "category": "Pricing",
+        "question": "Are there long-term contracts or cancellation penalties?",
+        "answer": "None. We believe our performance should earn your business every single month. All our plans operate on a flexible 30-day rolling agreement. If you ever wish to cancel or pause management, you can do so with a simple 14-day notice with zero exit penalties."
+      },
+      {
+        "id": "faq-7",
+        "category": "Operations",
+        "question": "How do you coordinate with my local cleaners and maintenance team?",
+        "answer": "We integrate directly with your existing turnover vendors via automated SMS/WhatsApp alerts, Turno, or shared dispatch calendars. When a guest checks out, your cleaner is notified instantly. We collect post-cleaning photo verifications before the next guest arrives and dispatch emergency maintenance when issues arise."
+      }
+    ]
+  },
+  "bookingContact": {
+    "channels": {
+      "phoneNumber": "+1 (800) 555-4678",
+      "whatsApp": {
+        "phone": "+1 (800) 555-4678",
+        "text": "Hi MyHost, I'd like to learn more about your services."
+      },
+      "calendarWidgetProvider": "Google Meet",
+      "operationalEmail": "contact@myhost.com"
+    }
+  },
+  "footer": {
+    "phoneNumber": "+1 (800) 555-4678",
+    "operationalEmail": "contact@myhost.com"
+  }
+}

@@ -23,30 +23,45 @@ export type Pending<T, P extends string> = {
 };
 
 export type RequiredProdPaths =
+  | 'hero.metrics'
   | 'platformBar.bookingChannels'
   | 'platformBar.operationsTools'
   | 'pricing.plans'
   | 'socialProof.caseStudies'
   | 'socialProof.testimonials'
   | 'aboutTrust.companyHistory'
-  | 'aboutTrust.founderBiography'
-  | 'aboutTrust.partnerLogoList'
-  | 'resources.posts'
+  | 'aboutTrust.credentials'
   | 'faq.items'
   | 'bookingContact.channels.phoneNumber'
-  | 'bookingContact.channels.phoneTel'
-  | 'bookingContact.channels.whatsAppLink'
+  | 'bookingContact.channels.whatsApp'
   | 'bookingContact.channels.calendarWidgetProvider'
   | 'bookingContact.channels.operationalEmail'
-  | 'bookingContact.channels.emailMailto'
   | 'footer.phoneNumber'
-  | 'footer.phoneTel'
-  | 'footer.operationalEmail'
-  | 'footer.emailMailto';
+  | 'footer.operationalEmail';
 
 export type RequiredProdStrings = Pending<AppStrings, RequiredProdPaths>;
 
 export const prodStrings = {
+  "hero": {
+    "metrics": [
+      {
+        "value": null,
+        "label": null
+      },
+      {
+        "value": null,
+        "label": null
+      },
+      {
+        "value": null,
+        "label": null
+      },
+      {
+        "value": null,
+        "label": null
+      }
+    ]
+  },
   "platformBar": {
     "bookingChannels": [
       {
@@ -88,10 +103,6 @@ export const prodStrings = {
         "percentageRate": null,
         "description": null,
         "features": [
-          null,
-          null,
-          null,
-          null,
           null
         ],
         "ctaText": null,
@@ -106,13 +117,6 @@ export const prodStrings = {
         "percentageRate": null,
         "description": null,
         "features": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null
         ],
         "ctaText": null,
@@ -127,12 +131,6 @@ export const prodStrings = {
         "percentageRate": null,
         "description": null,
         "features": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null
         ],
         "ctaText": null,
@@ -261,143 +259,67 @@ export const prodStrings = {
   },
   "aboutTrust": {
     "companyHistory": null,
-    "founderBiography": null,
-    "partnerLogoList": [
+    "credentials": [
       {
-        "name": null,
-        "label": null,
-        "metric": null
-      },
-      {
-        "name": null,
-        "label": null,
-        "metric": null
-      },
-      {
-        "name": null,
-        "label": null,
-        "metric": null
-      },
-      {
-        "name": null,
-        "label": null,
-        "metric": null
-      },
-      {
-        "name": null,
-        "label": null,
-        "metric": null
-      },
-      {
-        "name": null,
-        "label": null,
-        "metric": null
-      }
-    ]
-  },
-  "resources": {
-    "posts": [
-      {
-        "id": null,
         "title": null,
-        "category": null,
-        "readTime": null,
-        "date": null,
-        "excerpt": null,
-        "markdownContent": null,
-        "tags": [
-          null,
-          null,
-          null
-        ],
-        "highlights": [
-          null,
-          null,
-          null
-        ]
+        "description": null
       },
       {
-        "id": null,
         "title": null,
-        "category": null,
-        "readTime": null,
-        "date": null,
-        "excerpt": null,
-        "markdownContent": null,
-        "tags": [
-          null,
-          null,
-          null
-        ],
-        "highlights": [
-          null,
-          null,
-          null
-        ]
+        "description": null
       },
       {
-        "id": null,
         "title": null,
-        "category": null,
-        "readTime": null,
-        "date": null,
-        "excerpt": null,
-        "markdownContent": null,
-        "tags": [
-          null,
-          null,
-          null
-        ],
-        "highlights": [
-          null,
-          null,
-          null
-        ]
+        "description": null
+      },
+      {
+        "title": null,
+        "description": null
       }
     ]
   },
   "faq": {
     "items": [
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-1",
+        "category": "General",
+        "question": "Do you work with multiple platforms?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-2",
+        "category": "Reviews",
+        "question": "How does review removal work / what's your success rate?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-3",
+        "category": "General",
+        "question": "Do I keep control of my listing?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-4",
+        "category": "Operations",
+        "question": "What happens after the free consultation?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-5",
+        "category": "Pricing",
+        "question": "What are the exact terms of the Free-First-5 offer?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-6",
+        "category": "Pricing",
+        "question": "Are there long-term contracts or cancellation penalties?",
         "answer": null
       },
       {
-        "id": null,
-        "category": null,
-        "question": null,
+        "id": "faq-7",
+        "category": "Operations",
+        "question": "How do you coordinate with my local cleaners and maintenance team?",
         "answer": null
       }
     ]
@@ -405,17 +327,16 @@ export const prodStrings = {
   "bookingContact": {
     "channels": {
       "phoneNumber": null,
-      "phoneTel": null,
-      "whatsAppLink": null,
+      "whatsApp": {
+        "phone": null,
+        "text": null
+      },
       "calendarWidgetProvider": null,
-      "operationalEmail": null,
-      "emailMailto": null
+      "operationalEmail": null
     }
   },
   "footer": {
     "phoneNumber": null,
-    "phoneTel": null,
-    "operationalEmail": null,
-    "emailMailto": null
+    "operationalEmail": null
   }
 } satisfies RequiredProdStrings;

@@ -353,3 +353,18 @@ export function formatAsYouType(
     isValid,
   };
 }
+
+/**
+ * Composes a standard WhatsApp click-to-chat URL from a phone number and optional message text.
+ * Strips non-digits so that formatted numbers like "+1 (415) 890-4678" become "14158904678".
+ * The message text is safely URL-encoded.
+ */
+export function composeWhatsAppLink(phone?: string | null, text?: string | null): string {
+  if (!phone) return '#';
+  const cleanPhone = phone.replace(/[^0-9]/g, '');
+  if (!cleanPhone) return '#';
+  if (!text || !text.trim()) {
+    return `https://wa.me/${cleanPhone}`;
+  }
+  return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text.trim())}`;
+}

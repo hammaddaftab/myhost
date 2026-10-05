@@ -71,13 +71,13 @@ export default function Footer() {
               {f.phoneNumber && (
                 <li className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-primary" />
-                  <a href={f.phoneTel || '#'} className="hover:text-primary transition-colors">{f.phoneNumber}</a>
+                  <a href={(f as any).phoneTel || `tel:${f.phoneNumber.replace(/[^0-9+]/g, '')}`} className="hover:text-primary transition-colors">{f.phoneNumber}</a>
                 </li>
               )}
               {f.operationalEmail && (
                 <li className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-primary" />
-                  <a href={f.emailMailto || '#'} className="hover:text-primary transition-colors">{f.operationalEmail}</a>
+                  <a href={(f as any).emailMailto || `mailto:${f.operationalEmail}`} className="hover:text-primary transition-colors">{f.operationalEmail}</a>
                 </li>
               )}
               <li className="pt-2 text-[11px] text-inverse-on-surface/50">
