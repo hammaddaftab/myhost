@@ -7,7 +7,7 @@ import {
 import { strings } from '../strings';
 
 interface PricingSectionProps {
-  onOpenBooking: () => void;
+  onOpenBooking: (mode?: 'calendar' | 'form') => void;
   onOpenFreeFiveModal: () => void;
 }
 
@@ -132,7 +132,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
                 key={plan.id}
                 className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-colors duration-200 relative ${
                   isFullService
-                    ? 'bg-surface-container-low border-2 border-outline'
+                    ? 'bg-surface-container border-2 border-outline'
                     : 'bg-surface-container-low border border-outline-variant/40 hover:border-outline'
                 }`}
               >
@@ -213,7 +213,7 @@ export default function PricingSection({ onOpenBooking, onOpenFreeFiveModal }: P
 
                 <div className="space-y-2">
                   <button
-                    onClick={onOpenBooking}
+                    onClick={() => onOpenBooking('calendar')}
                     className={`w-full py-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
                       isFullService
                         ? 'bg-primary text-on-primary hover:opacity-90'

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import PlatformBar from './components/PlatformBar';
 import ProcessSection from './components/ProcessSection';
 import DifferentiatorsSection from './components/DifferentiatorsSection';
 import PricingSection from './components/PricingSection';
@@ -17,8 +16,10 @@ import NotificationToast from './components/NotificationToast';
 export default function App() {
   const [isFreeFiveModalOpen, setIsFreeFiveModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [bookingMode, setBookingMode] = useState<'calendar' | 'form'>('calendar');
 
-  const handleOpenBooking = () => {
+  const handleOpenBooking = (mode: 'calendar' | 'form' = 'calendar') => {
+    setBookingMode(mode);
     const contactSection = document.getElementById('contact-booking');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -52,10 +53,7 @@ export default function App() {
           onOpenFreeFiveModal={handleOpenFreeFiveModal}
         />
 
-        {/* 2. Platform & Channel Sync Bar */}
-        <PlatformBar />
-
-        {/* 3. Section 1: Process / How It Works (Simple 4-Step Process) */}
+        {/* 2. Section 1: Process / How It Works (Simple 4-Step Process) */}
         <ProcessSection onOpenBooking={handleOpenBooking} />
 
         {/* 4. Section 2: Differentiators / Why Choose MyHost (4 Core Pillars) */}
@@ -83,10 +81,14 @@ export default function App() {
         <ResourcesSection />
 
         {/* 9. Section 5: FAQ Section (Target questions addressed) */}
-        <FAQSection />
+        <FAQSection onOpenBooking={handleOpenBooking} />
 
         {/* 10. Section 7: Contact & Booking (Calendar scheduler + form + WhatsApp) */}
-        <BookingContactSection onSuccessToast={triggerToast} />
+        <BookingContactSection 
+          activeMode={bookingMode}
+          onModeChange={setBookingMode}
+          onSuccessToast={triggerToast} 
+        />
       </main>
 
       {/* Footer */}

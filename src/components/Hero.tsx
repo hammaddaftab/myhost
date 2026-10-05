@@ -62,9 +62,9 @@ export default function Hero({ onOpenFreeFiveModal }: HeroProps) {
         </div>
 
         {/* Key Metrics Card: Four columns with values in text-on-surface font-bold per exact specification */}
-        <div className="mt-14 pt-8 border-t border-outline-variant/40 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {hero.metrics.map((metric, idx) => (
-            <div key={idx} className="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/40">
+            <div key={idx} className="p-4 rounded-2xl bg-transparent border border-outline-variant/40">
               <p className="text-2xl sm:text-3xl font-bold text-on-surface font-serif-display">{metric.value}</p>
               <p className="text-xs text-on-surface-variant font-medium mt-1">{metric.label}</p>
             </div>

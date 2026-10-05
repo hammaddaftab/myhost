@@ -10,7 +10,7 @@ import {
 import { strings } from '../strings';
 
 interface SocialProofSectionProps {
-  onOpenBooking: () => void;
+  onOpenBooking: (mode?: 'calendar' | 'form') => void;
   onOpenFreeFiveModal: () => void;
 }
 
@@ -23,7 +23,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
   const activeCase = caseStudies.find((c) => c.id === selectedCaseId) || caseStudies[0];
 
   return (
-    <section id="case-studies" className="py-20 bg-surface border-t border-outline-variant">
+    <section id="case-studies" className="py-20 bg-surface border-t border-outline-variant/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -49,8 +49,8 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                   onClick={() => setSelectedCaseId(cs.id)}
                   className={`flex-1 text-left p-4 sm:p-5 rounded-2xl transition-all duration-200 flex items-center justify-between ${
                     isSelected
-                      ? 'bg-surface-container border border-outline shadow-elevation-1'
-                      : 'bg-surface-container border border-outline-variant hover:border-outline'
+                      ? 'bg-surface-container-low border border-outline'
+                      : 'bg-surface-container-lowest border border-outline-variant/40 hover:border-outline hover:shadow-elevation-1'
                   }`}
                 >
                   <div className="space-y-1">
@@ -73,7 +73,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
           </div>
 
           {/* Active Case Study Detail Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-surface-container border border-outline-variant shadow-elevation-1">
+          <div className="p-6 sm:p-8 rounded-3xl bg-surface-container-low border border-outline-variant/40">
             <div className="grid lg:grid-cols-12 gap-8 items-stretch">
               
               <div className="lg:col-span-8 space-y-6 text-left flex flex-col justify-between">
@@ -106,7 +106,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                       </p>
                     </div>
 
-                    <div className="pl-4 border-l-2 border-outline-variant">
+                    <div className="pl-4 border-l-2 border-outline-variant/40">
                       <span className="text-xs uppercase tracking-wider font-bold text-on-surface block mb-1.5">
                         {sp.solutionHeading}:
                       </span>
@@ -118,7 +118,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                 </div>
 
                 {/* Measurable Outcome: Sleek accent strip */}
-                <div className="p-4 rounded-2xl bg-primary-container/20 border border-outline-variant flex items-start gap-3 mt-4">
+                <div className="p-4 rounded-2xl bg-primary-container/20 border border-outline-variant/40 flex items-start gap-3 mt-4">
                   <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <span className="text-xs uppercase tracking-wider font-bold text-on-surface block">
@@ -132,9 +132,9 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
               </div>
 
               {/* Stat Highlight Column: Hairline Divider (Zero Inner Card Nesting) */}
-              <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-outline-variant pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between text-center space-y-5">
+              <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-outline-variant/40 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between text-center space-y-5">
                 <div className="space-y-4 my-auto">
-                  <div className="p-3 rounded-full w-14 h-14 mx-auto bg-primary-container/30 border border-outline-variant flex items-center justify-center">
+                  <div className="p-3 rounded-full w-14 h-14 mx-auto bg-primary-container/30 border border-outline-variant/40 flex items-center justify-center">
                     <TrendingUp className="w-7 h-7 text-primary" />
                   </div>
                   <div>
@@ -150,8 +150,8 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
                   </p>
                 </div>
                 <button
-                  onClick={onOpenBooking}
-                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                  onClick={() => onOpenBooking('calendar')}
+                  className="w-full py-2.5 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>{sp.ctaScheduleAudit}</span>
@@ -178,7 +178,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
             {testimonials.map((t) => (
               <div
                 key={t.id}
-                className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 flex flex-col justify-between text-left transition-colors"
+                className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-outline flex flex-col justify-between text-left transition-colors"
               >
                 <div>
                   <div className="flex items-center gap-1 mb-3">
@@ -194,7 +194,7 @@ export default function SocialProofSection({ onOpenBooking, onOpenFreeFiveModal 
 
                 <div>
                   {/* Before / After Stats Table */}
-                  <div className="bg-surface-container rounded-xl p-3 border border-outline-variant/40 mb-4 space-y-2">
+                  <div className="pt-4 border-t border-outline-variant/40 mb-4 space-y-2">
                     <p className="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant">
                       Before vs After MyHost:
                     </p>

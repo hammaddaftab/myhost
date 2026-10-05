@@ -213,7 +213,7 @@ export const devStrings = {
       "headline": "Special Launch Guarantee: Free-First-5 Stays",
       "subheadline": "Experience the difference of rapid response times and 5-star reviews with ZERO risk.",
       "badge": "Zero Risk Guarantee • No Lock-in Contract",
-      "cta": "Claim Free-First-5 Stays",
+      "cta": "Claim Free Bookings",
       "terms": [
         "We manage your next 5 guest reservations completely free of management fees.",
         "Includes full 24/7 guest communication and proactive review defense.",
@@ -292,7 +292,7 @@ export const devStrings = {
     "solutionHeading": "Our Solution",
     "resultHeading": "Verified Outcome",
     "ctaScheduleAudit": "Schedule Free Audit",
-    "ctaClaimOffer": "Claim Free-First-5 Stays",
+    "ctaClaimOffer": "Claim Free Bookings",
     "caseStudies": [
       {
         "id": "case-1",
@@ -634,7 +634,7 @@ export const devStrings = {
     "timeLabel": "Choose Time Slot",
     "detailsLabel": "Your Details",
     "nameLabel": "Your Full Name *",
-    "namePlaceholder": "e.g. Rachel Adams",
+    "namePlaceholder": "Rachel Adams",
     "emailLabel": "Email Address *",
     "emailPlaceholder": "rachel@example.com",
     "phoneLabel": "Phone Number (Optional)",
@@ -672,11 +672,11 @@ export const devStrings = {
       "whatsAppBadge": "Instant",
       "whatsAppAction": "Chat on WhatsApp",
       "whatsAppDesc": "Direct chat on WhatsApp",
-      "operationalEmail": "partners@myhost.co",
-      "emailMailto": "mailto:partners@myhost.co?subject=STR%20Co-Hosting%20Inquiry",
+      "operationalEmail": "hammaddaftab@gmail.com",
+      "emailMailto": "mailto:hammaddaftab@gmail.com?subject=STR%20Co-Hosting%20Inquiry",
       "emailTitle": "Email Desk",
       "emailBadge": "Inquiries",
-      "emailDesc": "partners@myhost.co",
+      "emailDesc": "hammaddaftab@gmail.com",
       "calendarWidgetProvider": "Google Meet"
     }
   },
@@ -744,8 +744,8 @@ export const devStrings = {
     ],
     "phoneNumber": "+1 (800) 555-HOST",
     "phoneTel": "tel:+18005554678",
-    "operationalEmail": "partners@myhost.co",
-    "emailMailto": "mailto:partners@myhost.co",
+    "operationalEmail": "hammaddaftab@gmail.com",
+    "emailMailto": "mailto:hammaddaftab@gmail.com",
     "availability": "Operating 24/7/365 across all North American and European time zones.",
     "copyright": "MyHost Technologies Inc. All rights reserved. MyHost is an independent co-hosting and revenue management service and is not affiliated with Airbnb, Inc. or VRBO.",
     "privacyPolicy": "Privacy Policy",
@@ -759,7 +759,7 @@ export const devStrings = {
     "description": "Test our 24/7 guest communications and review defense across your next 5 reservations at $0 management fee.",
     "termsHeading": "Offer Terms & Conditions:",
     "nameLabel": "Your Full Name *",
-    "namePlaceholder": "e.g. Rachel Adams",
+    "namePlaceholder": "Rachel Adams",
     "emailLabel": "Email Address *",
     "emailPlaceholder": "rachel@example.com",
     "phoneLabel": "Phone / WhatsApp",
@@ -781,7 +781,7 @@ export const devStrings = {
         "label": "5+ Units"
       }
     ],
-    "submitButton": "Claim Free 5 Stays (Instant Pass)",
+    "submitButton": "Claim Free Bookings",
     "privacyNote": "We respect your privacy. Zero spam, zero sales pressure.",
     "successTitle": "Free-First-5 Stays Pass Activated!",
     "successDescWelcome": "Welcome, ",

@@ -206,6 +206,70 @@
 }
 
 /* ==========================================================================
+   Material Design 3 Light Theme Exposed CSS Variables (Developer Tools)
+   ========================================================================== */
+:root {
+  --color-primary: #216A4D;
+  --color-surface-tint: #216A4D;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #A9F2CC;
+  --color-on-primary-container: #005137;
+  --color-inverse-primary: #8ED5B1;
+
+  --color-primary-fixed: #A9F2CC;
+  --color-on-primary-fixed: #002114;
+  --color-primary-fixed-dim: #8ED5B1;
+  --color-on-primary-fixed-variant: #005137;
+
+  --color-secondary: #4D6357;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #CFE9D9;
+  --color-on-secondary-container: #364B40;
+
+  --color-secondary-fixed: #CFE9D9;
+  --color-on-secondary-fixed: #0A1F16;
+  --color-secondary-fixed-dim: #B4CCBD;
+  --color-on-secondary-fixed-variant: #364B40;
+
+  --color-tertiary: #3D6473;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #C1E9FB;
+  --color-on-tertiary-container: #244C5A;
+
+  --color-tertiary-fixed: #C1E9FB;
+  --color-on-tertiary-fixed: #001F29;
+  --color-tertiary-fixed-dim: #A5CCDE;
+  --color-on-tertiary-fixed-variant: #244C5A;
+
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
+
+  --color-background: #F5FBF5;
+  --color-on-background: #171D19;
+  --color-surface: #F5FBF5;
+  --color-on-surface: #171D19;
+  --color-surface-variant: #DCE5DD;
+  --color-on-surface-variant: #404943;
+  --color-surface-dim: #D6DBD6;
+  --color-surface-bright: #F5FBF5;
+
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F0F5EF;
+  --color-surface-container: #EAEFE9;
+  --color-surface-container-high: #E4EAE4;
+  --color-surface-container-highest: #DEE4DE;
+
+  --color-outline: #707973;
+  --color-outline-variant: #BFC9C1;
+  --color-shadow: #000000;
+  --color-scrim: #000000;
+  --color-inverse-surface: #2C322E;
+  --color-inverse-on-surface: #EDF2EC;
+}
+
+/* ==========================================================================
    Material Design 3 Dark Theme Support (from material-theme.json)
    ========================================================================== */
 .dark {

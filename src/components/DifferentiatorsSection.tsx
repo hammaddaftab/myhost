@@ -94,7 +94,7 @@ export default function DifferentiatorsSection({}: DifferentiatorsSectionProps =
                     {item.assets.map((asset, aIdx) => (
                       <div
                         key={aIdx}
-                        className="p-1 rounded-xl bg-surface-container border border-outline-variant/40 shadow-xs flex items-center justify-center overflow-hidden hover:border-outline transition-colors"
+                        className="p-1 rounded-xl bg-surface-container border border-outline-variant/40 flex items-center justify-center overflow-hidden hover:border-outline transition-colors"
                       >
                         <img
                           src={asset.src}

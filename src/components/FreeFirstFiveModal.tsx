@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { X, Check, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { X, Check, ArrowRight, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { strings } from '../strings';
+import InternationalPhoneInput from './InternationalPhoneInput';
+import { validateInternationalPhone } from '../utils/phoneUtils';
 
 interface FreeFirstFiveModalProps {
   isOpen: boolean;
@@ -17,18 +19,58 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
     listingUrl: '',
     units: '1'
   });
+  const [phoneTouched, setPhoneTouched] = useState(false);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email) {
       alert(m.alertMissingFields);
       return;
     }
-    setSubmitted(true);
-    onSuccess(`Congratulations ${form.name}! Your Free-First-5 Stays pass has been generated.`);
+    const phoneRes = validateInternationalPhone(form.phone);
+    if (!phoneRes.isValid && phoneRes.error) {
+      setPhoneError(phoneRes.error);
+      setPhoneTouched(true);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'inquiry',
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          listingUrl: form.listingUrl,
+          propertiesCount: form.units,
+          message: 'Requested Free First 5 Stays Offer',
+          metadata: { offer: 'free-first-5', units: form.units }
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit inquiry');
+      }
+
+      setSubmitted(true);
+      onSuccess(`Congratulations ${form.name}! Your Free-First-5 Stays pass has been generated.`);
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -96,13 +138,29 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
                 </div>
                 <div>
                   <label className="text-xs text-on-surface font-medium block mb-1">{m.phoneLabel}</label>
-                  <input
-                    type="tel"
-                    placeholder={m.phonePlaceholder}
+                  <InternationalPhoneInput
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/40 text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary"
+                    onChange={(val) => {
+                      setForm((prev) => ({ ...prev, phone: val }));
+                      if (phoneTouched) {
+                        const res = validateInternationalPhone(val);
+                        setPhoneError(res.isValid ? null : (res.error || null));
+                      }
+                    }}
+                    onBlur={() => {
+                      setPhoneTouched(true);
+                      const res = validateInternationalPhone(form.phone);
+                      setPhoneError(res.isValid ? null : (res.error || null));
+                    }}
+                    error={phoneTouched ? phoneError : undefined}
+                    isValid={Boolean(phoneTouched && !phoneError && form.phone.trim())}
+                    placeholder={m.phonePlaceholder}
                   />
+                  {phoneTouched && phoneError && (
+                    <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
+                      <span>{phoneError}</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -132,12 +190,29 @@ export default function FreeFirstFiveModal({ isOpen, onClose, onSuccess }: FreeF
               </div>
             </div>
 
+            {submitError && (
+              <div className="p-3 rounded-xl bg-error-container/40 border border-error/20 text-xs text-error flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{submitError}</span>
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all flex items-center justify-center gap-2 active:scale-95"
+              disabled={isSubmitting}
+              className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span>{m.submitButton}</span>
-              <ArrowRight className="w-4 h-4" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Processing...</span>
+                </>
+              ) : (
+                <>
+                  <span>{m.submitButton}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
 
             <p className="text-[11px] text-on-surface-variant/70 text-center">

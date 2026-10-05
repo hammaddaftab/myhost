@@ -51,7 +51,7 @@ export default function ProcessSection({ onOpenBooking: _onOpenBooking }: Proces
           {processSteps.map((step) => (
             <div
               key={step.step}
-              className="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 flex flex-col hover:border-outline transition-colors"
+              className="p-6 rounded-2xl bg-transparent border border-outline-variant/40 flex flex-col hover:border-outline transition-colors"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center">

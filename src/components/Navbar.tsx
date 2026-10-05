@@ -3,7 +3,7 @@ import { Calendar } from 'lucide-react';
 import { strings } from '../strings';
 
 interface NavbarProps {
-  onOpenBooking: () => void;
+  onOpenBooking: (mode?: 'calendar' | 'form') => void;
   onOpenFreeFiveModal?: () => void;
 }
 
@@ -38,8 +38,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           </a>
 
           <button
-            onClick={onOpenBooking}
-            className="group inline-flex items-center justify-center gap-2 px-4 py-[10px] rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all duration-200 active:scale-95 shadow-sm"
+            onClick={() => onOpenBooking('calendar')}
+            className="group inline-flex items-center justify-center gap-2 px-4 py-[10px] rounded-xl text-xs sm:text-sm font-semibold bg-primary text-on-primary hover:bg-primary/90 transition-all duration-200 active:scale-95"
           >
             <Calendar className="w-4 h-4 text-on-primary" />
             <span>{navbar.bookAudit}</span>

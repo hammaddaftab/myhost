@@ -3,7 +3,11 @@ import { SectionHeader } from './SectionHeader';
 import { ChevronDown, HelpCircle, Search } from 'lucide-react';
 import { strings } from '../strings';
 
-export default function FAQSection() {
+interface FAQSectionProps {
+  onOpenBooking?: (mode?: 'calendar' | 'form') => void;
+}
+
+export default function FAQSection({ onOpenBooking }: FAQSectionProps = {}) {
   const { faq: f } = strings;
   const faqs = f.items;
 
@@ -125,12 +129,13 @@ export default function FAQSection() {
               <p className="text-[11px] text-on-surface-variant">Our STR co-hosting strategists are available 7 days a week.</p>
             </div>
           </div>
-          <a
-            href="#contact-booking"
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all shrink-0"
+          <button
+            type="button"
+            onClick={() => onOpenBooking ? onOpenBooking('form') : undefined}
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-on-primary hover:opacity-90 transition-all shrink-0 cursor-pointer"
           >
             Ask a Specialist
-          </a>
+          </button>
         </div>
 
       </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Calendar as CalendarIcon, 
   Clock, 
@@ -11,16 +11,36 @@ import {
   ArrowUpRight,
   Copy,
   Check,
-  AlertCircle
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 import { strings } from '../strings';
+import InternationalPhoneInput from './InternationalPhoneInput';
+import { validateInternationalPhone } from '../utils/phoneUtils';
 
 interface BookingContactSectionProps {
   onSuccessToast: (msg: string) => void;
+  activeMode?: 'calendar' | 'form';
+  onModeChange?: (mode: 'calendar' | 'form') => void;
 }
 
-export default function BookingContactSection({ onSuccessToast }: BookingContactSectionProps) {
-  const [activeMode, setActiveMode] = useState<'calendar' | 'form'>('calendar');
+export default function BookingContactSection({ 
+  onSuccessToast,
+  activeMode: externalMode,
+  onModeChange
+}: BookingContactSectionProps) {
+  const [activeMode, setActiveMode] = useState<'calendar' | 'form'>(externalMode ?? 'calendar');
+
+  useEffect(() => {
+    if (externalMode) {
+      setActiveMode(externalMode);
+    }
+  }, [externalMode]);
+
+  const handleModeChange = (mode: 'calendar' | 'form') => {
+    setActiveMode(mode);
+    onModeChange?.(mode);
+  };
   const [copiedChannel, setCopiedChannel] = useState<'phone' | 'email' | null>(null);
   const { bookingContact: bc } = strings;
 
@@ -46,6 +66,8 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
   });
   const [contactTouched, setContactTouched] = useState<Record<string, boolean>>({});
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const availableDates = [
     { dayName: 'Mon', dayNum: '05', fullDate: '2026-10-05', month: 'Oct' },
@@ -63,33 +85,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
   const validateUrl = (val: string) => !val.trim() || /^https?:\/\/.+/i.test(val.trim());
 
   const validatePhone = (val: string): { isValid: boolean; error?: string } => {
-    const trimmed = val.trim();
-    if (!trimmed) return { isValid: true };
-
-    // Allowed phone characters: optional leading +, digits, spaces, -, (, ), .
-    if (!/^\+?[0-9\s\-().]+$/.test(trimmed)) {
-      return { isValid: false, error: 'Only numbers and +, -, (, ), . are allowed' };
-    }
-
-    // Validate parentheses matching
-    if (trimmed.includes('(') || trimmed.includes(')')) {
-      const openCount = (trimmed.match(/\(/g) || []).length;
-      const closeCount = (trimmed.match(/\)/g) || []).length;
-      if (openCount !== closeCount || trimmed.indexOf('(') > trimmed.indexOf(')')) {
-        return { isValid: false, error: 'Please check parentheses in phone number' };
-      }
-    }
-
-    // Count actual numeric digits (standard international E.164: 7 to 15 digits)
-    const digits = trimmed.replace(/\D/g, '');
-    if (digits.length < 7) {
-      return { isValid: false, error: 'Phone number is too short (min 7 digits, e.g. +1 555-234-5678)' };
-    }
-    if (digits.length > 15) {
-      return { isValid: false, error: 'Phone number cannot exceed 15 digits' };
-    }
-
-    return { isValid: true };
+    return validateInternationalPhone(val);
   };
 
   const getCalendarErrors = (form: typeof calendarForm) => {
@@ -215,7 +211,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
     }
   };
 
-  const handleCalendarSubmit = (e: React.FormEvent) => {
+  const handleCalendarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = getCalendarErrors(calendarForm);
     if (Object.keys(errs).length > 0) {
@@ -227,11 +223,41 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
       });
       return;
     }
-    setBookingConfirmed(true);
-    onSuccessToast(`Consultation booked for ${selectedDate} at ${selectedTime}!`);
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'calendar',
+          name: calendarForm.name,
+          email: calendarForm.email,
+          phone: calendarForm.phone,
+          listingUrl: calendarForm.listingUrl,
+          selectedDate,
+          selectedTime,
+          consultationFocus: 'Free Consultation Call',
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit booking');
+      }
+
+      setBookingConfirmed(true);
+      onSuccessToast(`Consultation booked for ${selectedDate} at ${selectedTime}!`);
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = getContactErrors(contactForm);
     if (Object.keys(errs).length > 0) {
@@ -244,20 +270,46 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
       });
       return;
     }
-    setContactSubmitted(true);
-    onSuccessToast('Message sent! Our team will get back to you shortly.');
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'inquiry',
+          name: contactForm.name,
+          email: contactForm.email,
+          phone: contactForm.phone,
+          listingUrl: contactForm.listingUrl,
+          message: contactForm.message,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setContactSubmitted(true);
+      onSuccessToast('Message sent! Our team will get back to you shortly.');
+    } catch (err: any) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // State calculations for Calendar fields
   const calNameState = getFieldState(calendarTouched.name, calendarErrors.name, calendarForm.name);
   const calEmailState = getFieldState(calendarTouched.email, calendarErrors.email, calendarForm.email);
-  const calPhoneState = getFieldState(calendarTouched.phone, calendarErrors.phone, calendarForm.phone, true);
   const calUrlState = getFieldState(calendarTouched.listingUrl, calendarErrors.listingUrl, calendarForm.listingUrl, true);
 
   // State calculations for Contact fields
   const cntNameState = getFieldState(contactTouched.name, contactErrors.name, contactForm.name);
   const cntEmailState = getFieldState(contactTouched.email, contactErrors.email, contactForm.email);
-  const cntPhoneState = getFieldState(contactTouched.phone, contactErrors.phone, contactForm.phone, true);
   const cntUrlState = getFieldState(contactTouched.listingUrl, contactErrors.listingUrl, contactForm.listingUrl, true);
   const cntMsgState = getFieldState(contactTouched.message, contactErrors.message, contactForm.message);
 
@@ -417,17 +469,17 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
             </div>
 
             {/* The Actual Booking Form Container */}
-            <div className="bg-surface-container-low rounded-3xl p-6 sm:p-8 border border-outline-variant/60 shadow-sm text-left">
+            <div className="bg-surface-container rounded-3xl p-6 sm:p-8 border border-outline text-left">
               {/* Top Form Switcher Bar */}
               <div className="flex items-center pb-5 border-b border-outline-variant/40">
                 {/* Minimal segmented toggle between Calendar and Inquiry */}
-                <div className="inline-flex p-1 rounded-xl bg-surface-container border border-outline-variant/50">
+                <div className="inline-flex p-1 rounded-xl bg-transparent border border-outline-variant/50">
                   <button
                     type="button"
-                    onClick={() => setActiveMode('calendar')}
+                    onClick={() => handleModeChange('calendar')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                       activeMode === 'calendar'
-                        ? 'bg-primary text-on-primary shadow-sm'
+                        ? 'bg-primary text-on-primary'
                         : 'text-on-surface-variant hover:text-on-surface'
                     }`}
                   >
@@ -436,10 +488,10 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveMode('form')}
+                    onClick={() => handleModeChange('form')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                       activeMode === 'form'
-                        ? 'bg-primary text-on-primary shadow-sm'
+                        ? 'bg-primary text-on-primary'
                         : 'text-on-surface-variant hover:text-on-surface'
                     }`}
                   >
@@ -470,8 +522,8 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                               onClick={() => setSelectedDate(item.fullDate)}
                               className={`p-2.5 rounded-xl border text-center transition-all ${
                                 isSelected
-                                  ? 'bg-primary text-on-primary font-bold border-primary shadow-sm'
-                                  : 'bg-surface-container/60 border-outline-variant/40 text-on-surface hover:border-outline'
+                                  ? 'bg-primary text-on-primary font-bold border-primary'
+                                  : 'bg-transparent border-outline-variant/40 text-on-surface hover:border-outline'
                               }`}
                             >
                               <span className="text-[10px] uppercase block opacity-80">{item.dayName}</span>
@@ -498,8 +550,8 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                               onClick={() => setSelectedTime(slot)}
                               className={`py-2 px-3 rounded-xl border text-xs font-mono transition-all flex items-center justify-center gap-1.5 ${
                                 isSelected
-                                  ? 'bg-primary text-on-primary font-bold border-primary shadow-sm'
-                                  : 'bg-surface-container/60 border-outline-variant/40 text-on-surface hover:border-outline'
+                                  ? 'bg-primary text-on-primary font-bold border-primary'
+                                  : 'bg-transparent border-outline-variant/40 text-on-surface hover:border-outline'
                               }`}
                             >
                               <Clock className="w-3.5 h-3.5" />
@@ -525,7 +577,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                               placeholder={bc.namePlaceholder}
                               value={calendarForm.name}
                               onChange={(e) => handleCalendarChange('name', e.target.value)}
-                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calNameState.className}`}
+                              className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calNameState.className}`}
                             />
                             {calNameState.icon}
                           </div>
@@ -544,7 +596,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                               placeholder={bc.emailPlaceholder}
                               value={calendarForm.email}
                               onChange={(e) => handleCalendarChange('email', e.target.value)}
-                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calEmailState.className}`}
+                              className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calEmailState.className}`}
                             />
                             {calEmailState.icon}
                           </div>
@@ -559,19 +611,17 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
-                          <div className="relative">
-                            <input
-                              type="tel"
-                              placeholder={bc.phonePlaceholder}
-                              value={calendarForm.phone}
-                              onChange={(e) => handleCalendarChange('phone', e.target.value)}
-                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calPhoneState.className}`}
-                            />
-                            {calPhoneState.icon}
-                          </div>
-                          {calPhoneState.error && (
+                          <InternationalPhoneInput
+                            value={calendarForm.phone}
+                            onChange={(val) => handleCalendarChange('phone', val)}
+                            onBlur={() => setCalendarTouched((prev) => ({ ...prev, phone: true }))}
+                            error={calendarTouched.phone ? calendarErrors.phone : undefined}
+                            isValid={Boolean(calendarTouched.phone && !calendarErrors.phone && calendarForm.phone.trim())}
+                            placeholder={bc.phonePlaceholder}
+                          />
+                          {calendarTouched.phone && calendarErrors.phone && (
                             <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
-                              <span>{calPhoneState.error}</span>
+                              <span>{calendarErrors.phone}</span>
                             </p>
                           )}
                         </div>
@@ -584,7 +634,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                               placeholder={bc.listingUrlPlaceholder}
                               value={calendarForm.listingUrl}
                               onChange={(e) => handleCalendarChange('listingUrl', e.target.value)}
-                              className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calUrlState.className}`}
+                              className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${calUrlState.className}`}
                             />
                             {calUrlState.icon}
                           </div>
@@ -597,13 +647,30 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       </div>
                     </div>
 
+                    {submitError && (
+                      <div className="p-3 rounded-xl bg-error-container/40 border border-error/20 text-xs text-error flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm"
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <CalendarIcon className="w-4 h-4" />
-                      <span>{bc.calendarSubmitButton}</span>
-                      <ArrowRight className="w-4 h-4" />
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Booking consultation...</span>
+                        </>
+                      ) : (
+                        <>
+                          <CalendarIcon className="w-4 h-4" />
+                          <span>{bc.calendarSubmitButton}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   </form>
                 ) : (
@@ -617,7 +684,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     <p className="text-xs sm:text-sm text-on-surface-variant max-w-md mx-auto leading-relaxed">
                       {bc.calendarSuccessDesc}
                     </p>
-                    <div className="p-4 rounded-2xl bg-surface-container/60 border border-outline-variant/40 max-w-md mx-auto text-xs text-on-surface-variant text-left space-y-1">
+                    <div className="p-4 rounded-2xl bg-transparent border border-outline-variant/40 max-w-md mx-auto text-xs text-on-surface-variant text-left space-y-1">
                       <p><strong className="text-on-surface">Host:</strong> {calendarForm.name}</p>
                       <p><strong className="text-on-surface">Time:</strong> {selectedDate} at {selectedTime}</p>
                       <p><strong className="text-on-surface">Platform:</strong> {bc.channels.calendarWidgetProvider}</p>
@@ -625,6 +692,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     <button
                       onClick={() => {
                         setBookingConfirmed(false);
+                        setSubmitError(null);
                         setCalendarTouched({});
                         setCalendarForm({ name: '', email: '', phone: '', listingUrl: '' });
                       }}
@@ -649,7 +717,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             placeholder={bc.namePlaceholder}
                             value={contactForm.name}
                             onChange={(e) => handleContactChange('name', e.target.value)}
-                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntNameState.className}`}
+                            className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntNameState.className}`}
                           />
                           {cntNameState.icon}
                         </div>
@@ -667,7 +735,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             placeholder={bc.emailPlaceholder}
                             value={contactForm.email}
                             onChange={(e) => handleContactChange('email', e.target.value)}
-                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntEmailState.className}`}
+                            className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntEmailState.className}`}
                           />
                           {cntEmailState.icon}
                         </div>
@@ -682,19 +750,17 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-xs text-on-surface-variant block mb-1">{bc.phoneLabel}</label>
-                        <div className="relative">
-                          <input
-                            type="tel"
-                            placeholder={bc.phonePlaceholder}
-                            value={contactForm.phone}
-                            onChange={(e) => handleContactChange('phone', e.target.value)}
-                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntPhoneState.className}`}
-                          />
-                          {cntPhoneState.icon}
-                        </div>
-                        {cntPhoneState.error && (
+                        <InternationalPhoneInput
+                          value={contactForm.phone}
+                          onChange={(val) => handleContactChange('phone', val)}
+                          onBlur={() => setContactTouched((prev) => ({ ...prev, phone: true }))}
+                          error={contactTouched.phone ? contactErrors.phone : undefined}
+                          isValid={Boolean(contactTouched.phone && !contactErrors.phone && contactForm.phone.trim())}
+                          placeholder={bc.phonePlaceholder}
+                        />
+                        {contactTouched.phone && contactErrors.phone && (
                           <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
-                            <span>{cntPhoneState.error}</span>
+                            <span>{contactErrors.phone}</span>
                           </p>
                         )}
                       </div>
@@ -706,7 +772,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                             placeholder={bc.listingUrlPlaceholder}
                             value={contactForm.listingUrl}
                             onChange={(e) => handleContactChange('listingUrl', e.target.value)}
-                            className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntUrlState.className}`}
+                            className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntUrlState.className}`}
                           />
                           {cntUrlState.icon}
                         </div>
@@ -732,7 +798,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                         placeholder={bc.messagePlaceholder}
                         value={contactForm.message}
                         onChange={(e) => handleContactChange('message', e.target.value)}
-                        className={`w-full p-2.5 rounded-xl bg-surface-container/60 border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntMsgState.className}`}
+                        className={`w-full p-2.5 rounded-xl bg-transparent border text-xs sm:text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none transition-colors ${cntMsgState.className}`}
                       />
                       {cntMsgState.error && (
                         <p className="text-[11px] text-error mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-150">
@@ -741,12 +807,29 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                       )}
                     </div>
 
+                    {submitError && (
+                      <div className="p-3 rounded-xl bg-error-container/40 border border-error/20 text-xs text-error flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm"
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 rounded-xl text-sm font-semibold bg-primary text-on-primary hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>{bc.formSubmitButton}</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Sending message...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>{bc.formSubmitButton}</span>
+                        </>
+                      )}
                     </button>
                   </form>
                 ) : (
@@ -763,6 +846,7 @@ export default function BookingContactSection({ onSuccessToast }: BookingContact
                     <button
                       onClick={() => {
                         setContactSubmitted(false);
+                        setSubmitError(null);
                         setContactTouched({});
                         setContactForm({ name: '', email: '', phone: '', listingUrl: '', message: '' });
                       }}

@@ -63,7 +63,16 @@ export default function ResourcesSection() {
           {filteredPosts.map((post) => (
             <div
               key={post.id}
-              className="p-6 rounded-3xl bg-surface-container-low border border-outline-variant/40 hover:border-outline hover:shadow-elevation-1 transition-all duration-200 flex flex-col justify-between text-left group"
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelectedPost(post)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedPost(post);
+                }
+              }}
+              className="p-6 rounded-3xl bg-surface-container-low border border-outline-variant/40 hover:border-outline hover:shadow-elevation-1 transition-all duration-200 flex flex-col justify-between text-left group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <div>
                 <div className="flex items-center justify-between text-[11px] text-on-surface-variant mb-3">
@@ -99,14 +108,13 @@ export default function ResourcesSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-outline-variant/40">
-                <button
-                  onClick={() => setSelectedPost(post)}
-                  className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface border border-outline-variant/40 text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
+                <div
+                  className="w-full py-2.5 rounded-xl bg-surface-container group-hover:bg-surface-container-high text-on-surface border border-outline-variant/40 text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
                 >
                   <BookOpen className="w-3.5 h-3.5 text-on-surface-variant" />
                   <span>{r.readGuideButton}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
               </div>
             </div>
           ))}
